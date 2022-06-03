@@ -1,0 +1,43 @@
+# java -jar videopoker.jar -d 10000 cmd-file.txt card-file.txt
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 2H KH 2S JS 6D
+
+-cmd h 1 3
+player's hand 2H JH 2S TC 9H
+player loses and his credit is 9995
+
+-cmd $
+player's credit is 9995
+
+-cmd b 10
+b: illegal amount
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand QC AS 8H 8D 7S
+
+-cmd $
+player's credit is 9990
+
+-cmd h 3 4
+player's hand 3H 7D 8H 8D 5S
+player loses and his credit is 9990
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 7D 4D 5S 7S 3H
+
+-cmd a
+player should hold cards 1 4
+
+-cmd h 1 4
+player's hand 7D 4H JS 7S 4S
+player wins with a TWO PAIR and his credit is 9990
