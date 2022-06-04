@@ -7,7 +7,6 @@ public class RegularDeck extends Deck {
     
     public RegularDeck(){
         this.cardlist = new ArrayList<Card>();
-        this.length = 52;
         
         for (int index = 1; index < 14; index++) {
             Card auxD = new Card('D', index);

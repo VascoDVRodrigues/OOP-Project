@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class RiggedDeck extends Deck{
 
     public RiggedDeck(String filename){
-        this.length = 0;
         this.cardlist = new ArrayList<Card>();
     
         String[] splitedLine;
@@ -54,7 +53,6 @@ public class RiggedDeck extends Deck{
             }
             myReader.close();
 
-            this.length = this.cardlist.size();            
         } catch (FileNotFoundException e) {
             System.out.println("File " + filename + " doesn't exist :(");
         }
@@ -62,10 +60,10 @@ public class RiggedDeck extends Deck{
 
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
-    
 
+        //Remove n cards from cardslist
         for (int i = 0; i < n; i++) {
-            //aux.append(this.cardList);
+            aux.add( cardlist.remove(0) );
         }
         
         return aux;
