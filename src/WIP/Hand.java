@@ -1,24 +1,23 @@
 package WIP;
+import java.util.ArrayList;
 
 public class Hand {
-    protected Card [] cards;
-    private int i;
+    protected ArrayList<Card> cards;
 
     public Hand() {
-        cards = new Card[5];
-        i= 0;
+        cards = new ArrayList<Card>();
     }
     public void addToHand(Card c) {
-        cards[i] = c;
-        i ++;
+        cards.add(c);
     }
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        for (int index = 0; index < cards.length; index++) {
-            str.append(cards[index]);
+        for (Card card : cards) {
+            str.append(card);
             str.append(" ");
         }
+
         return str.toString();
     }
 }

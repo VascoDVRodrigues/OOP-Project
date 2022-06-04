@@ -16,8 +16,8 @@ public class RiggedDeck extends Deck{
         try {
             File file = new File(filename);
             Scanner myReader = new Scanner(file);
-            
-            //ASSUME QUE O FICHEIRO TEM SO UMA LINHA
+
+            //ASSUME QUE O FICHEIRO TEM SO UMA LINHA 
             while (myReader.hasNextLine()) {
                 cardOrder = myReader.nextLine();
             }
@@ -27,9 +27,9 @@ public class RiggedDeck extends Deck{
             this.length = cards.length;
 
             //Converter as cartas lidas para objetos carta
-            cardlist = new Card[this.length];
+            this.cardlist = new Card[this.length];
             for (int i = 0; i < this.length; i++) {
-                cardlist[i] = new Card(cards[i]);
+                this.cardlist[i] = new Card(cards[i]);
             }
         } catch (FileNotFoundException e) {
             System.out.println("File " + filename + " doesn't exist :(");
@@ -38,14 +38,12 @@ public class RiggedDeck extends Deck{
 
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
-        // for (int i = 0; i < n; i++) {
-        //     //Procurar a carta cards[i] no array cardlist e coloca-la no array list a retornar
-        //     for (Card c : this.cardlist) {
-        //         if (c.equals(cards[i])){
-        //             aux.add(c);
-        //         }
-        //     }
-        // }
+    
+
+        for (int i = 0; i < n; i++) {
+            aux.append(this.cardList);
+        }
+        
         return aux;
     }
 }
