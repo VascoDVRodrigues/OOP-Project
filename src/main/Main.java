@@ -1,6 +1,7 @@
 package main;
 
 import WIP.*;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
@@ -29,11 +30,29 @@ public class Main {
 
 		// RiggedDeck d = new RiggedDeck(args[0]);
 
-		// System.out.println(d);
-		
 		RegularDeck d = new RegularDeck();	
 		System.out.println(d);
-		d.shuffle();	
+		ArrayList<Card> aux;
+
+		aux = d.getCards(5);
+
+		System.out.println(aux);
+
+		aux = d.getCards(5);
+
+		System.out.println(aux);
+
+		aux = d.getCards(5);
+
+		System.out.println(aux);
+		
 		System.out.println(d);
+
+
+		
+		// System.out.println(d);
+		// d.shuffle();	
+		// System.out.println(d);
+
 	}
 }

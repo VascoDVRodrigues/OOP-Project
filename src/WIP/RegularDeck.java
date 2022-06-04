@@ -26,9 +26,12 @@ public class RegularDeck extends Deck {
 
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
-        // for (int i = 0; i < n; i++) {
-        //     aux.add(cardlist[i]);
-        // }
+        int index;
+        //Pick n random cards from cardslist
+        for (int i = 0; i < n; i++) {
+            index = (int)(Math.random() * this.cardlist.size());
+            aux.add( cardlist.get(index) );
+        }
         return aux;
     }
 
