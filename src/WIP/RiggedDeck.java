@@ -41,7 +41,7 @@ public class RiggedDeck extends Deck{
     
 
         for (int i = 0; i < n; i++) {
-            aux.append(this.cardList);
+            //aux.append(this.cardList);
         }
         
         return aux;

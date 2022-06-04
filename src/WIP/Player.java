@@ -1,6 +1,6 @@
 package WIP;
 
-import java.util.ArrayList
+import java.util.ArrayList;
 
 public class Player {
     protected int credits;
@@ -18,6 +18,10 @@ public class Player {
 
     public void bet(int amount) {
         this.credits -= amount;
+    }
+    //default bet value
+    public void bet(){
+        this.credits -= 5;
     }
 
     @Override
