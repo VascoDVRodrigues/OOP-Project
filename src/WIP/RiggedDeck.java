@@ -8,10 +8,11 @@ import java.util.Scanner;
 public class RiggedDeck extends Deck{
 
     public RiggedDeck(String filename){
-        String[] cards;
         this.length = 0;
+        this.cardlist = new ArrayList<Card>();
     
-        String cardOrder = new String();
+        String[] splitedLine;
+        String line = new String();
 
         try {
             File file = new File(filename);
@@ -19,18 +20,41 @@ public class RiggedDeck extends Deck{
 
             //ASSUME QUE O FICHEIRO TEM SO UMA LINHA 
             while (myReader.hasNextLine()) {
-                cardOrder = myReader.nextLine();
+                line = myReader.nextLine();
+
+                if (line.equals("")) { //Skips blank lines
+                    continue;
+                }
+
+                splitedLine = line.split(" ");
+
+                for (int i = 0; i < splitedLine.length; i++) {
+                    if ( Character.isDigit( splitedLine[i].charAt(0) ) ||
+                        (splitedLine[i].charAt(0) == 'T') || 
+                        (splitedLine[i].charAt(0) == 'Q') || 
+                        (splitedLine[i].charAt(0) == 'J') || 
+                        (splitedLine[i].charAt(0) == 'A') || 
+                        (splitedLine[i].charAt(0) == 'K') )  {
+
+                            if (splitedLine[i].charAt(1) == 'H' || 
+                                splitedLine[i].charAt(1) == 'D' || 
+                                splitedLine[i].charAt(1) == 'S' || 
+                                splitedLine[i].charAt(1) == 'C') {
+                                    this.cardlist.add( new Card(splitedLine[i]) ); 
+                            } else {
+                                System.out.println("Invalid Nape character, ignored");
+                            }
+
+                    } else {
+                        System.out.println("Invalid Card number, ignored");
+                    }
+
+                    
+                }
             }
             myReader.close();
 
-            cards = cardOrder.split(" ");
-            this.length = cards.length;
-
-            //Converter as cartas lidas para objetos carta
-            this.cardlist = new Card[this.length];
-            for (int i = 0; i < this.length; i++) {
-                this.cardlist[i] = new Card(cards[i]);
-            }
+            this.length = this.cardlist.size();            
         } catch (FileNotFoundException e) {
             System.out.println("File " + filename + " doesn't exist :(");
         }

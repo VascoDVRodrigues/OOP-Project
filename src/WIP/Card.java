@@ -26,8 +26,33 @@ public class Card {
 	public Card(String s) {
 		//Se quisermos dar uma string c a carta em vez de numero e naipe separado
 		//Vem na forma sempre Numero Naipe 
-		this.number = Character.getNumericValue(s.charAt(0)); 
-		this.nape = s.charAt(1); 
+		char c = s.charAt(0);
+
+		switch (c) {
+			case 'K':
+				this.number = 13;
+				break;
+			case 'J':
+				this.number = 12;
+				break;
+			case 'Q':
+				this.number = 11;
+				break;
+			case 'T':
+				this.number = 10;
+				break;
+			case 'A':
+				this.number = 1;
+				break;
+			default:
+				this.number = Character.getNumericValue(c);
+				break;
+		}
+		
+		c = s.charAt(1); 
+		if ( c == 'H' || c == 'D' || c == 'S'|| c == 'C' ) {
+			this.nape = c;
+		}
 	}
 
 	@Override
