@@ -1,10 +1,8 @@
 package main;
 
-import WIP.Player;
-import WIP.CardAnalizer;
-import WIP.RegularDeck;
-import WIP.Stats;
-import WIP.Hand;
+imimport WIP.*;
+import java.util.*;
+
 public class Main {
 	public static void main(String[] args) {
 		Player p = new Player(100, "João");
@@ -19,11 +17,35 @@ public class Main {
         System.out.println(s);
 
 		// RiggedDeck d = new RiggedDeck("/home/andreps/Documents/POO/OOP-Project/files/card-file.txt");
+
+		// Player p = new Player(100, "João");
+		// System.out.println(p);
+		// Debug g = new Debug(p, args[0]);
+
+
+		// RiggedDeck d = new RiggedDeck(args[0]);
+
+		RegularDeck d = new RegularDeck();	
+		System.out.println(d);
+		ArrayList<Card> aux;
+
+		aux = d.getCards(5);
+
+		System.out.println(aux);
+
+		aux = d.getCards(5);
+
+		System.out.println(aux);
+
+		aux = d.getCards(5);
+
+		System.out.println(aux);
 		
-		// RegularDeck d = new RegularDeck();
+		System.out.println(d);
+
+
 		
 		// System.out.println(d);
 		// d.shuffle();	
 		// System.out.println(d);
-	}
-}
+

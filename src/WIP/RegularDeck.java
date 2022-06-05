@@ -22,13 +22,14 @@ public class RegularDeck extends Deck {
 
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
+        //Pick n random cards from cardslist
         for (int i = 0; i < n; i++) {
             aux.add(cardlist.get(i));
         }
         return aux;
     }
 
-    public void shuffle() {
+    public void shuffle() {        
         Collections.shuffle(this.cardlist);
     }
 
