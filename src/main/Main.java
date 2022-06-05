@@ -1,6 +1,6 @@
 package main;
 
-imimport WIP.*;
+import WIP.*;
 import java.util.*;
 
 public class Main {
@@ -44,7 +44,8 @@ public class Main {
 		System.out.println(d);
 
 
-		
+    }}
+    
 		// System.out.println(d);
 		// d.shuffle();	
 		// System.out.println(d);
