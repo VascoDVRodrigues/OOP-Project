@@ -20,6 +20,8 @@ public class Stats {
         table.add(new StatCombination("Four of a Kind","FOK"));
         table.add(new StatCombination("Straight Flush","SF"));
         table.add(new StatCombination("Royal Flush","RF"));
+        table.add(new StatCombination("Other","O"));
+
     }
 
     public void addStat(String k){
@@ -39,9 +41,6 @@ public class Stats {
         for (StatCombination statCombination : table) {
             str.append(statCombination);
         }
-        str.append("Other          ");
-        str.append(nO);
-        str.append("\n");
         str.append("Total          ");
         str.append(nB);
         str.append("\n");

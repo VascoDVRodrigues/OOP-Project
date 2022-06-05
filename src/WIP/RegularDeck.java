@@ -1,46 +1,35 @@
 package WIP;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class RegularDeck extends Deck {
     
     public RegularDeck(){
-        this.cardlist = new Card[52];
-        this.length = 52;
+        this.cardlist = new ArrayList<Card> ();
         
-        int i = 0;
         for (int index = 1; index < 14; index++) {
             Card auxD = new Card('D', index);
-            cardlist[i] = auxD;
-            i++;
+            cardlist.add(auxD);
             Card auxS = new Card('S', index);
-            cardlist[i] = auxS;
-            i++;
+            cardlist.add(auxS);
             Card auxH = new Card('H', index);
-            cardlist[i] = auxH;
-            i++;
+            cardlist.add(auxH);
             Card auxC = new Card('C', index);
-            cardlist[i] = auxC;
-            i++;
+            cardlist.add(auxC);
         }
     }
 
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
         for (int i = 0; i < n; i++) {
-            aux.add(cardlist[i]);
+            aux.add(cardlist.get(i));
         }
         return aux;
     }
 
     public void shuffle() {
-        List<Card> list = Arrays.asList(this.cardlist);
-        
-        Collections.shuffle(list);
-        this.cardlist = list.toArray(this.cardlist);        
+        Collections.shuffle(this.cardlist);
     }
 
     

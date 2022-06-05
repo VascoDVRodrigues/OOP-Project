@@ -3,40 +3,19 @@ package WIP;
 import java.util.*;
 
 public class CardAnalizer {
-    
-    public Hand hand;
-
-    public CardAnalizer(Hand h){
-        this.hand = h;
+    public String getPayTableResult(Hand hand){
+        if(isFlush(hand) && isRoyal(hand) )return "RF";
+        else if(isStraight(hand) && isFlush(hand))return "SF";
+        else if(isFour(hand))return "FOK";
+        else if(isFH(hand))return "FH";
+        else if(isFlush(hand)) return "F";
+        else if(isStraight(hand))return "S";
+        else if(isTOK(hand))return "TOK";
+        else if(isTP(hand))return "TP";
+        else if(isJOB(hand))return "JOB";
+        return "O";
     }
-    public void updateHand(Hand h){
-        this.hand = h;
-    }
-    /*
-     * 1- Royal Flush
-     * 2- Straight Flush
-     * 3- Four of a kind
-     * 4- Full House
-     * 5- Flush
-     * 6- Straight
-     * 7- Three of a kind
-     * 8- Two Pairs
-     * 9- Jacks or better
-     * 0- Nothing
-     */
-    public int evaluateHand(){
-        if(isFlush() && isRoyal() )return 1;
-        else if(isStraight() && isFlush())return 2;
-        else if(isFour())return 3;
-        else if(isFH())return 4;
-        else if(isFlush()) return 5;
-        else if(isStraight())return 6;
-        else if(isTOK())return 7;
-        else if(isTP())return 8;
-        else if(isJOB())return 9;
-        return 0;
-    }
-    private boolean isRoyal(){
+    private boolean isRoyal(Hand hand){
         ArrayList<Integer> royaList = new ArrayList<Integer>();
         royaList.add(1);
         royaList.add(10);
@@ -51,7 +30,7 @@ public class CardAnalizer {
         if (aux.equals(royaList)) return true;
         return false;
     }
-    private boolean isFlush(){
+    private boolean isFlush(Hand hand){
         char aux = 'A';
         for (Card card : hand.cards) {
             if (aux == 'A'){
@@ -62,7 +41,7 @@ public class CardAnalizer {
         }
         return true;
     }
-    private boolean isStraight(){
+    private boolean isStraight(Hand hand){
         int aux = 0;
         ArrayList<Integer> aux1 = new ArrayList<Integer>();
         for (Card card : hand.cards) {
@@ -84,7 +63,7 @@ public class CardAnalizer {
         }
         return true;
     }
-    private boolean isFour(){
+    private boolean isFour(Hand hand){
         int[] hash = new int[13];
         for (Card card : hand.cards) {
             hash[card.number-1]++;
@@ -94,7 +73,7 @@ public class CardAnalizer {
         }
         return false;
     }
-    private boolean isFH(){
+    private boolean isFH(Hand hand){
         int[] hash = new int[13];
         for (Card card : hand.cards) {
             hash[card.number-1]++;
@@ -109,7 +88,7 @@ public class CardAnalizer {
             }
         }
         return false;    }
-    private boolean isTOK(){
+    private boolean isTOK(Hand hand){
         int[] hash = new int[13];
         for (Card card : hand.cards) {
             hash[card.number-1]++;
@@ -119,7 +98,7 @@ public class CardAnalizer {
         }    
         return false;
     }
-    private boolean isTP(){
+    private boolean isTP(Hand hand){
         int[] hash = new int[13];
         for (Card card : hand.cards) {
             hash[card.number-1]++;
@@ -130,7 +109,7 @@ public class CardAnalizer {
         }
         return aux == 2;
     }
-    private boolean isJOB(){
+    private boolean isJOB(Hand hand){
         int[] hash = new int[13];
         for (Card card : hand.cards) {
             hash[card.number-1]++;
@@ -139,5 +118,60 @@ public class CardAnalizer {
             if (hash[i] == 2) return true;
         }
         return false;
+    }
+    private boolean is3A(Hand hand){
+        int[] hash = new int[13];
+        for (Card card : hand.cards) {
+            hash[card.number-1]++;
+        }
+        if(hash[0]==3) return true;
+        return false;
+    }
+    private boolean is4toRF(Hand hand){
+        int[] hash = new int[13];
+        for (Card card : hand.cards) {
+            hash[card.number-1]++;
+        }
+        if((hash[0]+hash[12]+hash[11]+hash[10]+hash[9]>=4) && isFlush(hand)) return true;
+        return false;
+    }
+    private boolean isHP(Hand hand){
+        int[] hash = new int[13];
+        for (Card card : hand.cards) {
+            hash[card.number-1]++;
+        }
+        
+        return hash[0] == 2 || hash[12] == 2 || hash[11] == 2 || hash[10] == 2;
+    }
+    private boolean isLP(Hand hand){
+        int[] hash = new int[13];
+        for (Card card : hand.cards) {
+            hash[card.number-1]++;
+        }
+        for (int i = 1; i < 10; i++) {
+            if (hash[i]==2) return true;
+        }
+        
+        return false;
+    }
+    private boolean hasCard(int c, Hand hand){
+        for (Card card : hand.cards) {
+            if(card.number == c) return true;
+        }        
+        return false;
+    }
+
+    public String getAdviceFromTable(Hand hand){
+        if((isFlush(hand) && isRoyal(hand))||isFour(hand)||(isStraight(hand) && isFlush(hand)))return "1. Straight flush, four of a kind, royal flush";
+        if(is4toRF(hand))return "2. 4 to a royal flush";
+        if(is3A(hand))return "3. Three aces";
+        if(isStraight(hand)||isFH(hand)||isFlush(hand))return "4. Straight, flush, full house";
+        if(isTOK(hand))return "5. Three of a kind (except aces)";
+        if(isTP(hand))return "7. Two pair";
+        if(isHP(hand))return "8. High pair";
+        if(isLP(hand))return "12. Low pair";
+        if(hasCard(1,hand))return"29. Ace";
+        if(hasCard(11,hand)||hasCard(12,hand)||hasCard(13,hand)) return "31. Jack, Queen or King";
+        return "34. Discard everything";
     }
 }
