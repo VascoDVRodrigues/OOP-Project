@@ -1,4 +1,4 @@
-package WIP;
+package wip;
 
 public class StatCombination {
     protected String name;

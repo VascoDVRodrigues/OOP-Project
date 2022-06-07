@@ -1,9 +1,11 @@
-package WIP;
+package wip;
 
 import java.util.ArrayList;
 
 public class Stats {
-    int iCredit, nB, nO;
+    int iCredit;
+    int nB;
+    int nO;
     ArrayList<StatCombination> table;
 
     public Stats(int credit){
@@ -11,7 +13,7 @@ public class Stats {
         nB = 0;
         nO = 0;
         table = new ArrayList<StatCombination>();
-        table.add(new StatCombination("Jack of Better","JOB"));
+        table.add(new StatCombination("Jack or Better","JOB"));
         table.add(new StatCombination("Two Pair","TP"));
         table.add(new StatCombination("Three of a Kind","TOK"));
         table.add(new StatCombination("Straight","S"));
@@ -20,6 +22,8 @@ public class Stats {
         table.add(new StatCombination("Four of a Kind","FOK"));
         table.add(new StatCombination("Straight Flush","SF"));
         table.add(new StatCombination("Royal Flush","RF"));
+        table.add(new StatCombination("Other","O"));
+
     }
 
     public void addStat(String k){
@@ -39,9 +43,6 @@ public class Stats {
         for (StatCombination statCombination : table) {
             str.append(statCombination);
         }
-        str.append("Other          ");
-        str.append(nO);
-        str.append("\n");
         str.append("Total          ");
         str.append(nB);
         str.append("\n");

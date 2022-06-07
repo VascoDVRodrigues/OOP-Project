@@ -1,4 +1,4 @@
-package WIP;
+package wip;
 
 /*
  * H - hearts (copas)

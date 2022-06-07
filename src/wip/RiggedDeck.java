@@ -1,4 +1,4 @@
-package WIP;
+package wip;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,8 +8,7 @@ import java.util.Scanner;
 public class RiggedDeck extends Deck{
 
     public RiggedDeck(String filename){
-        this.length = 0;
-        this.cardlist = new ArrayList<Card>();
+        this.cardList = new ArrayList<Card>();
     
         String[] splitedLine;
         String line = new String();
@@ -40,7 +39,7 @@ public class RiggedDeck extends Deck{
                                 splitedLine[i].charAt(1) == 'D' || 
                                 splitedLine[i].charAt(1) == 'S' || 
                                 splitedLine[i].charAt(1) == 'C') {
-                                    this.cardlist.add( new Card(splitedLine[i]) ); 
+                                    this.cardList.add( new Card(splitedLine[i]) ); 
                             } else {
                                 System.out.println("Invalid Nape character, ignored");
                             }
@@ -54,7 +53,6 @@ public class RiggedDeck extends Deck{
             }
             myReader.close();
 
-            this.length = this.cardlist.size();            
         } catch (FileNotFoundException e) {
             System.out.println("File " + filename + " doesn't exist :(");
         }
@@ -62,10 +60,10 @@ public class RiggedDeck extends Deck{
 
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
-    
 
+        //Remove n cards from cardslist
         for (int i = 0; i < n; i++) {
-            //aux.append(this.cardList);
+            aux.add( cardList.remove(0) );
         }
         
         return aux;

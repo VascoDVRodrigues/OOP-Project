@@ -1,4 +1,4 @@
-package WIP;
+package wip;
 import java.util.ArrayList;
 
 public class Hand {
