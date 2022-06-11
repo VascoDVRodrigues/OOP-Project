@@ -1,6 +1,5 @@
 package wip;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Hand {
     protected ArrayList<Card> cards;

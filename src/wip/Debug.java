@@ -14,11 +14,13 @@ public class Debug extends Game {
     private boolean allowDeal = false;
 
     private CardAnalizer analizer = new CardAnalizer();
+    PayoutTable pay = new PayoutTable();
 
     public Debug(Player p, String cardFile, String cmd_file) {
         this.deck = new RiggedDeck(cardFile);
         this.player = p;
         parseCmdFile(cmd_file);
+        System.out.println("Starting debug mode with variant\n" + pay);
     }
 
     /**
@@ -146,8 +148,10 @@ public class Debug extends Game {
                 if (result.equals("O")) {
                     System.out.println("player loses and his credit is " + this.player.getCredits() + "\n");
                 } else {
+                    //Player won something
+                    int cashBack = pay.getValue(result, lastBet);
+                    this.player.increaseCredit(cashBack);
                     System.out.println( "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n" );
-                    return;
                 }
                 
                 allowBet = true;

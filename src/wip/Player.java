@@ -18,8 +18,13 @@ public class Player {
      * @return the credits
      */
     public int getCredits() {
-        return credits;
+        return this.credits;
     }
+
+    public void increaseCredit(int amount) {
+        this.credits += amount;
+    }
+
     public void bet(int amount) {
         this.credits -= amount;
         if (this.credits < 0) {
