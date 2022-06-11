@@ -5,48 +5,31 @@ import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
-		Player p = new Player(100, "João");
-        RegularDeck rd = new RegularDeck();
-        Stats s = new Stats(100);
-        CardAnalizer ca = new CardAnalizer();
-        for (int i = 0; i < 20; i++) {
-            rd.shuffle();       
-            String result = ca.getPayTableResult(new Hand(rd.getCards(5)));
-            s.addStat(result);
-        }
-        System.out.println(s);
-
-		// RiggedDeck d = new RiggedDeck("/home/andreps/Documents/POO/OOP-Project/files/card-file.txt");
-
 		// Player p = new Player(100, "João");
-		// System.out.println(p);
-		// Debug g = new Debug(p, args[0]);
+        // RegularDeck rd = new RegularDeck();
+        // Stats s = new Stats(100);
+        // CardAnalizer ca = new CardAnalizer();
+        // for (int i = 0; i < 20; i++) {
+        //     rd.shuffle();       
+        //     String result = ca.getPayTableResult(new Hand(rd.getCards(5)));
+        //     s.addStat(result);.
+        // }
+        // System.out.println(s);
 
+        // RegularDeck rd = new RegularDeck();
+        // rd.shuffle();
 
-		// RiggedDeck d = new RiggedDeck(args[0]);
+        // Hand h = new Hand(rd.getCards(5));
 
-		RegularDeck d = new RegularDeck();	
-		System.out.println(d);
-		ArrayList<Card> aux;
+        // System.out.println("hand is " + h);
+        
 
-		aux = d.getCards(5);
-
-		System.out.println(aux);
-
-		aux = d.getCards(5);
-
-		System.out.println(aux);
-
-		aux = d.getCards(5);
-
-		System.out.println(aux);
+		Player p = new Player(10000, "João");
+		System.out.println(p);
 		
-		System.out.println(d);
-
-
-    }}
-    
-		// System.out.println(d);
-		// d.shuffle();	
-		// System.out.println(d);
-
+		Debug g = new Debug(p, args[0], args[1]);
+		// g.showCmds();
+        System.out.println("Starting!!!");
+        g.play();
+    }
+}

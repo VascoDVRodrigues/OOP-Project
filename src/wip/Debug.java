@@ -68,9 +68,10 @@ public class Debug extends Game {
             current = this.cmds.remove(0); //Get the first command in the list
             
             if (current.equals("b")) {
+                System.out.print("-cmd b ");
                 //First check if the player can bet
                 if (!this.allowBet) {
-                    System.out.println("b: illegal command");
+                    System.out.println("\nb: illegal command");
                 }
                 
                 //Check whats next to see the amount
@@ -81,18 +82,17 @@ public class Debug extends Game {
                     amount = Integer.parseInt(next);
 
                     if (amount > maxBet) {
-                        System.out.println("b: illegal amount");
+                        System.out.println(amount + "\nb: illegal amount\n");
                         continue;
                     }
 
-                    System.out.println("-cmd b " + amount);
+                    System.out.println(amount);
 
                     //Dont forget to remove from the cmd list
                     this.cmds.remove(0);
                 } catch (NumberFormatException e) {
                     //amount was not specified
-                    System.out.println("-cmd b");
-
+                    System.out.print("\n");
                     if (lastBet!=-1) {
                         //then the last amount must be betted
                         amount = lastBet;
@@ -107,7 +107,7 @@ public class Debug extends Game {
                 allowDeal = true;
             } else if (current.equals("d")) {
                 if (!allowDeal) {
-                    System.out.println("d: illegal command");
+                    System.out.println("d: illegal command\n");
                     continue;
                 }
 
@@ -126,11 +126,14 @@ public class Debug extends Game {
                     } catch (NumberFormatException e) {
                         break;
                         //Do nothing - not good ?????????
-                    } 
+                    } catch (IndexOutOfBoundsException e) {
+                        //no more cmds
+                        break;
+                    }
                 }
                 System.out.print("-cmd h ");
                 for (Integer i : holdIdxs) {
-                    System.out.print(i + " ");
+                    System.out.print( (i+1) + " ");
                 }
                 System.out.println(" ");
 
@@ -141,12 +144,20 @@ public class Debug extends Game {
                 String result = analizer.getPayTableResult(this.hand);
 
                 if (result.equals("O")) {
-                    System.out.println("player loses and his credit is " + this.player.getCredits());
+                    System.out.println("player loses and his credit is " + this.player.getCredits() + "\n");
                 } else {
-                    System.out.println( "player wins with a " + result + "and his credit is " + this.player.getCredits() );
+                    System.out.println( "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n" );
+                    return;
                 }
                 
                 allowBet = true;
+            } else if ( current.equals("$") ) {
+                System.out.println("-cmd $");
+                System.out.println("player's credit is " + this.player.getCredits() + "\n");
+            } else if ( current.equals("a") ) {
+                System.out.println("-cmd a");
+                System.out.println("player should ");
+                System.out.println("TODO: ADVICES\n");
             }
         }
 
