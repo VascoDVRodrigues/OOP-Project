@@ -1,11 +1,46 @@
 package main;
 
 import wip.*;
-import java.util.*;
+
+import java.io.FileNotFoundException;
 
 public class Main {
 	public static void main(String[] args) {
-		// Player p = new Player(100, "João");
+        Player p;
+        //Parse input parameters
+        if (args[0].equals("-d")) { //debug mode
+            if (args.length != 4) {
+                System.out.println("Invalid number of arguments");
+            }
+
+            try {
+                p = new Player( Integer.parseInt(args[1]), "André");
+                System.out.println(p);
+            } catch (NumberFormatException e) {
+                System.out.println("First argument is number of credits, must be integer, " + args[0] + " is not an integer.. :(");
+                // System.out.println(e);
+                return;
+            }
+
+            try {
+                Debug g = new Debug(p, args[2], args[3]);
+                
+                g.play();
+            } catch (FileNotFoundException e) {
+                System.out.println("File doesn't exist :(");
+                System.out.println(e);
+            }
+        } else if (args[0].equals("-s")) { //Simulation mode
+            if (args.length != 4) {
+                System.out.println("Invalid number of arguments");
+            }
+        } else {
+            System.out.println("Invalid option " + args[0]);
+        }
+    }
+}
+
+// Player p = new Player(100, "João");
         // RegularDeck rd = new RegularDeck();
         // Stats s = new Stats(100);
         // CardAnalizer ca = new CardAnalizer();
@@ -22,14 +57,3 @@ public class Main {
         // Hand h = new Hand(rd.getCards(5));
 
         // System.out.println("hand is " + h);
-        
-
-		Player p = new Player(10000, "João");
-		System.out.println(p);
-		
-		Debug g = new Debug(p, args[0], args[1]);
-		// g.showCmds();
-        System.out.println("Starting!!!");
-        g.play();
-    }
-}

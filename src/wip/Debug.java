@@ -16,7 +16,7 @@ public class Debug extends Game {
     private CardAnalizer analizer = new CardAnalizer();
     PayoutTable pay = new PayoutTable();
 
-    public Debug(Player p, String cardFile, String cmd_file) {
+    public Debug(Player p, String cmd_file, String cardFile) throws FileNotFoundException {
         this.deck = new RiggedDeck(cardFile);
         this.player = p;
         parseCmdFile(cmd_file);
@@ -30,30 +30,27 @@ public class Debug extends Game {
      * 
      * @param cmdFile path to the file with the commands
      * @return void
+     * @throws FileNotFoundException
      */
-    private void parseCmdFile(String cmd_file) {
+    private void parseCmdFile(String cmd_file) throws FileNotFoundException {
         String line = new String();
 
-        try {
-            File f = new File(cmd_file);
-            Scanner reader = new Scanner(f);
+        File f = new File(cmd_file);
+        Scanner reader = new Scanner(f);
 
-            while (reader.hasNextLine()) {
-                line = reader.nextLine();
+        while (reader.hasNextLine()) {
+            line = reader.nextLine();
 
-                if (line.equals("")) { //Skips blank lines
-                    continue;
-                }
-
-                for (String str: line.split(" ")) {
-                    cmds.add(str);
-                }
-
+            if (line.equals("")) { //Skips blank lines
+                continue;
             }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File " + cmd_file + " doesn't exist :(");
+
+            for (String str: line.split(" ")) {
+                cmds.add(str);
+            }
+
         }
+        reader.close();
     }
 
     public void showCmds() {
