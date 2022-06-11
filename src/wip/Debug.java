@@ -7,16 +7,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Debug extends Game {
-    protected ArrayList<String> cmds;
+    protected ArrayList<String> cmds = new ArrayList<String>();
 
     private int lastBet = -1;
     private boolean allowBet = true; 
     private boolean allowDeal = false;
 
+    private CardAnalizer analizer = new CardAnalizer();
+
     public Debug(Player p, String cardFile, String cmd_file) {
         this.deck = new RiggedDeck(cardFile);
         this.player = p;
-        this.cmds = new ArrayList<String>();
         parseCmdFile(cmd_file);
     }
 
@@ -85,6 +86,9 @@ public class Debug extends Game {
                     }
 
                     System.out.println("-cmd b " + amount);
+
+                    //Dont forget to remove from the cmd list
+                    this.cmds.remove(0);
                 } catch (NumberFormatException e) {
                     //amount was not specified
                     System.out.println("-cmd b");
@@ -98,27 +102,60 @@ public class Debug extends Game {
                 }
 
                 this.player.bet(amount);
+                lastBet = amount;
                 allowBet = false;
                 allowDeal = true;
             } else if (current.equals("d")) {
                 if (!allowDeal) {
                     System.out.println("d: illegal command");
+                    continue;
                 }
 
                 System.out.println("-cmd d");
                 this.giveHand();
+                System.out.print("\n");
             } else if (current.equals("h")) {
-
                 //Fetch the cards that the player wants to hold
+                ArrayList<Integer> holdIdxs = new ArrayList<Integer>();
+                while (true) {
+                    try {
+                        //-1 because in the commands counting starts at 1
+                        holdIdxs.add( Integer.parseInt( this.cmds.get(0) ) - 1 );
+                        
+                        this.cmds.remove(0);
+                    } catch (NumberFormatException e) {
+                        break;
+                        //Do nothing - not good ?????????
+                    } 
+                }
+                System.out.print("-cmd h ");
+                for (Integer i : holdIdxs) {
+                    System.out.print(i + " ");
+                }
+                System.out.println(" ");
+
+                this.hand.holdCards(holdIdxs, this.deck.getCards(5-holdIdxs.size()));
                 
-                return;
+                this.player.displayHand();
+
+                String result = analizer.getPayTableResult(this.hand);
+
+                if (result.equals("O")) {
+                    System.out.println("player loses and his credit is " + this.player.getCredits());
+                } else {
+                    System.out.println( "player wins with a " + result + "and his credit is " + this.player.getCredits() );
+                }
+                
+                allowBet = true;
             }
         }
 
     }
 
     @Override
-    public void giveHand(){     
-        this.player.setHand( new Hand(this.deck.getCards(5)) );
+    public void giveHand(){  
+        //Both the player and the game have acess to the same hand
+        this.hand = new Hand(this.deck.getCards(5));
+        this.player.setHand( this.hand );
     }
 }

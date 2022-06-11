@@ -6,6 +6,7 @@ package wip;
 abstract class Game {
     protected Deck deck;
     protected Player player;
+    protected Hand hand;
 
     // final????
     protected final int defaultAmount = 5; 

@@ -1,21 +1,25 @@
 package wip;
 
-import java.util.ArrayList;
-
 public class Player {
     protected int credits;
     public String name;
     protected Hand hand;
-
+    
     public Player(int c, String name) {
         this.credits = c;
         this.name = name;
     }
-
+    
     public Player(int c) {
         this.credits = c;
     }
-
+    
+    /**
+     * @return the credits
+     */
+    public int getCredits() {
+        return credits;
+    }
     public void bet(int amount) {
         this.credits -= amount;
         if (this.credits < 0) {
@@ -30,8 +34,12 @@ public class Player {
         return "Player " + this.name + " has " + this.credits + " credits";
     }
 
+    public void displayHand() {
+        System.out.println("player's hand " + this.hand);
+    }
+
     public void setHand(Hand hand){
         this.hand = hand;
-        System.out.println("player's hand " + this.hand + "\n");
+        this.displayHand();
     }
 }
