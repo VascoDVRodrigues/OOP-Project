@@ -1,4 +1,4 @@
-package WIP;
+package wip;
 
 import java.util.*;
 import java.util.Map.Entry;

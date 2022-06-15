@@ -1,6 +1,6 @@
 package main;
 
-import WIP.*;
+import wip.*;
 import java.util.*;
 
 public class Main {
