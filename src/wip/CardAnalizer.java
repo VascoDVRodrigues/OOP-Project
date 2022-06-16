@@ -1,7 +1,6 @@
 package wip;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 public class CardAnalizer {
     public String getPayTableResult(Hand hand) {
@@ -9,8 +8,12 @@ public class CardAnalizer {
             return "RF";
         else if (isStraight(hand) && isFlush(hand))
             return "SF";
-        else if (isFour(hand))
-            return "FOK";
+        else if (isFour(hand)==1)
+            return "FA";
+        else if (isFour(hand)>1 && isFour(hand)<=4)
+            return "F24";
+        else if (isFour(hand)>4)
+            return "F5K"; 
         else if (isFH(hand))
             return "FH";
         else if (isFlush(hand))
@@ -56,38 +59,40 @@ public class CardAnalizer {
     }
 
     private boolean isStraight(Hand hand) {
-        int aux = 0;
-        ArrayList<Integer> aux1 = new ArrayList<Integer>();
+        int[] hash = new int[13];
         for (Card card : hand.cards) {
-            aux1.add(card.number);
+            hash[card.number - 1]++;
         }
-        Collections.sort(aux1);
-        for (Integer integer : aux1) {
-            if (aux == 0) {
-                aux = integer;
-            } else if (integer == aux) {
-                return false;
+        int start = 0;
+        int hit = 0;
+        //if the ace is a high ace
+        if(hash[0]==1 && hash[12]==1 && hash[11]==1&& hash[10]==1&& hash[9]==1) return true;
+
+        for (int i = 0; i < hash.length; i++) {
+            if (hash[i] > 0) {
+                hit++;
+                if (start == 0)
+                    start = 1;
             } else {
-                if (aux + 1 != integer) {
+                //se da um miss e ainda n comecou e ainda nao ha 5 cartas seguidas
+                if (start != 0 && hit<5)
                     return false;
-                } else {
-                    aux++;
-                }
             }
         }
         return true;
     }
 
-    private boolean isFour(Hand hand) {
+    private int isFour(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.cards) {
             hash[card.number - 1]++;
         }
-        for (int i : hash) {
-            if (i == 4)
-                return true;
+        for (int index = 0; index < hash.length; index++) {
+            if (hash[index] == 4){
+                return index+1;
+            }
         }
-        return false;
+        return 0;
     }
 
     private boolean isFH(Hand hand) {
@@ -165,11 +170,11 @@ public class CardAnalizer {
         for (Card card : hand.cards) {
             hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
         }
-        if (!hash_nape.containsValue(4))
+        if (! (hash_nape.containsValue(4) || hash_nape.containsValue(5)) )
             return false;
 
         for (Character key : hash_nape.keySet()) {
-            if (hash_nape.get(key) == 4) {
+            if (hash_nape.get(key) >= 4) {
                 true_nape = key;
                 break;
             }
@@ -317,7 +322,6 @@ public class CardAnalizer {
         }
 
         int start = 0;
-        int skip = 0;
         int hit = 0;
 
         for (int i : hash) {
@@ -326,11 +330,12 @@ public class CardAnalizer {
                 if (start == 0)
                     start = 1;
             } else {
-                if (start != 0 && hit < 4)
-                    skip++;
+                if (start != 0 && hit < 4){
+                    hit=0;
+                }
             }
         }
-        if (skip == 0 && hit == 4)
+        if (hit == 4)
             return true;
 
         return false;
@@ -731,7 +736,7 @@ public class CardAnalizer {
     }
 
     public String getAdviceFromTable(Hand hand) {
-        if ((isFlush(hand) && isRoyal(hand)) || isFour(hand) || (isStraight(hand) && isFlush(hand)))
+        if ((isFlush(hand) && isRoyal(hand)) || isFour(hand)!=0 || (isStraight(hand) && isFlush(hand)))
             return "1. Straight flush, four of a kind, royal flush";
         if (is4toRF(hand))
             return "2. 4 to a royal flush";
