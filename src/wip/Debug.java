@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import wip.commands.*;
+
 public class Debug extends Game {
-    protected ArrayList<String> cmds = new ArrayList<String>();
+    protected Commands cmds;
 
     private int lastBet = -1;
     private boolean allowBet = true; 
@@ -18,147 +20,90 @@ public class Debug extends Game {
     public Debug(Player p, String cmd_file, String cardFile) throws FileNotFoundException {
         this.deck = new RiggedDeck(cardFile);
         this.player = p;
-        parseCmdFile(cmd_file);
+        this.cmds = new Commands(cmd_file);
         System.out.println("Starting debug mode with variant\n" + pay);
     }
 
-    /**
-     * Function to parse the commands in the command file
-     * May raise FileNotFoundException if the file doesent exist
-     * Initializes the attribute cmds.
-     * 
-     * @param cmdFile path to the file with the commands
-     * @return void
-     * @throws FileNotFoundException
-     */
-    private void parseCmdFile(String cmd_file) throws FileNotFoundException {
-        String line = new String();
-
-        File f = new File(cmd_file);
-        Scanner reader = new Scanner(f);
-
-        while (reader.hasNextLine()) {
-            line = reader.nextLine();
-
-            if (line.equals("")) { //Skips blank lines
-                continue;
-            }
-
-            for (String str: line.split(" ")) {
-                cmds.add(str);
-            }
-
-        }
-        reader.close();
-    }
-
-    public void showCmds() {
-        for (String cmd : this.cmds) {
-            System.out.print(cmd);
-        }
-        System.out.println(" ");
-    }
-
     public void play(){
-        String current, next;
+        Command current;
         
-        while (!this.cmds.isEmpty()) {
-            current = this.cmds.remove(0); //Get the first command in the list
+        while (!cmds.isEmpty()) {
+            current = this.cmds.getNextCommand();
             
-            if (current.equals("b")) {
-                // System.out.print("-cmd b ");
+            System.out.println(current);
+            
+            if (current.getType().equals("b")) {
                 //First check if the player can bet
                 if (!this.allowBet) {
-                    System.out.println("\nb: illegal command");
+                    System.out.println("b: illegal command\n");
                     continue;
                 }
                 
-                //Check whats next to see the amount
-                next = this.cmds.get(0); //Get doesnt remove from the list
-                
+                //Check the amount
                 int amount;
-                try {
-                    amount = Integer.parseInt(next);
-
-                    if (amount > maxBet) {
-                        // System.out.println(amount + "\nb: illegal amount\n");
-                        continue;
-                    }
-
-                    // System.out.println(amount);
-
-                    //Dont forget to remove from the cmd list
-                    this.cmds.remove(0);
-                } catch (NumberFormatException e) {
-                    //amount was not specified
-                    // System.out.print("\n");
+                if (current.getArgs().size()==1) {
+                    amount = current.getArgs().get(0);
+                } else if (current.getArgs().size()==0) {
+                    //amount not specified
                     if (lastBet!=-1) {
                         //then the last amount must be betted
                         amount = lastBet;
                     } else {
                         amount = defaultAmount;
                     }
+                } else {
+                    System.out.println("b: illegal command\n");
+                    continue;
+                }
+
+                if ( amount > maxBet ) {
+                    System.out.println("b: illegal amount\n");
+                    continue;
                 }
 
                 this.player.bet(amount);
                 lastBet = amount;
                 allowBet = false;
                 allowDeal = true;
-            } else if (current.equals("d")) {
+            } else if (current.getType().equals("d")) {
                 if (!allowDeal) {
-                    // System.out.println("d: illegal command\n");
+                    System.out.println("d: illegal command\n");
                     continue;
                 }
 
-                // System.out.println("-cmd d");
                 this.giveHand();
-                // System.out.print("\n");
-            } else if (current.equals("h")) {
+                System.out.print("\n");
+            } else if (current.getType().equals("h")) {                
                 //Fetch the cards that the player wants to hold
-                ArrayList<Integer> holdIdxs = new ArrayList<Integer>();
-                while (true) {
-                    try {
-                        //-1 because in the commands counting starts at 1
-                        holdIdxs.add( Integer.parseInt( this.cmds.get(0) ) - 1 );
-                        
-                        this.cmds.remove(0);
-                    } catch (NumberFormatException e) {
-                        break;
-                        //Do nothing - not good ?????????
-                    } catch (IndexOutOfBoundsException e) {
-                        //no more cmds
-                        break;
-                    }
+                ArrayList<Integer> holdIdxs = current.getArgs();
+                
+                //Must convert all indexes to indexes starting at 0, in cmd file starts at 1
+                for (int i = 0; i < holdIdxs.size(); i++) {
+                    holdIdxs.set(i, holdIdxs.get(i) - 1 );
                 }
-                // System.out.print("-cmd h ");
-                // for (Integer i : holdIdxs) {
-                //     System.out.print( (i+1) + " ");
-                // }
-                // System.out.println(" ");
 
+                //Hold those cards, and replaced the dropped ones
                 this.hand.holdCards(holdIdxs, this.deck.getCards(5-holdIdxs.size()));
                 
-                // this.player.displayHand();
+                this.player.displayHand();
 
                 String result = analizer.getPayTableResult(this.hand);
 
-                // if (result.equals("O")) {
-                //     System.out.println("player loses and his credit is " + this.player.getCredits() + "\n");
-                // } else {
-                //     //Player won something
-                //     int cashBack = pay.getValue(result, lastBet);
-                //     this.player.increaseCredit(cashBack);
-                //     System.out.println( "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n" );
-                // }
+                if (result.equals("O")) {
+                    System.out.println("player loses and his credit is " + this.player.getCredits() + "\n");
+                } else {
+                    //Player won something
+                    this.player.increaseCredit( pay.getValue(result, lastBet) );
+                    System.out.println( "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n" );
+                }
                 
                 allowBet = true;
-            } else if ( current.equals("$") ) {
-                // System.out.println("-cmd $");
-                // System.out.println("player's credit is " + this.player.getCredits() + "\n");
-            } else if ( current.equals("a") ) {
-                System.out.println("-cmd a");
+            } else if ( current.getType().equals("$") ) {
+                System.out.println("player's credit is " + this.player.getCredits() + "\n");
+            } else if ( current.getType().equals("a") ) {
                 System.out.print("player should ");
                 System.out.println(this.analizer.getAdviceFromTable(this.hand));
+                System.out.println(" ");
                 // System.out.println("TODO: ADVICES\n");
             }
         }
