@@ -97,16 +97,20 @@ public class Debug extends Game {
                 this.player.displayHand();
 
                 String result = analizer.getPayTableResult(this.hand);
+                
+                int cashback;
 
                 if (result.equals("O")) {
                     System.out.println("player loses and his credit is " + this.player.getCredits() + "\n");
+                    cashback = 0;
                 } else {
                     //Player won something
-                    this.player.increaseCredit( pay.getValue(result, lastBet) );
+                    cashback = pay.getValue(result, lastBet);
+                    this.player.increaseCredit( cashback );
                     System.out.println( "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n" );
                 }
-
-                stats.addStat(result, this.player.getCredits());
+                
+                stats.addStat(result, cashback, lastBet);
                 
                 allowBet = true;
                 allowHold = false;

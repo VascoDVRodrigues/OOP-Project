@@ -6,15 +6,15 @@ public class Stats {
     private static final String BLUE = "\u001B[38;2;0;157;224m";
     private static final String RESET = "\u001B[0;0m";
 
-    int iCredit;
-    int updatedCredits;
+    int playersCredit;
+    int allGains = 0;
+    int allBets = 0;
     int nB;
     int nO;
     ArrayList<StatCombination> table;
 
     public Stats(int credit){
-        iCredit = credit;
-        updatedCredits = iCredit;
+        playersCredit = credit;
         nB = 0;
         nO = 0;
         table = new ArrayList<StatCombination>();
@@ -31,12 +31,14 @@ public class Stats {
 
     }
 
-    public void addStat(String k, int updatedCredits){
+    public void addStat(String k, int cashback, int bet){
         nB++;
         for (StatCombination statCombination : table) {
             if(statCombination.key==k){
                 statCombination.incrementValue();
-                this.updatedCredits = updatedCredits;
+                this.allBets += bet;
+                this.playersCredit += (cashback-bet);
+                this.allGains += cashback;
                 return;
             }
         }
@@ -56,7 +58,7 @@ public class Stats {
         // str.append(nB);
         // str.append("\n");
         str.append(BLUE + "────────────────────\n" + RESET);
-        str.append(String.format("%-16s %d (%f%%)", "Credit", iCredit, (float)updatedCredits/(float)iCredit));
+        str.append(String.format("%-16s %d (%f%%)", "Credit", playersCredit, 100*(float)this.allGains/(float)this.allBets));
         return str.toString();
     }
 
