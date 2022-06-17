@@ -1,9 +1,7 @@
 package wip;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import wip.commands.*;
 
@@ -13,14 +11,18 @@ public class Debug extends Game {
     private int lastBet = -1;
     private boolean allowBet = true; 
     private boolean allowDeal = false;
+    private boolean allowHold = false;
+    private boolean allowAdvice = false;
 
     private CardAnalizer analizer = new CardAnalizer();
     private PayoutTable pay = new PayoutTable();
+    private Stats stats;
 
     public Debug(Player p, String cmd_file, String cardFile) throws FileNotFoundException {
         this.deck = new RiggedDeck(cardFile);
         this.player = p;
         this.cmds = new Commands(cmd_file);
+        stats = new Stats(this.player.getCredits());
         System.out.println("Starting debug mode with variant\n" + pay);
     }
 
@@ -73,7 +75,14 @@ public class Debug extends Game {
 
                 this.giveHand();
                 System.out.print("\n");
-            } else if (current.getType().equals("h")) {                
+                allowDeal = false;
+                allowHold = true;
+                allowAdvice = true;
+            } else if (current.getType().equals("h")) {     
+                if (!allowHold) {
+                    System.out.println("h: illegal command\n");
+                    continue;
+                }           
                 //Fetch the cards that the player wants to hold
                 ArrayList<Integer> holdIdxs = current.getArgs();
                 
@@ -96,15 +105,25 @@ public class Debug extends Game {
                     this.player.increaseCredit( pay.getValue(result, lastBet) );
                     System.out.println( "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n" );
                 }
+
+                stats.addStat(result, this.player.getCredits());
                 
                 allowBet = true;
+                allowHold = false;
+                allowAdvice = false;
             } else if ( current.getType().equals("$") ) {
                 System.out.println("player's credit is " + this.player.getCredits() + "\n");
             } else if ( current.getType().equals("a") ) {
+                if (!allowAdvice) {
+                    System.out.println("a: illegal command");
+                    continue;
+                }
                 System.out.print("player should ");
                 System.out.println(this.analizer.getAdviceFromTable(this.hand));
                 System.out.println(" ");
                 // System.out.println("TODO: ADVICES\n");
+            } else if ( current.getType().equals("s") ) {
+                System.out.println(stats+"\n");
             }
         }
 

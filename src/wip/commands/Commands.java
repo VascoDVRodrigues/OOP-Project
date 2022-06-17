@@ -61,6 +61,8 @@ public class Commands {
                 this.cmds.add( new Command("$") );
             } else if ( current.equals("a") ) {
                 this.cmds.add( new Command("a") );
+            } else if ( current.equals("s") ) {
+                this.cmds.add( new Command("s") );
             }
         }
 
