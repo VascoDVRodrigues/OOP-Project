@@ -117,8 +117,8 @@ public class Advisor {
                     }
                 }
             } else {
-                System.out.println("erro no 4 to outside straight, classe advisor");
-                System.out.println(hand);
+                // System.out.println("erro no 4 to outside straight, classe advisor");
+                // System.out.println(hand);
             }
 
             // // OUTRA FORMA

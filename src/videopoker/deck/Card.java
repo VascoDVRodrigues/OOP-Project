@@ -9,8 +9,8 @@ package videopoker.deck;
  * As --> 1
  * Numbers 2 to 9
  * Number 10 --> T
- * Queen --> 11
- * Jack --> 12
+ * Jack --> 11
+ * Queen --> 12
  * King --> 13
  */
 
