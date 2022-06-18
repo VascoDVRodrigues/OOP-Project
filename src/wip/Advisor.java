@@ -154,13 +154,24 @@ public class Advisor {
             for (Card card : hand.cards) {
                 hash[card.number - 1]++;
             }
+
             int i = 0;
             for (Card card : hand.cards) {
-                if (hash[card.number - 1] == 2) {
+                if (hash[card.number - 1] != 2) {
+                    // isto remove o inteiro i e não o objeto com indice i
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
             }
+
+            // Ou assim
+            // holdList.removeAll(holdList);//so para limpar
+            // //Se a carta aparece 2 vezes na mão ent é para dar hold
+            // for (int i = 0; i < hand.cards.size(); i++) {
+            // if ( hash[hand.cards.get(i).number - 1] == 2) {
+            // holdList.add(i);
+            // }
+            // }
         } else if (condition == "13. AKQJ unsuited") {
             int i = 0;
             for (Card card : hand.cards) {
@@ -173,7 +184,7 @@ public class Advisor {
         } else if (condition == "14. 3 to a straight flush (type 1)") {
             holdList = this.xtoFlush(3, hand);
         } else if (condition == "15. 4 to an inside straight with 3 high cards") {
-
+            return this.insideStraight(hand);
         } else if (condition == "16. QJ suited") {
             int i = 0;
             // nao é necessario procurar outros casos pq seriam high pairs
@@ -191,25 +202,27 @@ public class Advisor {
             for (Card card : hand.cards) {
                 if (card.number != 1 && card.number <= 10) {
                     holdList.remove(Integer.valueOf(i));
-                }else{
+                } else {
                     int count = 0;
                     for (Card card1 : hand.cards) {
-                        if ((card1.number == 1 || card1.number > 10)&&(!card1.equals(card))&&(card.nape == card1.nape)) {
-                            count ++;
+                        if ((card1.number == 1 || card1.number > 10) && (!card1.equals(card))
+                                && (card.nape == card1.nape)) {
+                            count++;
                         }
                     }
-                    //nao preocupar com mais do que 2 suited high cards porque é 3 to royale flush
-                    if(count == 0){
+                    // nao preocupar com mais do que 2 suited high cards porque é 3 to royale flush
+                    if (count == 0) {
                         holdList.remove(Integer.valueOf(i));
                     }
                 }
                 i++;
-            }            
+            }
         } else if (condition == "19. 4 to an inside straight with 2 high cards") {
-
+            return this.insideStraight(hand);
         } else if (condition == "20. 3 to a straight flush (type 2)") {
             holdList = this.xtoFlush(3, hand);
         } else if (condition == "21. 4 to an inside straight with 1 high card") {
+            return this.insideStraight(hand);
 
         } else if (condition == "22. KQJ unsuited") {
             int i = 0;
@@ -241,26 +254,55 @@ public class Advisor {
         } else if (condition == "25. 3 to a flush with 1 high card") {
             holdList = this.xtoFlush(3, hand);
         } else if (condition == "26. QT suited") {
-
+            int i = 0;
+            // nao é necessario procurar outros casos pq seriam pairs
+            for (Card card : hand.cards) {
+                if (card.number != 10 && card.number != 12) {
+                    holdList.remove(Integer.valueOf(i));
+                }
+                i++;
+            }
         } else if (condition == "27. 3 to a straight flush (type 3)") {
-
+            return this.xtoFlush(3, hand);
         } else if (condition == "28. KQ, KJ unsuited") {
-
+            int i = 0;
+            // nao é necessario procurar outros casos pq seriam pairs
+            for (Card card : hand.cards) {
+                if (card.number > 10) {
+                    holdList.remove(Integer.valueOf(i));
+                }
+                i++;
+            }
         } else if (condition == "29. Ace") {
             // Only hold the ace
-            for (int i = 0; i < hand.cards.size(); i++) {
-                // Find the ace, remove everythinh from the list and only add the ace
-                if (hand.cards.get(i).nape == 'A') {
-                    holdList.removeAll(holdList);
-                    holdList.add(i);
-                    break;
+            int i = 0;
+            // nao é necessario procurar outros casos pq seriam pairs
+            for (Card card : hand.cards) {
+                if (card.number != 1) {
+                    holdList.remove(Integer.valueOf(i));
                 }
+                i++;
             }
         } else if (condition == "30. KT suited") {
-
+            int i = 0;
+            // nao é necessario procurar outros casos pq seriam pairs
+            for (Card card : hand.cards) {
+                if (card.number != 1 && card.number != 13) {
+                    holdList.remove(Integer.valueOf(i));
+                }
+                i++;
+            }
         } else if (condition == "31. Jack, Queen or King") {
-
+            int i = 0;
+            // nao é necessario procurar outros casos pq seriam pairs
+            for (Card card : hand.cards) {
+                if (card.number > 10) {
+                    holdList.remove(Integer.valueOf(i));
+                }
+                i++;
+            }
         } else if (condition == "32. 4 to an inside straight with no high cards") {
+            return this.insideStraight(hand);
 
         } else if (condition == "33. 3 to a flush with no high cards") {
             holdList = this.xtoFlush(3, hand);
@@ -272,6 +314,85 @@ public class Advisor {
             holdList.remove(Integer.valueOf(4));
         }
 
+        return holdList;
+    }
+
+    private ArrayList<Integer> insideStraight(Hand hand) {
+        int[] hash = new int[13];
+        ArrayList<Integer> holdList = new ArrayList<Integer>();
+        holdList.add(0);
+        holdList.add(1);
+        holdList.add(2);
+        holdList.add(3);
+        holdList.add(4);
+
+        for (Card card : hand.cards) {
+            hash[card.number - 1]++;
+        }
+        // catch weird inside straight
+        int i = 0;
+        if (hash[0] > 0 && hash[1] > 0 && hash[2] > 0 && hash[3] > 0) {
+            for (Card card : hand.cards) {
+                if (card.number > 4) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
+        } else if (hash[0] > 0 && hash[10] > 0 && hash[11] > 0 && hash[12] > 0) {
+            for (Card card : hand.cards) {
+                if (card.number != 1 && card.number < 11) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
+        } else {
+            int missing = -1;
+            for (int index = 0; index < hash.length; index++) {
+                int neighbouring = 0;
+                if (index == 0) {
+                    if (hash[1] > 0)
+                        neighbouring = 1;
+                } else if (index == 12) {
+                    if (hash[11] > 0)
+                        neighbouring = 1;
+                } else {
+                    neighbouring += hash[index - 1];
+                    neighbouring += hash[index + 1];
+                }
+                if (hash[index] == 0 && neighbouring == 2) {
+                    missing = index;
+                    break;
+                }
+            }
+            for (int index = 0; index < hash.length; index++) {
+                int neighbouring = 0;
+                if (index == 0) {
+                    if (hash[1] > 0)
+                        neighbouring = 1;
+                } else if (index == 12) {
+                    if (hash[11] > 0)
+                        neighbouring = 1;
+                } else {
+                    neighbouring += hash[index - 1];
+                    neighbouring += hash[index + 1];
+                }
+                if (hash[index] == 1 && neighbouring == 0) {
+                    if (index != missing + 1 && index != missing - 1) {
+                        for (Card card : hand.cards) {
+                            if (card.number == index + 1) {
+                                // isto remove o inteiro i e não o objeto com indice i
+                                holdList.remove(Integer.valueOf(i));
+                                return holdList;
+                            }
+                            i++;
+                        }
+                    }
+                }
+            }
+            // [0,0,0,1,1,1,0,1,0,0,1,0,0]
+        }
         return holdList;
     }
 
