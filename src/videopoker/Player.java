@@ -31,7 +31,6 @@ public class Player {
             this.credits += amount;
             System.out.println("Player doesnt have enough credits :( (E AGORA?)");
         }
-        System.out.println("player is betting " + amount + "\n");
     }
 
     @Override
@@ -45,6 +44,6 @@ public class Player {
 
     public void setHand(Hand hand) {
         this.hand = hand;
-        this.displayHand();
+        // this.displayHand();
     }
 }

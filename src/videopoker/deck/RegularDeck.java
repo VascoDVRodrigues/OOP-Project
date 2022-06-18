@@ -20,6 +20,7 @@ public class RegularDeck extends Deck {
         }
     }
 
+    @Override
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
         //Pick n random cards from cardslist

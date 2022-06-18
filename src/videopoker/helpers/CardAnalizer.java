@@ -661,7 +661,7 @@ public class CardAnalizer {
                 }
             }
         }
-        System.out.println(highcard + " " + skip + " " + hit);
+        // System.out.println(highcard + " " + skip + " " + hit);
 
         if (highcard < 2 && skip == 1 && hit == 4)
             return true;
