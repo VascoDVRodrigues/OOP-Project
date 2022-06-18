@@ -104,19 +104,99 @@ public class Advisor {
             // not necessary bcs if it has 5 of the same nape it's a flush
 
         } else if (condition == "7. Two pair") {
+            int[] hash = new int[13];
+            for (Card card : hand.cards) {
+                hash[card.number - 1]++;
+            }
+            int i = 0;
+            for (Card card : hand.cards) {
+                if (hash[card.number - 1] == 1) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
 
         } else if (condition == "8. High pair") {
-
+            int[] hash = new int[13];
+            for (Card card : hand.cards) {
+                hash[card.number - 1]++;
+            }
+            int i = 0;
+            for (Card card : hand.cards) {
+                if (hash[card.number-1] == 2 && (card.number==1 || card.number>10)){
+                    holdList.remove(Integer.valueOf(i));
+                }
+                i++;
+            }
         } else if (condition == "9. 4 to a flush") {
+            HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
+            hash_nape.put('H', 0);
+            hash_nape.put('S', 0);
+            hash_nape.put('D', 0);
+            hash_nape.put('C', 0);
+            char true_nape = 'A';
 
+            for (Card card : hand.cards) {
+                hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+            }
+            // exclude with the nape
+            for (Character key : hash_nape.keySet()) {
+                if (hash_nape.get(key) == 4) {
+                    true_nape = key;
+                    break;
+                }
+            }
+            int i = 0;
+            for (Card card : hand.cards) {
+                if (card.nape == true_nape) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
         } else if (condition == "10. 3 to a royal flush") {
+            HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
+            hash_nape.put('H', 0);
+            hash_nape.put('S', 0);
+            hash_nape.put('D', 0);
+            hash_nape.put('C', 0);
+            char true_nape = 'A';
+
+            for (Card card : hand.cards) {
+                hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+            }
+            // exclude with the nape
+            for (Character key : hash_nape.keySet()) {
+                if (hash_nape.get(key) >=3) {
+                    true_nape = key;
+                    break;
+                }
+            }
+
+            int i = 0;
+            for (Card card : hand.cards) {
+                if (card.nape != true_nape) {
+                    holdList.remove(Integer.valueOf(i));
+                }else if(card.number > 1 && card.number < 10){
+                    holdList.remove(Integer.valueOf(i));
+                }
+                i++;
+            }
 
         } else if (condition == "11. 4 to an outside straight") {
-
+            
         } else if (condition == "12. Low pair") {
 
         } else if (condition == "13. AKQJ unsuited") {
-
+            int i=0;
+            for (Card card : hand.cards) {
+                if(card.number > 1 && card.number < 11){
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
         } else if (condition == "14. 3 to a straight flush (type 1)") {
 
         } else if (condition == "15. 4 to an inside straight with 3 high cards") {
