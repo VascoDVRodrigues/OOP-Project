@@ -1,0 +1,16 @@
+KC QC JC TC 9C
+AD KD QS JD TD   QD
+5S 6S 7S 8S JS
+TD JD QC KD 5S   TH TS
+2H QS JS 9D 8S   7H QD
+KH JH 3H 5S 6S   KS KC
+AD 2C 4C 5C 7S
+7C TC QC 3H 2D   
+5C KD QH 6C 9C
+
+2 4 9 10 14 17 25 27 
+
+20 - n deteta o 3 to straight flush tipo 3 
+33 - nao existe nenhum exemplo
+
+  

@@ -55,6 +55,14 @@ public class RiggedDeck extends Deck{
         myReader.close();
     }
 
+    /*
+     * @return Number of cards left in the deck
+     * 
+     */
+    public int getNumberOfCards() {
+        return cardList.size();
+    }
+
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
 
