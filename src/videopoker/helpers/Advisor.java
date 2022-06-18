@@ -16,18 +16,18 @@ public class Advisor {
         if (condition == "1. Straight flush, four of a kind, royal flush") {
             return holdList;
         } else if (condition == "2. 4 to a royal flush") {
-            // // Remove by value
-            // int i = 0;
-            // for (Card card : hand.getCards()) {
-            // if (card.getNumber() != 1 && card.getNumber() < 10) {
-            // holdList.remove(Integer.valueOf(i));
-            // return holdList;
-            // }
-            // i++;
-            // }
-            // i = 0;
+            // Remove by value
+            int i = 0;
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 1 && card.getNumber() < 10) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
+            i = 0;
 
-            holdList = this.xtoFlush(4, hand);
+            // holdList = this.xtoFlush(4, hand);
         } else if (condition == "3. Three aces") {
             int i = 0;
             for (Card card : hand.getCards()) {
@@ -72,12 +72,14 @@ public class Advisor {
 
         } else if (condition == "8. High pair") {
             int[] hash = new int[13];
+            // Check how many cards there are with the same number
             for (Card card : hand.getCards()) {
                 hash[card.getNumber() - 1]++;
             }
+
             int i = 0;
             for (Card card : hand.getCards()) {
-                if (hash[card.getNumber() - 1] == 2) {
+                if (hash[card.getNumber() - 1] != 2) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
@@ -93,12 +95,28 @@ public class Advisor {
                 hash[card.getNumber() - 1]++;
             }
 
+            // / Se existir mais do que 1 carta c mm numero retira-se essa carta
+            // Aqui o naipe não interessa, so se procura por um straight e nao flush
+            int i = 0;
+            for (Card card : hand.getCards()) {
+                if (hash[card.getNumber() - 1] > 1) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
+
             // [0,0,1,1,1,1,0,0,1,0,0,0,0]
-            int i = 0, j = 0, count = 0;
+            // [0,0,0,1,0,0,1,1,1,1,0,0]
+
+            holdList.removeAll(holdList);
+            i = 0;
+            int j = 0, count = 0;
             for (i = 0; i < hash.length; i++) {
                 if (hash[i] > 0) {
-                    for (j = 0; j < hash.length; j++) {
-                        if (hash[i] > 0) {
+                    //comecar a contar 1s
+                    for (j = i; j < hash.length; j++) {
+                        if (hash[j] > 0) {
                             count += 1;
                         } else {
                             break;
@@ -106,51 +124,53 @@ public class Advisor {
                     }
                     if (count == 4) {
                         break;
+                    } else {
+                        count = 0;
                     }
                 }
             }
             // Cartas desde i até j estão no straight
+            System.out.println(i+" "+j);
             if (count == 4) { // sanity check
-                for (int k = 0; i < hand.getCards().size(); i++) {
-                    if ((i < hand.getCards().get(k).getNumber()) && (hand.getCards().get(k).getNumber() < j)) {
+                for (int k = 0; k < hand.getCards().size(); k++) {
+                    if ((i < hand.getCards().get(k).getNumber()) &&
+                            (hand.getCards().get(k).getNumber() <= j)) {
                         holdList.add(k);
                     }
                 }
             } else {
-                // System.out.println("erro no 4 to outside straight, classe advisor");
-                // System.out.println(hand);
+                System.out.println("erro no 4 to outside straight, classe advisor");
+                System.out.println(hand);
             }
 
             // // OUTRA FORMA
-            // // Se existir mais do que 1 carta c mm numero retira-se essa carta
-            // // Aqui o naipe não interessa, so se procura por um straight e nao flush
+            // Se existir mais do que 1 carta c mm numero retira-se essa carta
+            // Aqui o naipe não interessa, so se procura por um straight e nao flush
             // int i = 0;
             // for (Card card : hand.getCards()) {
-            // if (hash[card.getNumber() - 1] > 1) {
-            // holdList.remove(Integer.valueOf(i));
-            // return holdList;
+            //     if (hash[card.getNumber() - 1] > 1) {
+            //         holdList.remove(Integer.valueOf(i));
+            //         return holdList;
+            //     }
+            //     i++;
             // }
-            // i++;
-            // }
-
+            // /////////////////// [0,0,0,1,0,0,1,1,1,1,0,0]
             // i = -1;
             // int hit = 0;
-            // //
             // for (int j = 0; j < hash.length; j++) {
-            // if (hash[j] > 0) {
-            // hit++;
-            // i++;
-            // } else {
-            // if (hit == 1){
-            // holdList.remove(Integer.valueOf(i));
-            // return holdList;
-            // }
-            // else if(hit == 4){
-            // i++;
-            // holdList.remove(Integer.valueOf(i));
-            // return holdList;
-            // }
-            // }
+            //     if (hash[j] > 0) {
+            //         hit++;
+            //         i++;
+            //     } else {
+            //         if (hit == 1) {
+            //             holdList.remove(Integer.valueOf(i));
+            //             return holdList;
+            //         } else if (hit == 4) {
+            //             i++;
+            //             holdList.remove(Integer.valueOf(i));
+            //             return holdList;
+            //         }
+            //     }
             // }
 
         } else if (condition == "12. Low pair") {

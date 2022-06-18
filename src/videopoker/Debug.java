@@ -89,7 +89,7 @@ public class Debug extends Game {
                 count++;
                 this.giveHand();
                 System.out.println(count + ".");
-                // this.player.displayHand();
+                this.player.displayHand();
                 // System.out.print("\n");
                 allowDeal = false;
                 allowHold = true;
@@ -164,9 +164,9 @@ public class Debug extends Game {
                 ArrayList<Integer> holdList = advisor.getHoldList(condition, this.hand);
 
                 if (holdList.size() == 0) {
-                    //System.out.println("player should discard everything\n");
+                    System.out.println("player should discard everything\n");
                 } else if (holdList.size() == 5) {
-                    //System.out.println("player should hold everything\n");
+                    System.out.println("player should hold everything\n");
                 } else {
                     StringBuilder str = new StringBuilder();
                     for (Integer i : holdList) {
@@ -174,7 +174,7 @@ public class Debug extends Game {
                         str.append(" ");
                     }
 
-                    //System.out.println("player should hold cards " + str.toString()+"\n");
+                    System.out.println("player should hold cards " + str.toString()+"\n");
                 }
             } else if ( current.getType().equals("s") ) {
                 System.out.println(stats+"\n");
