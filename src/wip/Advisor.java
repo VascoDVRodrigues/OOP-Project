@@ -212,11 +212,32 @@ public class Advisor {
         } else if (condition == "21. 4 to an inside straight with 1 high card") {
 
         } else if (condition == "22. KQJ unsuited") {
-
+            int i = 0;
+            for (Card card : hand.cards) {
+                if (card.number < 11) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
         } else if (condition == "23. JT suited") {
-
+            int i = 0;
+            // nao é necessario procurar outros casos pq seriam pairs
+            for (Card card : hand.cards) {
+                if (card.number != 10 && card.number != 11) {
+                    holdList.remove(Integer.valueOf(i));
+                }
+                i++;
+            }
         } else if (condition == "24. QJ unsuited") {
-
+            int i = 0;
+            for (Card card : hand.cards) {
+                if (card.number != 11 && card.number != 12) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
         } else if (condition == "25. 3 to a flush with 1 high card") {
             holdList = this.xtoFlush(3, hand);
         } else if (condition == "26. QT suited") {
