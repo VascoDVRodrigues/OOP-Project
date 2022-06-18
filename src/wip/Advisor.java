@@ -51,7 +51,7 @@ public class Advisor {
         } else if (condition == "3. Three aces") {
             int i = 0;
             for (Card card : hand.cards) {
-                if (card.number == 1)
+                if (card.number != 1)
                     holdList.remove(Integer.valueOf(i));
                 i++;
             }
@@ -64,17 +64,44 @@ public class Advisor {
             }
             int cardtokeep = 0;
             for (int i = 0; i < hash.length; i++) {
-                if(hash[i]==3)
-                    cardtokeep =i;
+                if (hash[i] == 3)
+                    cardtokeep = i;
             }
             int i = 0;
             for (Card card : hand.cards) {
-                if (card.number == cardtokeep+1)
+                if (card.number == cardtokeep + 1)
                     holdList.remove(Integer.valueOf(i));
                 i++;
             }
 
         } else if (condition == "6. 4 to a straight flush") {
+            HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
+            hash_nape.put('H', 0);
+            hash_nape.put('S', 0);
+            hash_nape.put('D', 0);
+            hash_nape.put('C', 0);
+            char true_nape = 'A';
+
+            for (Card card : hand.cards) {
+                hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+            }
+            // exclude with the nape
+            for (Character key : hash_nape.keySet()) {
+                if (hash_nape.get(key) == 4) {
+                    true_nape = key;
+                    break;
+                }
+            }
+            int i = 0;
+            for (Card card : hand.cards) {
+                if (card.nape == true_nape) {
+                    holdList.remove(Integer.valueOf(i));
+                    return holdList;
+                }
+                i++;
+            }
+            // exlude with number
+            // not necessary bcs if it has 5 of the same nape it's a flush
 
         } else if (condition == "7. Two pair") {
 
