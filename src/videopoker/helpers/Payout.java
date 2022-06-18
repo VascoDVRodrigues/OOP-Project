@@ -1,4 +1,4 @@
-package wip;
+package videopoker.helpers;
 
 import java.util.HashMap;
 import java.util.Map.Entry;

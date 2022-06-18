@@ -1,6 +1,9 @@
-package wip;
+package videopoker.helpers;
 
 import java.util.*;
+
+import videopoker.Hand;
+import videopoker.deck.Card;
 
 public class CardAnalizer {
     public String getPayTableResult(Hand hand) {
@@ -37,8 +40,8 @@ public class CardAnalizer {
         royaList.add(12);
         royaList.add(13);
         ArrayList<Integer> aux = new ArrayList<Integer>();
-        for (Card card : hand.cards) {
-            aux.add(card.number);
+        for (Card card : hand.getCards()) {
+            aux.add(card.getNumber());
         }
         Collections.sort(aux);
         if (aux.equals(royaList))
@@ -48,10 +51,10 @@ public class CardAnalizer {
 
     private boolean isFlush(Hand hand) {
         char aux = 'A';
-        for (Card card : hand.cards) {
+        for (Card card : hand.getCards()) {
             if (aux == 'A') {
-                aux = card.nape;
-            } else if (card.nape != aux) {
+                aux = card.getNape();
+            } else if (card.getNape() != aux) {
                 return false;
             }
         }
@@ -60,8 +63,8 @@ public class CardAnalizer {
 
     private boolean isStraight(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         int start = 0;
         int hit = 0;
@@ -85,8 +88,8 @@ public class CardAnalizer {
 
     private int isFour(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         for (int index = 0; index < hash.length; index++) {
             if (hash[index] == 4) {
@@ -98,8 +101,8 @@ public class CardAnalizer {
 
     private boolean isFH(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         for (int i : hash) {
             if (i == 3) {
@@ -115,8 +118,8 @@ public class CardAnalizer {
 
     private boolean isTOK(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         for (int i : hash) {
             if (i == 3)
@@ -127,8 +130,8 @@ public class CardAnalizer {
 
     private boolean isTP(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         int aux = 0;
         for (Integer integer : hash) {
@@ -140,8 +143,8 @@ public class CardAnalizer {
 
     private boolean isJOB(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         for (int i = 10; i < hash.length; i++) {
             if (hash[i] == 2)
@@ -152,8 +155,8 @@ public class CardAnalizer {
 
     private boolean is3A(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         if (hash[0] == 3)
             return true;
@@ -168,8 +171,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!(hash_nape.containsValue(4) || hash_nape.containsValue(5)))
             return false;
@@ -182,9 +185,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
 
         if ((hash[0] + hash[12] + hash[11] + hash[10] + hash[9] >= 4))
@@ -194,8 +197,8 @@ public class CardAnalizer {
 
     private boolean isHP(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
 
         return hash[0] == 2 || hash[12] == 2 || hash[11] == 2 || hash[10] == 2;
@@ -203,8 +206,8 @@ public class CardAnalizer {
 
     private boolean isLP(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         for (int i = 1; i < 10; i++) {
             if (hash[i] == 2)
@@ -215,8 +218,8 @@ public class CardAnalizer {
     }
 
     private boolean hasCard(int c, Hand hand) {
-        for (Card card : hand.cards) {
-            if (card.number == c)
+        for (Card card : hand.getCards()) {
+            if (card.getNumber() == c)
                 return true;
         }
         return false;
@@ -230,8 +233,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(4))
             return false;
@@ -244,9 +247,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
 
         int start = 0;
@@ -276,8 +279,8 @@ public class CardAnalizer {
         hash_nape.put('D', 0);
         hash_nape.put('C', 0);
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(4))
             return false;
@@ -292,8 +295,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(3))
             return false;
@@ -306,9 +309,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
 
         if ((hash[0] + hash[12] + hash[11] + hash[10] + hash[9] >= 3))
@@ -318,8 +321,8 @@ public class CardAnalizer {
 
     private boolean isOS(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
 
         int start = 0;
@@ -341,8 +344,8 @@ public class CardAnalizer {
 
     private boolean isHighUnsuited(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         if ((hash[0] + hash[12] + hash[11] + hash[10] >= 4))
             return true;
@@ -357,8 +360,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(3))
             return false;
@@ -371,9 +374,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
 
         int start = 0;
@@ -399,8 +402,8 @@ public class CardAnalizer {
 
     private boolean is4toIS3HC(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         int start = hash[0] == 1 ? 1 : 0;
         int skip = 0;
@@ -424,10 +427,10 @@ public class CardAnalizer {
     }
 
     private boolean isQJS(Hand hand) {
-        for (Card card : hand.cards) {
-            if (card.number == 12) {
-                for (Card card1 : hand.cards) {
-                    if (card1.number == 11 && card.nape == card1.nape) {
+        for (Card card : hand.getCards()) {
+            if (card.getNumber() == 12) {
+                for (Card card1 : hand.getCards()) {
+                    if (card1.getNumber() == 11 && card.getNape() == card1.getNape()) {
                         return true;
                     }
                 }
@@ -444,8 +447,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(3))
             return false;
@@ -458,9 +461,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
         if (hash[0] + hash[12] + hash[11] + hash[10] >= 2)
             return true;
@@ -468,12 +471,12 @@ public class CardAnalizer {
     }
 
     private boolean is2SHC(Hand hand) {
-        for (Card card : hand.cards) {
+        for (Card card : hand.getCards()) {
 
-            if (card.number == 1 || card.number >= 11) {
-                for (Card card1 : hand.cards) {
-                    if ((card1.number == 1 || card1.number >= 11) && card.nape == card1.nape
-                            && card1.number != card.number) {
+            if (card.getNumber() == 1 || card.getNumber() >= 11) {
+                for (Card card1 : hand.getCards()) {
+                    if ((card1.getNumber() == 1 || card1.getNumber() >= 11) && card.getNape() == card1.getNape()
+                            && card1.getNumber() != card.getNumber()) {
                         return true;
                     }
                 }
@@ -484,8 +487,8 @@ public class CardAnalizer {
 
     private boolean is4toIS2HC(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         int start = 0;
         int skip = 0;
@@ -516,8 +519,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(3))
             return false;
@@ -530,9 +533,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
         int highcard = 0;
         int skip = 0;
@@ -565,8 +568,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(3))
             return false;
@@ -579,9 +582,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
 
         int start = 0;
@@ -607,8 +610,8 @@ public class CardAnalizer {
 
     private boolean is4toIS1HC(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         int start = 0;
         int skip = 0;
@@ -635,8 +638,8 @@ public class CardAnalizer {
 
     private boolean is4toIS0HC(Hand hand) {
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         int start = 0;
         int skip = 0;
@@ -667,10 +670,10 @@ public class CardAnalizer {
     }
 
     private boolean isJTS(Hand hand) {
-        for (Card card : hand.cards) {
-            if (card.number == 11) {
-                for (Card card1 : hand.cards) {
-                    if (card1.number == 10 && card.nape == card1.nape) {
+        for (Card card : hand.getCards()) {
+            if (card.getNumber() == 11) {
+                for (Card card1 : hand.getCards()) {
+                    if (card1.getNumber() == 10 && card.getNape() == card1.getNape()) {
                         return true;
                     }
                 }
@@ -687,8 +690,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(3))
             return false;
@@ -701,9 +704,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
         if (hash[0] + hash[12] + hash[11] + hash[10] >= 1)
             return true;
@@ -711,10 +714,10 @@ public class CardAnalizer {
     }
 
     private boolean isQTS(Hand hand) {
-        for (Card card : hand.cards) {
-            if (card.number == 12) {
-                for (Card card1 : hand.cards) {
-                    if (card1.number == 10 && card.nape == card1.nape) {
+        for (Card card : hand.getCards()) {
+            if (card.getNumber() == 12) {
+                for (Card card1 : hand.getCards()) {
+                    if (card1.getNumber() == 10 && card.getNape() == card1.getNumber()) {
                         return true;
                     }
                 }
@@ -724,10 +727,10 @@ public class CardAnalizer {
     }
 
     private boolean isKTS(Hand hand) {
-        for (Card card : hand.cards) {
-            if (card.number == 13) {
-                for (Card card1 : hand.cards) {
-                    if (card1.number == 10 && card.nape == card1.nape) {
+        for (Card card : hand.getCards()) {
+            if (card.getNumber() == 13) {
+                for (Card card1 : hand.getCards()) {
+                    if (card1.getNumber() == 10 && card.getNape() == card1.getNape()) {
                         return true;
                     }
                 }
@@ -744,8 +747,8 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
         if (!hash_nape.containsValue(3))
             return false;
@@ -758,9 +761,9 @@ public class CardAnalizer {
         }
 
         int[] hash = new int[13];
-        for (Card card : hand.cards) {
-            if (card.nape == true_nape)
-                hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            if (card.getNape() == true_nape)
+                hash[card.getNumber() - 1]++;
         }
         if (hash[0] + hash[12] + hash[11] + hash[10] >= 0)
             return true;

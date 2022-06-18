@@ -1,8 +1,8 @@
 package main;
 
-import wip.*;
-
 import java.io.FileNotFoundException;
+
+import videopoker.*;
 
 public class Main {
     public static void main(String[] args) {

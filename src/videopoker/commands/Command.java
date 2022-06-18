@@ -1,4 +1,4 @@
-package wip.commands;
+package videopoker.commands;
 
 import java.util.ArrayList;
 

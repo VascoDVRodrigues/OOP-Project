@@ -1,4 +1,6 @@
-package wip;
+package videopoker;
+
+import videopoker.deck.Deck;
 
 /**
  * Game

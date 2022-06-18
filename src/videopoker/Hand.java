@@ -1,12 +1,21 @@
-package wip;
+package videopoker;
 
 import java.util.ArrayList;
 
+import videopoker.deck.Card;
+
 public class Hand {
-    protected ArrayList<Card> cards;
+    private ArrayList<Card> cards;
 
     public Hand(ArrayList<Card> c) {
         this.cards = c;
+    }
+
+    /**
+     * @return the cards
+     */
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 
     // Adds card to hand

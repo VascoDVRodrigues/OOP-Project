@@ -1,4 +1,4 @@
-package wip;
+package videopoker;
 
 public class Player {
     protected int credits;

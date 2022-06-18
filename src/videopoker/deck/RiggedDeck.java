@@ -1,4 +1,4 @@
-package wip;
+package videopoker.deck;
 
 import java.io.File;
 import java.io.FileNotFoundException;

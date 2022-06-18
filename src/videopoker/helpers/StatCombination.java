@@ -1,4 +1,4 @@
-package wip;
+package videopoker.helpers;
 
 public class StatCombination {
     protected String name;

@@ -1,8 +1,8 @@
-package wip;
+package videopoker.deck;
 
 import java.util.ArrayList;
 
-abstract class Deck {
+public abstract class Deck {
     protected ArrayList<Card> cardList;
 
     abstract ArrayList<Card> getCards(int n);

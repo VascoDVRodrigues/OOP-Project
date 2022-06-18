@@ -1,9 +1,14 @@
-package wip;
+package videopoker;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import wip.commands.*;
+import videopoker.commands.*;
+import videopoker.deck.RiggedDeck;
+import videopoker.helpers.Advisor;
+import videopoker.helpers.CardAnalizer;
+import videopoker.helpers.PayoutTable;
+import videopoker.helpers.Stats;
 
 public class Debug extends Game {
     protected Commands cmds;

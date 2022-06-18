@@ -1,6 +1,9 @@
-package wip;
+package videopoker.helpers;
 
 import java.util.*;
+
+import videopoker.Hand;
+import videopoker.deck.Card;
 
 public class Advisor {
     public ArrayList<Integer> getHoldList(String condition, Hand hand) {
@@ -15,8 +18,8 @@ public class Advisor {
         } else if (condition == "2. 4 to a royal flush") {
             // // Remove by value
             // int i = 0;
-            // for (Card card : hand.cards) {
-            // if (card.number != 1 && card.number < 10) {
+            // for (Card card : hand.getCards()) {
+            // if (card.getNumber() != 1 && card.getNumber() < 10) {
             // holdList.remove(Integer.valueOf(i));
             // return holdList;
             // }
@@ -27,8 +30,8 @@ public class Advisor {
             holdList = this.xtoFlush(4, hand);
         } else if (condition == "3. Three aces") {
             int i = 0;
-            for (Card card : hand.cards) {
-                if (card.number != 1)
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 1)
                     holdList.remove(Integer.valueOf(i));
                 i++;
             }
@@ -36,8 +39,8 @@ public class Advisor {
             return holdList;
         } else if (condition == "5. Three of a kind (except aces)") {
             int[] hash = new int[13];
-            for (Card card : hand.cards) {
-                hash[card.number - 1]++;
+            for (Card card : hand.getCards()) {
+                hash[card.getNumber() - 1]++;
             }
             int cardtokeep = 0;
             for (int i = 0; i < hash.length; i++) {
@@ -45,8 +48,8 @@ public class Advisor {
                     cardtokeep = i;
             }
             int i = 0;
-            for (Card card : hand.cards) {
-                if (card.number == cardtokeep + 1)
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() == cardtokeep + 1)
                     holdList.remove(Integer.valueOf(i));
                 i++;
             }
@@ -55,12 +58,12 @@ public class Advisor {
             holdList = this.xtoFlush(4, hand);
         } else if (condition == "7. Two pair") {
             int[] hash = new int[13];
-            for (Card card : hand.cards) {
-                hash[card.number - 1]++;
+            for (Card card : hand.getCards()) {
+                hash[card.getNumber() - 1]++;
             }
             int i = 0;
-            for (Card card : hand.cards) {
-                if (hash[card.number - 1] == 1) {
+            for (Card card : hand.getCards()) {
+                if (hash[card.getNumber() - 1] == 1) {
                     holdList.remove(Integer.valueOf(i));
                     return holdList;
                 }
@@ -69,12 +72,12 @@ public class Advisor {
 
         } else if (condition == "8. High pair") {
             int[] hash = new int[13];
-            for (Card card : hand.cards) {
-                hash[card.number - 1]++;
+            for (Card card : hand.getCards()) {
+                hash[card.getNumber() - 1]++;
             }
             int i = 0;
-            for (Card card : hand.cards) {
-                if (hash[card.number - 1] == 2) {
+            for (Card card : hand.getCards()) {
+                if (hash[card.getNumber() - 1] == 2) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
@@ -86,8 +89,8 @@ public class Advisor {
         } else if (condition == "11. 4 to an outside straight") {
             int[] hash = new int[13];
             // Ver quantas cartas ha do mesmo numero
-            for (Card card : hand.cards) {
-                hash[card.number - 1]++;
+            for (Card card : hand.getCards()) {
+                hash[card.getNumber() - 1]++;
             }
 
             // [0,0,1,1,1,1,0,0,1,0,0,0,0]
@@ -108,8 +111,8 @@ public class Advisor {
             }
             // Cartas desde i até j estão no straight
             if (count == 4) { // sanity check
-                for (int k = 0; i < hand.cards.size(); i++) {
-                    if ((i < hand.cards.get(k).number) && (hand.cards.get(k).number < j)) {
+                for (int k = 0; i < hand.getCards().size(); i++) {
+                    if ((i < hand.getCards().get(k).getNumber()) && (hand.getCards().get(k).getNumber() < j)) {
                         holdList.add(k);
                     }
                 }
@@ -121,8 +124,8 @@ public class Advisor {
             // // Se existir mais do que 1 carta c mm numero retira-se essa carta
             // // Aqui o naipe não interessa, so se procura por um straight e nao flush
             // int i = 0;
-            // for (Card card : hand.cards) {
-            // if (hash[card.number - 1] > 1) {
+            // for (Card card : hand.getCards()) {
+            // if (hash[card.getNumber() - 1] > 1) {
             // holdList.remove(Integer.valueOf(i));
             // return holdList;
             // }
@@ -151,13 +154,13 @@ public class Advisor {
 
         } else if (condition == "12. Low pair") {
             int[] hash = new int[13];
-            for (Card card : hand.cards) {
-                hash[card.number - 1]++;
+            for (Card card : hand.getCards()) {
+                hash[card.getNumber() - 1]++;
             }
 
             int i = 0;
-            for (Card card : hand.cards) {
-                if (hash[card.number - 1] != 2) {
+            for (Card card : hand.getCards()) {
+                if (hash[card.getNumber() - 1] != 2) {
                     // isto remove o inteiro i e não o objeto com indice i
                     holdList.remove(Integer.valueOf(i));
                 }
@@ -167,15 +170,15 @@ public class Advisor {
             // Ou assim
             // holdList.removeAll(holdList);//so para limpar
             // //Se a carta aparece 2 vezes na mão ent é para dar hold
-            // for (int i = 0; i < hand.cards.size(); i++) {
-            // if ( hash[hand.cards.get(i).number - 1] == 2) {
+            // for (int i = 0; i < hand.getCards().size(); i++) {
+            // if ( hash[hand.getCards().get(i).number - 1] == 2) {
             // holdList.add(i);
             // }
             // }
         } else if (condition == "13. AKQJ unsuited") {
             int i = 0;
-            for (Card card : hand.cards) {
-                if (card.number > 1 && card.number < 11) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() > 1 && card.getNumber() < 11) {
                     holdList.remove(Integer.valueOf(i));
                     return holdList;
                 }
@@ -188,8 +191,8 @@ public class Advisor {
         } else if (condition == "16. QJ suited") {
             int i = 0;
             // nao é necessario procurar outros casos pq seriam high pairs
-            for (Card card : hand.cards) {
-                if (card.number != 11 && card.number != 12) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 11 && card.getNumber() != 12) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
@@ -199,14 +202,14 @@ public class Advisor {
             holdList = this.xtoFlush(3, hand);
         } else if (condition == "18. 2 suited high cards") {
             int i = 0;
-            for (Card card : hand.cards) {
-                if (card.number != 1 && card.number <= 10) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 1 && card.getNumber() <= 10) {
                     holdList.remove(Integer.valueOf(i));
                 } else {
                     int count = 0;
-                    for (Card card1 : hand.cards) {
-                        if ((card1.number == 1 || card1.number > 10) && (!card1.equals(card))
-                                && (card.nape == card1.nape)) {
+                    for (Card card1 : hand.getCards()) {
+                        if ((card1.getNumber() == 1 || card1.getNumber() > 10) && (!card1.equals(card))
+                                && (card.getNape() == card1.getNape())) {
                             count++;
                         }
                     }
@@ -226,8 +229,8 @@ public class Advisor {
 
         } else if (condition == "22. KQJ unsuited") {
             int i = 0;
-            for (Card card : hand.cards) {
-                if (card.number < 11) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() < 11) {
                     holdList.remove(Integer.valueOf(i));
                     return holdList;
                 }
@@ -236,16 +239,16 @@ public class Advisor {
         } else if (condition == "23. JT suited") {
             int i = 0;
             // nao é necessario procurar outros casos pq seriam pairs
-            for (Card card : hand.cards) {
-                if (card.number != 10 && card.number != 11) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 10 && card.getNumber() != 11) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
             }
         } else if (condition == "24. QJ unsuited") {
             int i = 0;
-            for (Card card : hand.cards) {
-                if (card.number != 11 && card.number != 12) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 11 && card.getNumber() != 12) {
                     holdList.remove(Integer.valueOf(i));
                     return holdList;
                 }
@@ -256,8 +259,8 @@ public class Advisor {
         } else if (condition == "26. QT suited") {
             int i = 0;
             // nao é necessario procurar outros casos pq seriam pairs
-            for (Card card : hand.cards) {
-                if (card.number != 10 && card.number != 12) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 10 && card.getNumber() != 12) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
@@ -267,8 +270,8 @@ public class Advisor {
         } else if (condition == "28. KQ, KJ unsuited") {
             int i = 0;
             // nao é necessario procurar outros casos pq seriam pairs
-            for (Card card : hand.cards) {
-                if (card.number > 10) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() > 10) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
@@ -277,8 +280,8 @@ public class Advisor {
             // Only hold the ace
             int i = 0;
             // nao é necessario procurar outros casos pq seriam pairs
-            for (Card card : hand.cards) {
-                if (card.number != 1) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 1) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
@@ -286,8 +289,8 @@ public class Advisor {
         } else if (condition == "30. KT suited") {
             int i = 0;
             // nao é necessario procurar outros casos pq seriam pairs
-            for (Card card : hand.cards) {
-                if (card.number != 1 && card.number != 13) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 1 && card.getNumber() != 13) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
@@ -295,8 +298,8 @@ public class Advisor {
         } else if (condition == "31. Jack, Queen or King") {
             int i = 0;
             // nao é necessario procurar outros casos pq seriam pairs
-            for (Card card : hand.cards) {
-                if (card.number > 10) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() > 10) {
                     holdList.remove(Integer.valueOf(i));
                 }
                 i++;
@@ -326,22 +329,22 @@ public class Advisor {
         holdList.add(3);
         holdList.add(4);
 
-        for (Card card : hand.cards) {
-            hash[card.number - 1]++;
+        for (Card card : hand.getCards()) {
+            hash[card.getNumber() - 1]++;
         }
         // catch weird inside straight
         int i = 0;
         if (hash[0] > 0 && hash[1] > 0 && hash[2] > 0 && hash[3] > 0) {
-            for (Card card : hand.cards) {
-                if (card.number > 4) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() > 4) {
                     holdList.remove(Integer.valueOf(i));
                     return holdList;
                 }
                 i++;
             }
         } else if (hash[0] > 0 && hash[10] > 0 && hash[11] > 0 && hash[12] > 0) {
-            for (Card card : hand.cards) {
-                if (card.number != 1 && card.number < 11) {
+            for (Card card : hand.getCards()) {
+                if (card.getNumber() != 1 && card.getNumber() < 11) {
                     holdList.remove(Integer.valueOf(i));
                     return holdList;
                 }
@@ -380,8 +383,8 @@ public class Advisor {
                 }
                 if (hash[index] == 1 && neighbouring == 0) {
                     if (index != missing + 1 && index != missing - 1) {
-                        for (Card card : hand.cards) {
-                            if (card.number == index + 1) {
+                        for (Card card : hand.getCards()) {
+                            if (card.getNumber() == index + 1) {
                                 // isto remove o inteiro i e não o objeto com indice i
                                 holdList.remove(Integer.valueOf(i));
                                 return holdList;
@@ -412,8 +415,8 @@ public class Advisor {
         char true_nape = 'A';
 
         // Check how many cards have the same nape
-        for (Card card : hand.cards) {
-            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        for (Card card : hand.getCards()) {
+            hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
 
         // Find the nape that has x cards
@@ -425,8 +428,8 @@ public class Advisor {
         }
 
         // If a card in the hand has the nape then hold it
-        for (int i = 0; i < hand.cards.size(); i++) {
-            if (hand.cards.get(i).nape == true_nape) {
+        for (int i = 0; i < hand.getCards().size(); i++) {
+            if (hand.getCards().get(i).getNape() == true_nape) {
                 holdList.add(i);
             }
         }
@@ -434,7 +437,7 @@ public class Advisor {
         return holdList;
 
         // int i = 0;
-        // for (Card card : hand.cards) {
+        // for (Card card : hand.getCards()) {
         // if (card.nape != true_nape) {
         // holdList.remove(Integer.valueOf(i));
         // }

@@ -1,4 +1,4 @@
-package wip;
+package videopoker.deck;
 
 import java.util.ArrayList;
 import java.util.Collections;

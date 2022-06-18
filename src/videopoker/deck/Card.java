@@ -1,4 +1,4 @@
-package wip;
+package videopoker.deck;
 
 /*
  * H - hearts (copas)
@@ -21,6 +21,20 @@ public class Card {
 	public Card(char n, int num) {
 		this.nape = n;
 		this.number = num;
+	}
+
+	/**
+	 * @return the nape
+	 */
+	public char getNape() {
+		return nape;
+	}
+
+	/**
+	 * @return the number
+	 */
+	public int getNumber() {
+		return number;
 	}
 
 	public Card(String s) {
