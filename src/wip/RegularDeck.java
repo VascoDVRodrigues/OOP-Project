@@ -33,5 +33,14 @@ public class RegularDeck extends Deck {
         Collections.shuffle(this.cardList);
     }
 
-    
+    public static void main(String[] args) {
+        RegularDeck d = new RegularDeck();
+
+        d.shuffle();
+        System.out.println(d);
+        d.shuffle();
+        System.out.println(d);
+        d.shuffle();
+        System.out.println(d);
+    }
 }

@@ -16,7 +16,6 @@ public class RiggedDeck extends Deck{
         File file = new File(filename);
         Scanner myReader = new Scanner(file);
 
-        //ASSUME QUE O FICHEIRO TEM SO UMA LINHA 
         while (myReader.hasNextLine()) {
             line = myReader.nextLine();
 
@@ -27,6 +26,9 @@ public class RiggedDeck extends Deck{
             splitedLine = line.split(" ");
 
             for (int i = 0; i < splitedLine.length; i++) {
+                if (splitedLine[i].length() != 2) {
+                    continue;
+                }
                 if ( Character.isDigit( splitedLine[i].charAt(0) ) ||
                     (splitedLine[i].charAt(0) == 'T') || 
                     (splitedLine[i].charAt(0) == 'Q') || 
