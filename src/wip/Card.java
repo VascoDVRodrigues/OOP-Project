@@ -54,7 +54,20 @@ public class Card {
 			this.nape = c;
 		}
 	}
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Card)) {
+            return false;
+        }
+         
+        Card c = (Card) obj;
+         
+        return Integer.compare(this.number, c.number) == 0
+                && Character.compare(this.nape, c.nape) == 0;        
+    }
 	@Override
 	public String toString() {
 		char[] str = new char[2];

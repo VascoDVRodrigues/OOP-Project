@@ -17,6 +17,7 @@ public class Debug extends Game {
     private CardAnalizer analizer = new CardAnalizer();
     private PayoutTable pay = new PayoutTable();
     private Stats stats;
+    private Advisor advisor = new Advisor();
 
     public Debug(Player p, String cmd_file, String cardFile) throws FileNotFoundException {
         this.deck = new RiggedDeck(cardFile);
@@ -122,10 +123,22 @@ public class Debug extends Game {
                     System.out.println("a: illegal command");
                     continue;
                 }
-                System.out.print("player should ");
-                System.out.println(this.analizer.getAdviceFromTable(this.hand));
-                System.out.println(" ");
-                // System.out.println("TODO: ADVICES\n");
+
+                ArrayList<Integer> holdList = advisor.getHoldList(this.analizer.getAdviceFromTable(this.hand), this.hand);
+
+                if (holdList.size() == 0) {
+                    System.out.println("player should discard everything");
+                } else if (holdList.size() == 5) {
+                    System.out.println("player should hold everything");
+                } else {
+                    StringBuilder str = new StringBuilder();
+                    for (Integer i : holdList) {
+                        str.append(i);
+                        str.append(" ");
+                    }
+
+                    System.out.print("player should hold cards " + str.toString());
+                }
             } else if ( current.getType().equals("s") ) {
                 System.out.println(stats+"\n");
             }
