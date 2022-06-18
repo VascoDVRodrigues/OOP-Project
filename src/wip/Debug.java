@@ -7,7 +7,7 @@ import wip.commands.*;
 
 public class Debug extends Game {
     protected Commands cmds;
-
+    protected RiggedDeck deck;
     private int lastBet = -1;
     private boolean allowBet = true; 
     private boolean allowDeal = false;
@@ -38,6 +38,7 @@ public class Debug extends Game {
             if (current.getType().equals("b")) {
                 //First check if the player can bet
                 if (!this.allowBet) {
+                    //TODO: trocar estes prints de erro para exceções
                     System.out.println("b: illegal command\n");
                     continue;
                 }
@@ -68,10 +69,17 @@ public class Debug extends Game {
                 lastBet = amount;
                 allowBet = false;
                 allowDeal = true;
+                allowAdvice = false;
             } else if (current.getType().equals("d")) {
                 if (!allowDeal) {
                     System.out.println("d: illegal command\n");
                     continue;
+                }
+                
+                //Check if there are enough cards
+                if (this.deck.getNumberOfCards() < 5) {
+                    System.out.println("d: illegal command (not enough cards)\n");
+                    continue;  
                 }
 
                 this.giveHand();
@@ -88,10 +96,30 @@ public class Debug extends Game {
                 ArrayList<Integer> holdIdxs = current.getArgs();
                 
                 //Must convert all indexes to indexes starting at 0, in cmd file starts at 1
+                int idx;
+                boolean illegal = false;
                 for (int i = 0; i < holdIdxs.size(); i++) {
-                    holdIdxs.set(i, holdIdxs.get(i) - 1 );
+                    idx = holdIdxs.get(i) - 1;
+
+                    if (idx >= 5) { //Invalid index, hands have maximum of 5 cards
+                        illegal = true;
+                        break;
+                    } else {
+                        holdIdxs.set(i, idx);
+                    }
+                }
+                
+                if (illegal) {
+                    System.out.println("h: illegal command\n");
+                    continue;
                 }
 
+                //Check if there are enough cards
+                if (this.deck.getNumberOfCards()< (5-holdIdxs.size()) ) {
+                    System.out.println("h: illegal command (not enough cards)\n");
+                    continue;  
+                }
+                
                 //Hold those cards, and replaced the dropped ones
                 this.hand.holdCards(holdIdxs, this.deck.getCards(5-holdIdxs.size()));
                 
@@ -120,24 +148,25 @@ public class Debug extends Game {
                 System.out.println("player's credit is " + this.player.getCredits() + "\n");
             } else if ( current.getType().equals("a") ) {
                 if (!allowAdvice) {
-                    System.out.println("a: illegal command");
+                    System.out.println("a: illegal command\n");
                     continue;
                 }
-
-                ArrayList<Integer> holdList = advisor.getHoldList(this.analizer.getAdviceFromTable(this.hand), this.hand);
+                String condition = this.analizer.getAdviceFromTable(this.hand);
+                System.out.println(condition);
+                ArrayList<Integer> holdList = advisor.getHoldList(condition, this.hand);
 
                 if (holdList.size() == 0) {
-                    System.out.println("player should discard everything");
+                    System.out.println("player should discard everything\n");
                 } else if (holdList.size() == 5) {
-                    System.out.println("player should hold everything");
+                    System.out.println("player should hold everything\n");
                 } else {
                     StringBuilder str = new StringBuilder();
                     for (Integer i : holdList) {
-                        str.append(i);
+                        str.append(i+1); //+1 because advisor returns the true index (starts counting at 0)
                         str.append(" ");
                     }
 
-                    System.out.print("player should hold cards " + str.toString());
+                    System.out.println("player should hold cards " + str.toString()+"\n");
                 }
             } else if ( current.getType().equals("s") ) {
                 System.out.println(stats+"\n");
