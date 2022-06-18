@@ -1,0 +1,10 @@
+$ b d a h 1 2 3 4 5 
+b d a h 1 5 2 4
+b d a h 1 2 3 4 5
+b d a h 1 2 4
+b d a h 2 3 5
+b d a h 1 2 3
+b d a h 1 2 3 4 5
+b d a h 1 2 3 4 5
+b d a
+s
