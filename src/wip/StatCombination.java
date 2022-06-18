@@ -16,10 +16,11 @@ public class StatCombination {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append(name);
-        str.append(" ");
-        str.append(absolutValue);
-        str.append("\n");
+        str.append(String.format("%-16s %d\n", name, absolutValue));
+        // str.append(name);
+        // str.append("\t");
+        // str.append(absolutValue);
+        // str.append("\n");
 
         return str.toString();
     }
