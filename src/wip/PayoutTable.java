@@ -100,45 +100,4 @@ public class PayoutTable {
 
         return str.toString();
     }
-
-    public static void main(String[] args) {
-        // Payout tests
-        PayoutTable p = new PayoutTable();
-        System.out.println(p);
-        // System.out.println("###################");
-        // System.out.println(p.printList());
-
-        Map<String, Integer> bets = new HashMap<String, Integer>();
-        bets.put("RF", 1);
-        bets.put("SF", 2);
-        bets.put("FA", 3);
-        bets.put("F24", 4);
-        bets.put("F5K", 5);
-        bets.put("FH", 6);
-        bets.put("F", 7);
-        bets.put("S", 8);
-        bets.put("TOK", 9);
-        bets.put("TP", 10);
-        bets.put("JOB", 11);
-        p.addBet(bets, 8);
-        System.out.println(p);
-
-        p.removeBet(2);
-        System.out.println(p);
-
-        p.modifyValue("FA", 3, 69);
-        p.removePayout("FH");
-        System.out.println(p);
-
-        System.out.println(p.getValue("RF", 3));
-        try {
-            p.addPayout("Test", "T", new int[] { 78, 2, 3, 3, 4, 88 });
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        System.out.println(p);
-        p.removePayout("JOB");
-        System.out.println(p);
-    }
 }

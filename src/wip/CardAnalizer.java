@@ -8,12 +8,12 @@ public class CardAnalizer {
             return "RF";
         else if (isStraight(hand) && isFlush(hand))
             return "SF";
-        else if (isFour(hand)==1)
+        else if (isFour(hand) == 1)
             return "FA";
-        else if (isFour(hand)>1 && isFour(hand)<=4)
+        else if (isFour(hand) > 1 && isFour(hand) <= 4)
             return "F24";
-        else if (isFour(hand)>4)
-            return "F5K"; 
+        else if (isFour(hand) > 4)
+            return "F5K";
         else if (isFH(hand))
             return "FH";
         else if (isFlush(hand))
@@ -65,8 +65,9 @@ public class CardAnalizer {
         }
         int start = 0;
         int hit = 0;
-        //if the ace is a high ace
-        if(hash[0]==1 && hash[12]==1 && hash[11]==1&& hash[10]==1&& hash[9]==1) return true;
+        // if the ace is a high ace
+        if (hash[0] == 1 && hash[12] == 1 && hash[11] == 1 && hash[10] == 1 && hash[9] == 1)
+            return true;
 
         for (int i = 0; i < hash.length; i++) {
             if (hash[i] > 0) {
@@ -74,8 +75,8 @@ public class CardAnalizer {
                 if (start == 0)
                     start = 1;
             } else {
-                //se da um miss e ainda n comecou e ainda nao ha 5 cartas seguidas
-                if (start != 0 && hit<5)
+                // se da um miss e ainda n comecou e ainda nao ha 5 cartas seguidas
+                if (start != 0 && hit < 5)
                     return false;
             }
         }
@@ -88,8 +89,8 @@ public class CardAnalizer {
             hash[card.number - 1]++;
         }
         for (int index = 0; index < hash.length; index++) {
-            if (hash[index] == 4){
-                return index+1;
+            if (hash[index] == 4) {
+                return index + 1;
             }
         }
         return 0;
@@ -170,7 +171,7 @@ public class CardAnalizer {
         for (Card card : hand.cards) {
             hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
         }
-        if (! (hash_nape.containsValue(4) || hash_nape.containsValue(5)) )
+        if (!(hash_nape.containsValue(4) || hash_nape.containsValue(5)))
             return false;
 
         for (Character key : hash_nape.keySet()) {
@@ -330,15 +331,12 @@ public class CardAnalizer {
                 if (start == 0)
                     start = 1;
             } else {
-                if (start != 0 && hit < 4){
-                    hit=0;
+                if (start != 0 && hit < 4) {
+                    hit = 0;
                 }
             }
         }
-        if (hit == 4)
-            return true;
-
-        return false;
+        return (hit == 4 && hash[0] != 1);
     }
 
     private boolean isHighUnsuited(Hand hand) {
@@ -386,7 +384,7 @@ public class CardAnalizer {
         for (int i = 0; i < hash.length; i++) {
             if (hash[i] == 1) {
                 hit++;
-                if (i >= 10)
+                if (i >= 10 || i == 0)
                     highcard++;
                 if (start == 0)
                     start = 1;
@@ -396,11 +394,7 @@ public class CardAnalizer {
             }
         }
 
-        if (highcard >= skip)
-            return true;
-
-        return false;
-
+        return (highcard >= skip && highcard != 0);
     }
 
     private boolean is4toIS3HC(Hand hand) {
@@ -408,28 +402,25 @@ public class CardAnalizer {
         for (Card card : hand.cards) {
             hash[card.number - 1]++;
         }
-        int start = 0;
+        int start = hash[0] == 1 ? 1 : 0;
         int skip = 0;
-        int hit = 0;
-        int highcard = 0;
+        int hit = hash[0] == 1 ? 1 : 0;
+        int highcard = hash[0] == 1 ? 1 : 0;
 
-        for (int i = 0; i < hash.length; i++) {
-            if (hash[i] > 0) {
+        for (int i = hash.length - 1; i >= 0; i--) {
+            if (hash[i] > 0 && hit < 4) {
                 hit++;
-                if (i >= 10)
+                if (i >= 10 || i == 0)
                     highcard++;
                 if (start == 0)
                     start = 1;
             } else {
-                if (start != 0 && hit < 3)
+                if (start != 0 && hit < 4)
                     skip++;
             }
         }
 
-        if (highcard == 3 && skip == 1 && hit == 4)
-            return true;
-
-        return false;
+        return (highcard == 3 && (skip == 1 || skip == 0) && hit == 4);
     }
 
     private boolean isQJS(Hand hand) {
@@ -501,7 +492,7 @@ public class CardAnalizer {
         int hit = 0;
         int highcard = 0;
 
-        for (int i = 0; i < hash.length; i++) {
+        for (int i = hash.length - 1; i > 6; i--) {
             if (hash[i] > 0) {
                 hit++;
                 if (i >= 10)
@@ -509,23 +500,64 @@ public class CardAnalizer {
                 if (start == 0)
                     start = 1;
             } else {
-                if (start != 0 && hit < 3)
+                if (start != 0)
                     skip++;
             }
         }
-
-        if (highcard == 2 && skip == 1 && hit == 4)
-            return true;
-
-        return false;
+        return (highcard == 2 && skip == 1 && hit == 4);
     }
 
+    // AINDA NÂO ESTÁ 100% CORRETO
     private boolean is3toSFT2(Hand hand) {
-        // TODO: wtf como implementar esta merda
-        return false;
+        HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
+        hash_nape.put('H', 0);
+        hash_nape.put('S', 0);
+        hash_nape.put('D', 0);
+        hash_nape.put('C', 0);
+        char true_nape = 'A';
+
+        for (Card card : hand.cards) {
+            hash_nape.put(card.nape, hash_nape.get(card.nape) + 1);
+        }
+        if (!hash_nape.containsValue(3))
+            return false;
+
+        for (Character key : hash_nape.keySet()) {
+            if (hash_nape.get(key) == 3) {
+                true_nape = key;
+                break;
+            }
+        }
+
+        int[] hash = new int[13];
+        for (Card card : hand.cards) {
+            if (card.nape == true_nape)
+                hash[card.number - 1]++;
+        }
+        int highcard = 0;
+        int skip = 0;
+        int start = 0;
+        int hit = 0;
+
+        for (int i = 0; i < hash.length; i++) {
+            if (hash[i] > 0 && hit < 4) {
+                hit++;
+                if (i >= 10)
+                    highcard++;
+                if (start == 0)
+                    start = 1;
+            } else {
+                if (start != 0 && hit < 4 && highcard != 1)
+                    skip++;
+            }
+        }
+        return ((highcard == 0 && skip == 1 && hit == 4)
+                || (highcard == 1 && skip == 2 && hit == 3)
+                || (hash[1] == 1 && hash[2] == 1 && hash[3] == 1)
+                || (hash[0] == 1 && skip == 4 && hit == 1));
     }
 
-    private boolean is3toSFT3(Hand hand){
+    private boolean is3toSFT3(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
         hash_nape.put('S', 0);
@@ -560,7 +592,7 @@ public class CardAnalizer {
         for (int i = 0; i < hash.length; i++) {
             if (hash[i] == 1) {
                 hit++;
-                if (i >= 10)
+                if (i >= 10 || i == 0)
                     highcard++;
                 if (start == 0)
                     start = 1;
@@ -570,10 +602,7 @@ public class CardAnalizer {
             }
         }
 
-        if (highcard == 0 && skip == 2)
-            return true;
-
-        return false;
+        return (highcard == 0 && skip == 2);
     }
 
     private boolean is4toIS1HC(Hand hand) {
@@ -584,25 +613,24 @@ public class CardAnalizer {
         int start = 0;
         int skip = 0;
         int hit = 0;
-        int highcard = 0;
+        int highcard = hash[0] == 1 ? 1 : 0;
 
-        for (int i = 0; i < hash.length; i++) {
-            if (hash[i] > 0) {
+        for (int i = hash.length - 1; i > 0; i--) {
+            if (hash[i] > 0 && hit < 4) {
                 hit++;
                 if (i >= 10)
                     highcard++;
                 if (start == 0)
                     start = 1;
             } else {
-                if (start != 0 && hit < 3)
+                if ((hash[0] == 1 && i < 5) || (start != 0 && i > 5))
                     skip++;
+
             }
         }
-
-        if (highcard == 1 && skip == 1 && hit == 4)
+        if (hash[0] == 1 && hash[1] == 1 && hash[2] == 1 && hash[3] == 1)
             return true;
-
-        return false;
+        return (highcard == 1 && skip == 1 && hit == 4);
     }
 
     private boolean is4toIS0HC(Hand hand) {
@@ -616,19 +644,23 @@ public class CardAnalizer {
         int highcard = 0;
 
         for (int i = 0; i < hash.length; i++) {
-            if (hash[i] > 0) {
+            if (hash[i] > 0 && hit < 4) {
                 hit++;
-                if (i >= 10)
+                if (i >= 10 || i == 0)
                     highcard++;
                 if (start == 0)
                     start = 1;
             } else {
-                if (start != 0 && hit < 3)
+                if (start != 0 && hit < 4) {
                     skip++;
+                    skip = skip == 2 ? 0 : skip;
+                    hit = skip == 2 ? 0 : hit;
+                }
             }
         }
+        System.out.println(highcard + " " + skip + " " + hit);
 
-        if (highcard == 0 && skip == 1 && hit == 4)
+        if (highcard < 2 && skip == 1 && hit == 4)
             return true;
 
         return false;
@@ -636,7 +668,7 @@ public class CardAnalizer {
 
     private boolean isJTS(Hand hand) {
         for (Card card : hand.cards) {
-            if (card.number == 12) {
+            if (card.number == 11) {
                 for (Card card1 : hand.cards) {
                     if (card1.number == 10 && card.nape == card1.nape) {
                         return true;
@@ -680,7 +712,7 @@ public class CardAnalizer {
 
     private boolean isQTS(Hand hand) {
         for (Card card : hand.cards) {
-            if (card.number == 11) {
+            if (card.number == 12) {
                 for (Card card1 : hand.cards) {
                     if (card1.number == 10 && card.nape == card1.nape) {
                         return true;
@@ -736,7 +768,7 @@ public class CardAnalizer {
     }
 
     public String getAdviceFromTable(Hand hand) {
-        if ((isFlush(hand) && isRoyal(hand)) || isFour(hand)!=0 || (isStraight(hand) && isFlush(hand)))
+        if ((isFlush(hand) && isRoyal(hand)) || isFour(hand) != 0 || (isStraight(hand) && isFlush(hand)))
             return "1. Straight flush, four of a kind, royal flush";
         if (is4toRF(hand))
             return "2. 4 to a royal flush";
@@ -778,29 +810,29 @@ public class CardAnalizer {
             return "20. 3 to a straight flush (type 2)";
         if (is4toIS1HC(hand))
             return "21. 4 to an inside straight with 1 high card";
-        if(hasCard(13,hand) && hasCard(12,hand) && hasCard(11,hand))
+        if (hasCard(13, hand) && hasCard(12, hand) && hasCard(11, hand))
             return "22. KQJ unsuited";
-        if(isJTS(hand))
+        if (isJTS(hand))
             return "23. JT suited";
-        if(hasCard(12,hand) && hasCard(11,hand))
+        if (hasCard(12, hand) && hasCard(11, hand))
             return "24. QJ unsuited";
-        if(is3toF1HC(hand))
+        if (is3toF1HC(hand))
             return "25. 3 to a flush with 1 high card";
-        if(isQTS(hand))
+        if (isQTS(hand))
             return "26. QT suited";
-        if(is3toSFT3(hand))
+        if (is3toSFT3(hand))
             return "27. 3 to a straight flush (type 3)";
-        if((hasCard(13,hand) && hasCard(12,hand))||(hasCard(13,hand) && hasCard(11,hand)))
+        if ((hasCard(13, hand) && hasCard(12, hand)) || (hasCard(13, hand) && hasCard(11, hand)))
             return "28. KQ, KJ unsuited";
         if (hasCard(1, hand))
             return "29. Ace";
-        if(isKTS(hand))
+        if (isKTS(hand))
             return "30. KT suited";
         if (hasCard(11, hand) || hasCard(12, hand) || hasCard(13, hand))
             return "31. Jack, Queen or King";
         if (is4toIS0HC(hand))
             return "32. 4 to an inside straight with no high cards";
-        if(is3toF0HC(hand))
+        if (is3toF0HC(hand))
             return "33. 3 to a flush with no high cards";
         return "34. Discard everything";
     }

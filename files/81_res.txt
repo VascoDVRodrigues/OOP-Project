@@ -1,0 +1,162 @@
+1.
+1. Straight flush, four of a kind, royal flush
+2.
+2. 4 to a royal flush
+3.
+2. 4 to a royal flush
+4.
+3. Three aces
+5.
+4. Straight, flush, full house
+6.
+4. Straight, flush, full house
+7.
+4. Straight, flush, full house
+8.
+4. Straight, flush, full house
+9.
+6. 4 to a straight flush
+10.
+7. Two pair
+11.
+8. High pair
+12.
+8. High pair
+13.
+9. 4 to a flush
+14.
+9. 4 to a flush
+15.
+10. 3 to a royal flush
+16.
+10. 3 to a royal flush
+17.
+11. 4 to an outside straight
+18.
+11. 4 to an outside straight
+19.
+12. Low pair
+20.
+12. Low pair
+21.
+13. AKQJ unsuited
+22.
+13. AKQJ unsuited
+23.
+13. AKQJ unsuited
+24.
+14. 3 to a straight flush (type 1)
+25.
+14. 3 to a straight flush (type 1)
+26.
+15. 4 to an inside straight with 3 high cards
+27.
+15. 4 to an inside straight with 3 high cards
+28.
+15. 4 to an inside straight with 3 high cards
+29.
+15. 4 to an inside straight with 3 high cards
+30.
+16. QJ suited
+31.
+16. QJ suited
+32.
+16. QJ suited
+33.
+17. 3 to a flush with 2 high cards
+34.
+16. QJ suited
+35.
+17. 3 to a flush with 2 high cards
+36.
+18. 2 suited high cards
+37.
+18. 2 suited high cards
+38.
+19. 4 to an inside straight with 2 high cards
+39.
+19. 4 to an inside straight with 2 high cards
+40.
+20. 3 to a straight flush (type 2)
+41.
+21. 4 to an inside straight with 1 high card
+42.
+21. 4 to an inside straight with 1 high card
+43.
+20. 3 to a straight flush (type 2)
+44.
+23. JT suited
+45.
+23. JT suited
+46.
+23. JT suited
+47.
+23. JT suited
+48.
+23. JT suited
+49.
+21. 4 to an inside straight with 1 high card
+50.
+23. JT suited
+51.
+24. QJ unsuited
+52.
+24. QJ unsuited
+53.
+24. QJ unsuited
+54.
+24. QJ unsuited
+55.
+24. QJ unsuited
+56.
+25. 3 to a flush with 1 high card
+57.
+25. 3 to a flush with 1 high card
+58.
+25. 3 to a flush with 1 high card
+59.
+25. 3 to a flush with 1 high card
+60.
+25. 3 to a flush with 1 high card
+61.
+26. QT suited
+62.
+26. QT suited
+63.
+26. QT suited
+64.
+26. QT suited
+65.
+26. QT suited
+66.
+27. 3 to a straight flush (type 3)
+67.
+27. 3 to a straight flush (type 3)
+68.
+27. 3 to a straight flush (type 3)
+69.
+27. 3 to a straight flush (type 3)
+70.
+28. KQ, KJ unsuited
+71.
+28. KQ, KJ unsuited
+72.
+28. KQ, KJ unsuited
+73.
+29. Ace
+74.
+29. Ace
+75.
+29. Ace
+76.
+29. Ace
+77.
+30. KT suited
+78.
+30. KT suited
+79.
+31. Jack, Queen or King
+80.
+31. Jack, Queen or King
+81.
+32. 4 to an inside straight with no high cards

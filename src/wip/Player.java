@@ -4,16 +4,16 @@ public class Player {
     protected int credits;
     public String name;
     protected Hand hand;
-    
+
     public Player(int c, String name) {
         this.credits = c;
         this.name = name;
     }
-    
+
     public Player(int c) {
         this.credits = c;
     }
-    
+
     /**
      * @return the credits
      */
@@ -33,7 +33,7 @@ public class Player {
         }
         System.out.println("player is betting " + amount + "\n");
     }
-    
+
     @Override
     public String toString() {
         return "Player " + this.name + " has " + this.credits + " credits";
@@ -43,7 +43,7 @@ public class Player {
         System.out.println("player's hand " + this.hand);
     }
 
-    public void setHand(Hand hand){
+    public void setHand(Hand hand) {
         this.hand = hand;
         this.displayHand();
     }

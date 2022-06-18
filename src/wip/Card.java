@@ -24,18 +24,18 @@ public class Card {
 	}
 
 	public Card(String s) {
-		//Se quisermos dar uma string c a carta em vez de numero e naipe separado
-		//Vem na forma sempre Numero Naipe 
+		// Se quisermos dar uma string c a carta em vez de numero e naipe separado
+		// Vem na forma sempre Numero Naipe
 		char c = s.charAt(0);
 
 		switch (c) {
 			case 'K':
 				this.number = 13;
 				break;
-			case 'J':
+			case 'Q':
 				this.number = 12;
 				break;
-			case 'Q':
+			case 'J':
 				this.number = 11;
 				break;
 			case 'T':
@@ -48,9 +48,9 @@ public class Card {
 				this.number = Character.getNumericValue(c);
 				break;
 		}
-		
-		c = s.charAt(1); 
-		if ( c == 'H' || c == 'D' || c == 'S'|| c == 'C' ) {
+
+		c = s.charAt(1);
+		if (c == 'H' || c == 'D' || c == 'S' || c == 'C') {
 			this.nape = c;
 		}
 	}
@@ -59,17 +59,17 @@ public class Card {
 	public String toString() {
 		char[] str = new char[2];
 
-		switch(this.number) {
+		switch (this.number) {
 			case 1:
 				str[0] = 'A';
-			  break;
+				break;
 			case 10:
 				str[0] = 'T';
 				break;
-			case 11:
-				str[0] = 'Q';
-			  break;
 			case 12:
+				str[0] = 'Q';
+				break;
+			case 11:
 				str[0] = 'J';
 				break;
 			case 13:
@@ -80,10 +80,14 @@ public class Card {
 				str[0] = (char) (this.number + '0');
 
 				break;
-		}       
+		}
 
 		str[1] = this.nape;
 
 		return String.valueOf(str);
+	}
+
+	public void printUnconverted() {
+		System.out.println("(" + this.number + this.nape + ")");
 	}
 }

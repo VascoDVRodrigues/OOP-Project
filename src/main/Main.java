@@ -5,32 +5,33 @@ import wip.*;
 import java.io.FileNotFoundException;
 
 public class Main {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         Player p;
-        //Parse input parameters
-        if (args[0].equals("-d")) { //debug mode
+        // Parse input parameters
+        if (args[0].equals("-d")) { // debug mode
             if (args.length != 4) {
                 System.out.println("Invalid number of arguments");
             }
 
             try {
-                p = new Player( Integer.parseInt(args[1]), "André");
+                p = new Player(Integer.parseInt(args[1]), "André");
                 System.out.println(p);
             } catch (NumberFormatException e) {
-                System.out.println("First argument is number of credits, must be integer, " + args[0] + " is not an integer.. :(");
-                // System.out.println(e);
+                System.out.println(
+                        "First argument is number of credits, must be integer, " + args[0] + " is not an integer.. :(");
+                System.out.println(e);
                 return;
             }
 
             try {
                 Debug g = new Debug(p, args[2], args[3]);
-                
+
                 g.play();
             } catch (FileNotFoundException e) {
                 System.out.println("File doesn't exist :(");
                 System.out.println(e);
             }
-        } else if (args[0].equals("-s")) { //Simulation mode
+        } else if (args[0].equals("-s")) { // Simulation mode
             if (args.length != 4) {
                 System.out.println("Invalid number of arguments");
             }
@@ -41,19 +42,19 @@ public class Main {
 }
 
 // Player p = new Player(100, "João");
-        // RegularDeck rd = new RegularDeck();
-        // Stats s = new Stats(100);
-        // CardAnalizer ca = new CardAnalizer();
-        // for (int i = 0; i < 20; i++) {
-        //     rd.shuffle();       
-        //     String result = ca.getPayTableResult(new Hand(rd.getCards(5)));
-        //     s.addStat(result);.
-        // }
-        // System.out.println(s);
+// RegularDeck rd = new RegularDeck();
+// Stats s = new Stats(100);
+// CardAnalizer ca = new CardAnalizer();
+// for (int i = 0; i < 20; i++) {
+// rd.shuffle();
+// String result = ca.getPayTableResult(new Hand(rd.getCards(5)));
+// s.addStat(result);.
+// }
+// System.out.println(s);
 
-        // RegularDeck rd = new RegularDeck();
-        // rd.shuffle();
+// RegularDeck rd = new RegularDeck();
+// rd.shuffle();
 
-        // Hand h = new Hand(rd.getCards(5));
+// Hand h = new Hand(rd.getCards(5));
 
-        // System.out.println("hand is " + h);
+// System.out.println("hand is " + h);
