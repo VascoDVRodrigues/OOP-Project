@@ -3,6 +3,7 @@ package main;
 import java.io.FileNotFoundException;
 
 import videopoker.*;
+import videopoker.exceptions.InvalidSimulationMode;
 
 public class Main {
     public static void main(String[] args) {
@@ -66,9 +67,15 @@ public class Main {
                 return;
             }
 
-            Simulation g = new Simulation(p, bet, nbdeals);
+            Simulation g;
+            try {
+                g = new Simulation(p, bet, nbdeals);
+                g.play();
+            } catch (InvalidSimulationMode e) {
+                // TODO Auto-generated catch block
+                System.out.println(e.getMessage());
+            }
 
-            g.play();
         } else {
             System.out.println("Invalid option " + args[0]);
         }
