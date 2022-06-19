@@ -519,12 +519,16 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
+        //Ver quantas cartas de cada naipe ha
         for (Card card : hand.getCards()) {
             hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
+
+        //Se não existem 3 cartas do mm naipe já nao vai ser flush
         if (!hash_nape.containsValue(3))
             return false;
 
+        // Ver qual é o naipe que tem 3 cartas
         for (Character key : hash_nape.keySet()) {
             if (hash_nape.get(key) == 3) {
                 true_nape = key;
@@ -532,32 +536,33 @@ public class CardAnalizer {
             }
         }
 
+        //Ver quais são as cartas que teem o naipe que dará o flush
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
             if (card.getNape() == true_nape)
                 hash[card.getNumber() - 1]++;
         }
+
         int highcard = 0;
         int skip = 0;
         int start = 0;
         int hit = 0;
 
         for (int i = 0; i < hash.length; i++) {
-            if (hash[i] > 0 && hit < 4) {
+            if (hash[i] > 0 && hit<3) {
                 hit++;
                 if (i >= 10)
                     highcard++;
                 if (start == 0)
                     start = 1;
             } else {
-                if (start != 0 && hit < 4 && highcard != 1)
+                if (start != 0 && hit<3) //Vai haver até 2 gaps, nunca mais
                     skip++;
             }
         }
-        return ((highcard == 0 && skip == 1 && hit == 4)
-                || (highcard == 1 && skip == 2 && hit == 3)
-                || (hash[1] == 1 && hash[2] == 1 && hash[3] == 1)
-                || (hash[0] == 1 && skip == 4 && hit == 1));
+        return ((highcard == 0 && skip == 1 && hit == 3) // Straight flush draw with one gap no High Card
+                || (highcard == 1 && skip == 2 && hit == 3) //Straight flush draw with two gaps one High Card
+                || (hash[0] == 1 && skip < 3));
     }
 
     private boolean is3toSFT3(Hand hand) {
@@ -646,6 +651,7 @@ public class CardAnalizer {
         int hit = 0;
         int highcard = 0;
 
+
         for (int i = 0; i < hash.length; i++) {
             if (hash[i] > 0 && hit < 4) {
                 hit++;
@@ -656,12 +662,11 @@ public class CardAnalizer {
             } else {
                 if (start != 0 && hit < 4) {
                     skip++;
-                    skip = skip == 2 ? 0 : skip;
                     hit = skip == 2 ? 0 : hit;
+                    skip = skip == 2 ? 0 : skip;
                 }
             }
         }
-        System.out.println(highcard + " " + skip + " " + hit);
 
         if (highcard < 2 && skip == 1 && hit == 4)
             return true;
@@ -715,9 +720,9 @@ public class CardAnalizer {
 
     private boolean isQTS(Hand hand) {
         for (Card card : hand.getCards()) {
-            if (card.getNumber() == 12) {
-                for (Card card1 : hand.getCards()) {
-                    if (card1.getNumber() == 10 && card.getNape() == card1.getNumber()) {
+            if (card.getNumber() == 12) { //Check if card is Queen
+                for (Card card1 : hand.getCards()) { //Search for the 10 and check if they have the same nape
+                    if (card1.getNumber() == 10 && card.getNape() == card1.getNape()) {
                         return true;
                     }
                 }

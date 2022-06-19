@@ -5,19 +5,18 @@ import java.util.ArrayList;
 
 import videopoker.commands.*;
 import videopoker.deck.RiggedDeck;
-import videopoker.helpers.Advisor;
-import videopoker.helpers.CardAnalizer;
-import videopoker.helpers.PayoutTable;
-import videopoker.helpers.Stats;
+import videopoker.helpers.*;
 
 public class Debug extends Game {
     protected Commands cmds;
-    protected RiggedDeck deck;
+    
     private int lastBet = -1;
     private boolean allowBet = true;
     private boolean allowDeal = false;
     private boolean allowHold = false;
     private boolean allowAdvice = false;
+
+    // private int count = 0;
 
     private CardAnalizer analizer = new CardAnalizer();
     private PayoutTable pay = new PayoutTable();
@@ -29,7 +28,7 @@ public class Debug extends Game {
         this.player = p;
         this.cmds = new Commands(cmd_file);
         stats = new Stats(this.player.getCredits());
-        System.out.println("Starting debug mode with variant\n" + pay);
+        // System.out.println("Starting debug mode with variant\n" + pay);
     }
 
     public void play() {
@@ -71,6 +70,7 @@ public class Debug extends Game {
                 }
 
                 this.player.bet(amount);
+                System.out.println("player is betting " + amount + "\n");
                 lastBet = amount;
                 allowBet = false;
                 allowDeal = true;
@@ -82,12 +82,14 @@ public class Debug extends Game {
                 }
                 
                 //Check if there are enough cards
-                if (this.deck.getNumberOfCards() < 5) {
+                if (((RiggedDeck) this.deck).getNumberOfCards() < 5) {
                     System.out.println("d: illegal command (not enough cards)\n");
                     continue;  
                 }
-
+                // count++;
                 this.giveHand();
+                // System.out.println(count + ".");
+                this.player.displayHand();
                 System.out.print("\n");
                 allowDeal = false;
                 allowHold = true;
@@ -120,7 +122,7 @@ public class Debug extends Game {
                 }
 
                 //Check if there are enough cards
-                if (this.deck.getNumberOfCards()< (5-holdIdxs.size()) ) {
+                if (((RiggedDeck) this.deck).getNumberOfCards()< (5-holdIdxs.size()) ) {
                     System.out.println("h: illegal command (not enough cards)\n");
                     continue;  
                 }
@@ -158,7 +160,7 @@ public class Debug extends Game {
                     continue;
                 }
                 String condition = this.analizer.getAdviceFromTable(this.hand);
-                System.out.println(condition);
+                // System.out.println(condition);
                 ArrayList<Integer> holdList = advisor.getHoldList(condition, this.hand);
 
                 if (holdList.size() == 0) {
@@ -179,12 +181,5 @@ public class Debug extends Game {
             }
         }
 
-    }
-
-    @Override
-    public void giveHand() {
-        // Both the player and the game have acess to the same hand
-        this.hand = new Hand(this.deck.getCards(5));
-        this.player.setHand(this.hand);
     }
 }

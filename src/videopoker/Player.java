@@ -27,11 +27,10 @@ public class Player {
 
     public void bet(int amount) {
         this.credits -= amount;
-        if (this.credits < 0) {
-            this.credits += amount;
-            System.out.println("Player doesnt have enough credits :( (E AGORA?)");
-        }
-        System.out.println("player is betting " + amount + "\n");
+        // if (this.credits < 0) {
+        //     // this.credits += amount;
+        //     System.out.println("Player doesnt have enough credits :(");
+        // }
     }
 
     @Override
@@ -45,6 +44,6 @@ public class Player {
 
     public void setHand(Hand hand) {
         this.hand = hand;
-        this.displayHand();
+        // this.displayHand();
     }
 }

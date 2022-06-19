@@ -63,6 +63,7 @@ public class RiggedDeck extends Deck{
         return cardList.size();
     }
 
+    @Override
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class Deck {
     protected ArrayList<Card> cardList;
 
-    abstract ArrayList<Card> getCards(int n);
+    abstract public ArrayList<Card> getCards(int n);
 
     @Override
     public String toString() {

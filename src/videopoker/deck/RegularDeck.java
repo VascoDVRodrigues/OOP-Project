@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class RegularDeck extends Deck {
+
+    ArrayList<Card> bag = new ArrayList<Card>();
     
     public RegularDeck(){
         this.cardList = new ArrayList<Card> ();
@@ -20,16 +22,22 @@ public class RegularDeck extends Deck {
         }
     }
 
+    @Override
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();
         //Pick n random cards from cardslist
-        for (int i = 0; i < n; i++) {
-            aux.add(cardList.get(i));
+        int i=0;
+        while (i < n) {
+            aux.add(cardList.get(0));
+            bag.add(cardList.remove(0));
+            i++;
         }
         return aux;
     }
 
     public void shuffle() {        
+        this.cardList.addAll(this.bag);
+        this.bag.removeAll(this.bag);
         Collections.shuffle(this.cardList);
     }
 

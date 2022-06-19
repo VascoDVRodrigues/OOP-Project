@@ -183,6 +183,13 @@ public class PayoutTable {
         }
     }
 
+    /**
+     * This method <b>@Overides</b> the <code>toString</code> method in order to
+     * create a print function that outputs the payout values in a table format.
+     * <p>
+     * The method builds a string, retriving first the header of the table from the
+     */
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

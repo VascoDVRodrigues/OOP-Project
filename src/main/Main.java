@@ -15,7 +15,7 @@ public class Main {
 
             try {
                 p = new Player(Integer.parseInt(args[1]), "André");
-                System.out.println(p);
+                // System.out.println(p);
             } catch (NumberFormatException e) {
                 System.out.println(
                         "First argument is number of credits, must be integer, " + args[0] + " is not an integer.. :(");
@@ -35,6 +35,40 @@ public class Main {
             if (args.length != 4) {
                 System.out.println("Invalid number of arguments");
             }
+
+            try {
+                p = new Player(Integer.parseInt(args[1]), "André");
+                // System.out.println(p);
+            } catch (NumberFormatException e) {
+                System.out.println(
+                        "First argument is number of credits, must be integer, " + args[0] + " is not an integer.. :(");
+                System.out.println(e);
+                return;
+            }
+
+            int bet;
+            try {
+                bet = Integer.parseInt(args[2]);
+            } catch (NumberFormatException e) {
+                System.out.println(
+                        "Second argument is bet amount, must be integer, " + args[0] + " is not an integer.. :(");
+                System.out.println(e);
+                return;
+            }
+
+            int nbdeals;
+            try {
+                nbdeals = Integer.parseInt(args[3]);
+            } catch (NumberFormatException e) {
+                System.out.println(
+                        "Third argument is number of deals, must be integer, " + args[0] + " is not an integer.. :(");
+                System.out.println(e);
+                return;
+            }
+
+            Simulation g = new Simulation(p, bet, nbdeals);
+
+            g.play();
         } else {
             System.out.println("Invalid option " + args[0]);
         }
