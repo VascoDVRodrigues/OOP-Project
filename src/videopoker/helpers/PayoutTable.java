@@ -104,10 +104,10 @@ public class PayoutTable {
      * The amounts array needs to be of the same length as the tables bet numbers.
      * </p>
      * 
-     * @param name      The name of the new hand type.
-     * @param shortName The short name of the new hand type.
-     * @param amounts   The array of ints representing the payout values for each
-     *                  bet value.
+     * @param name    The name of the new hand type.
+     * @param key     The short name of the new hand type.
+     * @param amounts The array of ints representing the payout values for each
+     *                bet value.
      */
     public void addPayout(String name, String key, int[] amounts) {
         Iterator<Entry<String, Payout>> iterator = table.entrySet().iterator();
@@ -174,7 +174,7 @@ public class PayoutTable {
      * every hand in the table, and removing the his payout value from the table.
      * </p>
      * 
-     * @param bet
+     * @param bet The int representing the bet value to be removed.
      */
     public void removeBet(int bet) {
         // Remove bets from table
@@ -187,9 +187,13 @@ public class PayoutTable {
      * This method <b>@Overides</b> the <code>toString</code> method in order to
      * create a print function that outputs the payout values in a table format.
      * <p>
-     * The method builds a string, retriving first the header of the table from the
+     * The method builds a string, retriving first the header of the table from one
+     * of the rows in the table, and then each of the rows one by one from the
+     * table.
+     * </p>
+     * 
+     * @return The string representing the payout table.
      */
-
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
