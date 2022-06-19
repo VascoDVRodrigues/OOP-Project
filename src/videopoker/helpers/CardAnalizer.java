@@ -651,6 +651,7 @@ public class CardAnalizer {
         int hit = 0;
         int highcard = 0;
 
+
         for (int i = 0; i < hash.length; i++) {
             if (hash[i] > 0 && hit < 4) {
                 hit++;
@@ -661,12 +662,11 @@ public class CardAnalizer {
             } else {
                 if (start != 0 && hit < 4) {
                     skip++;
-                    skip = skip == 2 ? 0 : skip;
                     hit = skip == 2 ? 0 : hit;
+                    skip = skip == 2 ? 0 : skip;
                 }
             }
         }
-        // System.out.println(highcard + " " + skip + " " + hit);
 
         if (highcard < 2 && skip == 1 && hit == 4)
             return true;

@@ -16,7 +16,7 @@ public class Debug extends Game {
     private boolean allowHold = false;
     private boolean allowAdvice = false;
 
-    private int count = 0;
+    // private int count = 0;
 
     private CardAnalizer analizer = new CardAnalizer();
     private PayoutTable pay = new PayoutTable();
@@ -37,7 +37,7 @@ public class Debug extends Game {
         while (!cmds.isEmpty()) {
             current = this.cmds.getNextCommand();
 
-            //System.out.println(current);
+            System.out.println(current);
 
             if (current.getType().equals("b")) {
                 // First check if the player can bet
@@ -70,7 +70,7 @@ public class Debug extends Game {
                 }
 
                 this.player.bet(amount);
-                //System.out.println("player is betting " + amount + "\n");
+                System.out.println("player is betting " + amount + "\n");
                 lastBet = amount;
                 allowBet = false;
                 allowDeal = true;
@@ -86,11 +86,11 @@ public class Debug extends Game {
                     System.out.println("d: illegal command (not enough cards)\n");
                     continue;  
                 }
-                count++;
+                // count++;
                 this.giveHand();
-                System.out.println(count + ".");
+                // System.out.println(count + ".");
                 this.player.displayHand();
-                // System.out.print("\n");
+                System.out.print("\n");
                 allowDeal = false;
                 allowHold = true;
                 allowAdvice = true;
@@ -130,21 +130,21 @@ public class Debug extends Game {
                 //Hold those cards, and replaced the dropped ones
                 this.hand.holdCards(holdIdxs, this.deck.getCards(5-holdIdxs.size()));
                 
-                // this.player.displayHand();
+                this.player.displayHand();
 
                 String result = analizer.getPayTableResult(this.hand);
 
                 int cashback;
 
                 if (result.equals("O")) {
-                    //System.out.println("player loses and his credit is " + this.player.getCredits() + "\n");
+                    System.out.println("player loses and his credit is " + this.player.getCredits() + "\n");
                     cashback = 0;
                 } else {
                     // Player won something
                     cashback = pay.getValue(result, lastBet);
                     this.player.increaseCredit(cashback);
-                    //System.out.println(
-                            //"player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n");
+                    System.out.println(
+                            "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n");
                 }
 
                 stats.addStat(result, cashback, lastBet);
@@ -160,7 +160,7 @@ public class Debug extends Game {
                     continue;
                 }
                 String condition = this.analizer.getAdviceFromTable(this.hand);
-                System.out.println(condition);
+                // System.out.println(condition);
                 ArrayList<Integer> holdList = advisor.getHoldList(condition, this.hand);
 
                 if (holdList.size() == 0) {

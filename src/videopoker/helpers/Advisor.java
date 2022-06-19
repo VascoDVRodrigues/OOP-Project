@@ -130,7 +130,7 @@ public class Advisor {
                 }
             }
             // Cartas desde i até j estão no straight
-            System.out.println(i + " " + j);
+            // System.out.println(i + " " + j);
             if (count == 4) { // sanity check
                 for (int k = 0; k < hand.getCards().size(); k++) {
                     if ((i < hand.getCards().get(k).getNumber()) &&

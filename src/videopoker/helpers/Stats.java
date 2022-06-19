@@ -10,13 +10,14 @@ public class Stats {
     int allGains = 0;
     int allBets = 0;
     int nB;
-    int nO;
+
+    public int counter = 0;
     ArrayList<StatCombination> table;
 
     public Stats(int credit){
         playersCredit = credit;
         nB = 0;
-        nO = 0;
+
         table = new ArrayList<StatCombination>();
         table.add(new StatCombination("Jack or Better","JOB"));
         table.add(new StatCombination("Two Pair","TP"));
@@ -33,16 +34,20 @@ public class Stats {
 
     public void addStat(String k, int cashback, int bet){
         nB++;
+
+        k = (k == "F24" || k == "F5K" || k == "FA") ? "FOK" : k ;
+        
         for (StatCombination statCombination : table) {
-            if(statCombination.key==k){
+            if( statCombination.key == k ){
+                this.counter++;
                 statCombination.incrementValue();
+                
                 this.allBets += bet;
                 this.playersCredit += (cashback-bet);
                 this.allGains += cashback;
                 return;
             }
         }
-        nO++;
     }
     @Override
     public String toString() {
@@ -58,7 +63,7 @@ public class Stats {
         // str.append(nB);
         // str.append("\n");
         str.append(BLUE + "────────────────────\n" + RESET);
-        str.append(String.format("%-16s %d (%f%%)", "Credit", playersCredit, 100*(float)this.allGains/(float)this.allBets));
+        str.append(String.format("%-16s %d (%.2f%%)", "Credit", playersCredit, 100*(float)this.allGains/(float)this.allBets));
         return str.toString();
     }
 

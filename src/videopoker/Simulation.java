@@ -43,20 +43,26 @@ public class Simulation extends Game {
             ((RegularDeck) this.deck).shuffle();
             this.giveHand();
 
+            // System.out.println(this.hand);
+
             //GET ADVICE
-
             String condition = this.analizer.getAdviceFromTable(this.hand);
+            // System.out.println(condition);
 
-            if (condition.equals("14. 3 to a straight flush (type 1)")) {
-                System.out.println(condition);
-            }
+            // if (condition.equals("14. 3 to a straight flush (type 1)")) {
+            // }
 
             ArrayList<Integer> holdList = advisor.getHoldList(condition, this.hand);
+            // System.out.println(holdList);
 
             //FOLLOW THE ADVICE
             this.hand.holdCards(holdList, this.deck.getCards(5-holdList.size()));
-            
+            // System.out.println(this.hand);
+
             String result = analizer.getPayTableResult(this.hand);
+            // System.out.println(result);
+            
+            // System.out.println("--------");
 
             int cashback;
             if (result.equals("O")) {
@@ -65,15 +71,17 @@ public class Simulation extends Game {
             } else {
                 // Player won something
                 cashback = pay.getValue(result, bet);
+
                 this.player.increaseCredit(cashback);
                 // System.out.println(
                 //         "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n");
             }
-
             stats.addStat(result, cashback, bet);
         }
-
+        
+        // System.out.println(var1+ " "+var2+ " "+var3);
         System.out.println(stats+"\n");
+        // System.out.println(stats.counter);
 
     }
     

@@ -86,7 +86,6 @@ player should hold cards 2 3 4 5
 18.
 player's hand 7D 8D 9D TS 4H 
 11. 4 to an outside straight
-6 10
 player should hold cards 1 2 3 4 
 
 19.
