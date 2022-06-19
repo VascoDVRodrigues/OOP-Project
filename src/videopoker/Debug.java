@@ -54,7 +54,7 @@ public class Debug extends Game {
             throw new IllegalCommandException("b");
         }
 
-        if (amount > maxBet) {
+        if (amount > maxBet || amount <= 0) {
             throw new IllegalAmountException();
         }
 
