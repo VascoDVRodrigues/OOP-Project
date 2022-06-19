@@ -146,6 +146,9 @@ public class CardAnalizer {
         for (Card card : hand.getCards()) {
             hash[card.getNumber() - 1]++;
         }
+        if (hash[0] == 2)
+            return true;
+
         for (int i = 10; i < hash.length; i++) {
             if (hash[i] == 2)
                 return true;
@@ -327,9 +330,8 @@ public class CardAnalizer {
 
         int start = 0;
         int hit = 0;
-
         for (int i : hash) {
-            if (i > 0) {
+            if (i > 0 && hit < 4) {
                 hit++;
                 if (start == 0)
                     start = 1;
@@ -519,12 +521,12 @@ public class CardAnalizer {
         hash_nape.put('C', 0);
         char true_nape = 'A';
 
-        //Ver quantas cartas de cada naipe ha
+        // Ver quantas cartas de cada naipe ha
         for (Card card : hand.getCards()) {
             hash_nape.put(card.getNape(), hash_nape.get(card.getNape()) + 1);
         }
 
-        //Se não existem 3 cartas do mm naipe já nao vai ser flush
+        // Se não existem 3 cartas do mm naipe já nao vai ser flush
         if (!hash_nape.containsValue(3))
             return false;
 
@@ -536,7 +538,7 @@ public class CardAnalizer {
             }
         }
 
-        //Ver quais são as cartas que teem o naipe que dará o flush
+        // Ver quais são as cartas que teem o naipe que dará o flush
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
             if (card.getNape() == true_nape)
@@ -549,19 +551,19 @@ public class CardAnalizer {
         int hit = 0;
 
         for (int i = 0; i < hash.length; i++) {
-            if (hash[i] > 0 && hit<3) {
+            if (hash[i] > 0 && hit < 3) {
                 hit++;
                 if (i >= 10)
                     highcard++;
                 if (start == 0)
                     start = 1;
             } else {
-                if (start != 0 && hit<3) //Vai haver até 2 gaps, nunca mais
+                if (start != 0 && hit < 3) // Vai haver até 2 gaps, nunca mais
                     skip++;
             }
         }
         return ((highcard == 0 && skip == 1 && hit == 3) // Straight flush draw with one gap no High Card
-                || (highcard == 1 && skip == 2 && hit == 3) //Straight flush draw with two gaps one High Card
+                || (highcard == 1 && skip == 2 && hit == 3) // Straight flush draw with two gaps one High Card
                 || (hash[0] == 1 && skip < 3));
     }
 
@@ -651,7 +653,6 @@ public class CardAnalizer {
         int hit = 0;
         int highcard = 0;
 
-
         for (int i = 0; i < hash.length; i++) {
             if (hash[i] > 0 && hit < 4) {
                 hit++;
@@ -720,8 +721,8 @@ public class CardAnalizer {
 
     private boolean isQTS(Hand hand) {
         for (Card card : hand.getCards()) {
-            if (card.getNumber() == 12) { //Check if card is Queen
-                for (Card card1 : hand.getCards()) { //Search for the 10 and check if they have the same nape
+            if (card.getNumber() == 12) { // Check if card is Queen
+                for (Card card1 : hand.getCards()) { // Search for the 10 and check if they have the same nape
                     if (card1.getNumber() == 10 && card.getNape() == card1.getNape()) {
                         return true;
                     }

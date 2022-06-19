@@ -9,7 +9,7 @@ import videopoker.helpers.*;
 
 public class Debug extends Game {
     protected Commands cmds;
-    
+
     private int lastBet = -1;
     private boolean allowBet = true;
     private boolean allowDeal = false;
@@ -33,16 +33,16 @@ public class Debug extends Game {
 
     public void play() {
         Command current;
-
+        int count = 0;
         while (!cmds.isEmpty()) {
             current = this.cmds.getNextCommand();
 
-            System.out.println(current);
+            // System.out.println(current);
 
             if (current.getType().equals("b")) {
                 // First check if the player can bet
                 if (!this.allowBet) {
-                    //TODO: trocar estes prints de erro para exceções
+                    // TODO: trocar estes prints de erro para exceções
                     System.out.println("b: illegal command\n");
                     continue;
                 }
@@ -70,7 +70,7 @@ public class Debug extends Game {
                 }
 
                 this.player.bet(amount);
-                System.out.println("player is betting " + amount + "\n");
+                // System.out.println("player is betting " + amount + "\n");
                 lastBet = amount;
                 allowBet = false;
                 allowDeal = true;
@@ -80,17 +80,17 @@ public class Debug extends Game {
                     System.out.println("d: illegal command\n");
                     continue;
                 }
-                
-                //Check if there are enough cards
+
+                // Check if there are enough cards
                 if (((RiggedDeck) this.deck).getNumberOfCards() < 5) {
                     System.out.println("d: illegal command (not enough cards)\n");
-                    continue;  
+                    continue;
                 }
-                // count++;
+                count++;
                 this.giveHand();
-                // System.out.println(count + ".");
+                System.out.println(count + ".");
                 this.player.displayHand();
-                System.out.print("\n");
+                // System.out.print("\n");
                 allowDeal = false;
                 allowHold = true;
                 allowAdvice = true;
@@ -101,36 +101,36 @@ public class Debug extends Game {
                 }
                 // Fetch the cards that the player wants to hold
                 ArrayList<Integer> holdIdxs = current.getArgs();
-                
-                //Must convert all indexes to indexes starting at 0, in cmd file starts at 1
+
+                // Must convert all indexes to indexes starting at 0, in cmd file starts at 1
                 int idx;
                 boolean illegal = false;
                 for (int i = 0; i < holdIdxs.size(); i++) {
                     idx = holdIdxs.get(i) - 1;
 
-                    if (idx >= 5) { //Invalid index, hands have maximum of 5 cards
+                    if (idx >= 5) { // Invalid index, hands have maximum of 5 cards
                         illegal = true;
                         break;
                     } else {
                         holdIdxs.set(i, idx);
                     }
                 }
-                
+
                 if (illegal) {
                     System.out.println("h: illegal command\n");
                     continue;
                 }
 
-                //Check if there are enough cards
-                if (((RiggedDeck) this.deck).getNumberOfCards()< (5-holdIdxs.size()) ) {
+                // Check if there are enough cards
+                if (((RiggedDeck) this.deck).getNumberOfCards() < (5 - holdIdxs.size())) {
                     System.out.println("h: illegal command (not enough cards)\n");
-                    continue;  
+                    continue;
                 }
-                
-                //Hold those cards, and replaced the dropped ones
-                this.hand.holdCards(holdIdxs, this.deck.getCards(5-holdIdxs.size()));
-                
-                this.player.displayHand();
+
+                // Hold those cards, and replaced the dropped ones
+                this.hand.holdCards(holdIdxs, this.deck.getCards(5 - holdIdxs.size()));
+
+                // this.player.displayHand();
 
                 String result = analizer.getPayTableResult(this.hand);
 
@@ -160,7 +160,7 @@ public class Debug extends Game {
                     continue;
                 }
                 String condition = this.analizer.getAdviceFromTable(this.hand);
-                // System.out.println(condition);
+                System.out.println(condition);
                 ArrayList<Integer> holdList = advisor.getHoldList(condition, this.hand);
 
                 if (holdList.size() == 0) {
@@ -170,14 +170,14 @@ public class Debug extends Game {
                 } else {
                     StringBuilder str = new StringBuilder();
                     for (Integer i : holdList) {
-                        str.append(i+1); //+1 because advisor returns the true index (starts counting at 0)
+                        str.append(i + 1); // +1 because advisor returns the true index (starts counting at 0)
                         str.append(" ");
                     }
 
-                    System.out.println("player should hold cards " + str.toString()+"\n");
+                    System.out.println("player should hold cards " + str.toString() + "\n");
                 }
-            } else if ( current.getType().equals("s") ) {
-                System.out.println(stats+"\n");
+            } else if (current.getType().equals("s")) {
+                System.out.println(stats + "\n");
             }
         }
 

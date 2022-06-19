@@ -25,9 +25,6 @@ public class Advisor {
                 }
                 i++;
             }
-            i = 0;
-
-            // holdList = this.xtoFlush(4, hand);
         } else if (condition == "3. Three aces") {
             int i = 0;
             for (Card card : hand.getCards()) {
@@ -49,7 +46,7 @@ public class Advisor {
             }
             int i = 0;
             for (Card card : hand.getCards()) {
-                if (card.getNumber() == cardtokeep + 1)
+                if (card.getNumber() != cardtokeep + 1)
                     holdList.remove(Integer.valueOf(i));
                 i++;
             }
@@ -106,11 +103,31 @@ public class Advisor {
                 i++;
             }
 
+            // int hit = 0;
+            // for (i = 0; i < hash.length; i++) {
+            // if (hash[i] > 0 && hit < 4) {
+            // hit++;
+            // } else if (hit == 1) {
+            // int j = 0;
+            // for (Card card : hand.getCards()) {
+            // if (card.getNumber() - 1 == i) {
+            // holdList.remove(Integer.valueOf(j));
+            // return holdList;
+            // }
+            // j++;
+            // }
+            // } else if (hit == 4) {
+            // holdList.remove(Integer.valueOf(4));
+            // return holdList;
+            // }
+            // }
+
             // [0,0,1,1,1,1,0,0,1,0,0,0,0]
             // [0,0,0,1,0,0,1,1,1,1,0,0]
 
             holdList.removeAll(holdList);
             i = 0;
+
             int j = 0, count = 0;
             for (i = 0; i < hash.length; i++) {
                 if (hash[i] > 0) {

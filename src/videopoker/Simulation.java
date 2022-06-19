@@ -22,30 +22,30 @@ public class Simulation extends Game {
             System.out.println("Maximum bet is " + this.maxBet);
         }
         this.deck = new RegularDeck();
-        
+
         this.player = p;
 
         stats = new Stats(this.player.getCredits());
-        
+
         this.bet = bet;
         this.nbdeals = nbdeals;
     }
 
     @Override
     public void play() {
-        //strategy is to bet, deal, ask for advice and follow the advice
-        
+        // strategy is to bet, deal, ask for advice and follow the advice
+
         for (int i = 0; i < nbdeals; i++) {
-            //BET
+            // BET
             this.player.bet(bet);
 
-            //DEAL
+            // DEAL
             ((RegularDeck) this.deck).shuffle();
             this.giveHand();
 
             // System.out.println(this.hand);
 
-            //GET ADVICE
+            // GET ADVICE
             String condition = this.analizer.getAdviceFromTable(this.hand);
             // System.out.println(condition);
 
@@ -55,18 +55,19 @@ public class Simulation extends Game {
             ArrayList<Integer> holdList = advisor.getHoldList(condition, this.hand);
             // System.out.println(holdList);
 
-            //FOLLOW THE ADVICE
-            this.hand.holdCards(holdList, this.deck.getCards(5-holdList.size()));
+            // FOLLOW THE ADVICE
+            this.hand.holdCards(holdList, this.deck.getCards(5 - holdList.size()));
             // System.out.println(this.hand);
 
             String result = analizer.getPayTableResult(this.hand);
             // System.out.println(result);
-            
+
             // System.out.println("--------");
 
             int cashback;
             if (result.equals("O")) {
-                // System.out.println("player loses and his credit is " + this.player.getCredits() + "\n");
+                // System.out.println("player loses and his credit is " +
+                // this.player.getCredits() + "\n");
                 cashback = 0;
             } else {
                 // Player won something
@@ -74,15 +75,16 @@ public class Simulation extends Game {
 
                 this.player.increaseCredit(cashback);
                 // System.out.println(
-                //         "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n");
+                // "player wins with a " + result + " and his credit is " +
+                // this.player.getCredits() + "\n");
             }
             stats.addStat(result, cashback, bet);
         }
-        
+
         // System.out.println(var1+ " "+var2+ " "+var3);
-        System.out.println(stats+"\n");
+        System.out.println(stats + "\n");
         // System.out.println(stats.counter);
 
     }
-    
+
 }
