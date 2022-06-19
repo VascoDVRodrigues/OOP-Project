@@ -3,7 +3,7 @@ package videopoker;
 import java.util.ArrayList;
 
 import videopoker.deck.RegularDeck;
-
+import videopoker.exceptions.InvalidSimulationMode;
 import videopoker.helpers.*;
 
 public class Simulation extends Game {
@@ -15,12 +15,18 @@ public class Simulation extends Game {
     private int bet, nbdeals;
 
     /**
+     * @throws InvalidSimulationMode
      * 
      */
-    public Simulation(Player p, int bet, int nbdeals) {
+    public Simulation(Player p, int bet, int nbdeals) throws InvalidSimulationMode {
         if (bet > maxBet) {
-            System.out.println("Maximum bet is " + this.maxBet);
+            throw new InvalidSimulationMode("Maximum bet is " + this.maxBet);
         }
+
+        if (bet < 0) {
+            throw new InvalidSimulationMode("Bet must be positive");
+        }
+
         this.deck = new RegularDeck();
         
         this.player = p;
