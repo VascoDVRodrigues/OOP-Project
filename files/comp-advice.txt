@@ -127,12 +127,12 @@ player should hold cards 1 2 3
 26.
 player's hand KS QD JD 9H 7C 
 15. 4 to an inside straight with 3 high cards
-player should hold everything
+player should hold cards 1 2 3 4 
 
 27.
 player's hand AH KC QC TD 6C 
 15. 4 to an inside straight with 3 high cards
-player should hold cards 2 3 4 5 
+player should hold cards 1 2 3 4 
 
 28.
 player's hand KH QS JS 9D 3C 
@@ -142,7 +142,7 @@ player should hold cards 1 2 3 4
 29.
 player's hand KC QH JS 9H 8H 
 15. 4 to an inside straight with 3 high cards
-player should hold everything
+player should hold cards 1 2 3 4 
 
 30.
 player's hand QD JD 7D 5H 4S 
@@ -242,7 +242,7 @@ player should hold cards 1 2
 49.
 player's hand 6S 7C 8D TH JH 
 21. 4 to an inside straight with 1 high card
-player should hold everything
+player should hold cards 2 3 4 5 
 
 50.
 player's hand JD TD 2C 5C 7C 
@@ -252,27 +252,27 @@ player should hold cards 1 2
 51.
 player's hand QC JH 9H 4H 2S 
 24. QJ unsuited
-player should hold cards 1 2 4 5 
+player should hold cards 1 2 
 
 52.
 player's hand QC JD TC 3S 5H 
 24. QJ unsuited
-player should hold cards 1 2 4 5 
+player should hold cards 1 2 
 
 53.
 player's hand QS JD 5H 6H 9H 
 24. QJ unsuited
-player should hold cards 1 2 4 5 
+player should hold cards 1 2 
 
 54.
 player's hand AD QC JS 4H 7S 
 24. QJ unsuited
-player should hold cards 2 3 4 5 
+player should hold cards 2 3 
 
 55.
 player's hand QC JH 2D 5D 7D 
 24. QJ unsuited
-player should hold cards 1 2 4 5 
+player should hold cards 1 2 
 
 56.
 player's hand 7C TC QC 3H 2D 
@@ -347,17 +347,17 @@ player should hold cards 1 2 4
 70.
 player's hand AD KC JS 7H 4C 
 28. KQ, KJ unsuited
-player should hold cards 1 4 5 
+player should hold cards 2 3 
 
 71.
 player's hand KC QH TC 4D 6S 
 28. KQ, KJ unsuited
-player should hold cards 3 4 5 
+player should hold cards 1 2 
 
 72.
 player's hand KH JS 3D 8D 9D 
 28. KQ, KJ unsuited
-player should hold cards 3 4 5 
+player should hold cards 1 2 
 
 73.
 player's hand AC KH TH 4S 5D 
@@ -382,22 +382,22 @@ player should hold cards 1
 77.
 player's hand KD 6C 7S 9H TD 
 30. KT suited
-player should hold cards 1 
+player should hold cards 1 5 
 
 78.
 player's hand KC TC 3H 5H 8H 
 30. KT suited
-player should hold cards 1 
+player should hold cards 1 2 
 
 79.
 player's hand JH 2S 3C 4D 6H 
 31. Jack, Queen or King
-player should hold cards 2 3 4 5 
+player should hold cards 1 
 
 80.
 player's hand QC 2H 5H 7H 9S 
 31. Jack, Queen or King
-player should hold cards 2 3 4 5 
+player should hold cards 1 
 
 81.
 player's hand 2D 3S 5C 6C TC 
