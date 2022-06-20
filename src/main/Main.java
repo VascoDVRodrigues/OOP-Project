@@ -3,7 +3,7 @@ package main;
 import java.io.FileNotFoundException;
 
 import videopoker.*;
-import videopoker.exceptions.InvalidSimulationMode;
+import videopoker.exceptions.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,6 +21,9 @@ public class Main {
                 System.out.println(
                         "First argument is number of credits, must be integer, " + args[0] + " is not an integer.. :(");
                 System.out.println(e);
+                return;
+            } catch (InvalidPlayer e) {
+                System.out.println(e.getMessage());
                 return;
             }
 
@@ -44,6 +47,9 @@ public class Main {
                 System.out.println(
                         "First argument is number of credits, must be integer, " + args[0] + " is not an integer.. :(");
                 System.out.println(e);
+                return;
+            } catch (InvalidPlayer e) {
+                System.out.println(e.getMessage());
                 return;
             }
 
@@ -72,7 +78,6 @@ public class Main {
                 g = new Simulation(p, bet, nbdeals);
                 g.play();
             } catch (InvalidSimulationMode e) {
-                // TODO Auto-generated catch block
                 System.out.println(e.getMessage());
             }
 

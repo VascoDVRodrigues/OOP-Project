@@ -1,16 +1,24 @@
 package videopoker;
 
+import videopoker.exceptions.InvalidPlayer;
+
 public class Player {
     protected int credits;
     public String name;
     protected Hand hand;
 
-    public Player(int c, String name) {
+    public Player(int c, String name) throws InvalidPlayer {
+        if ( c <= 0 ) {
+            throw new InvalidPlayer("Credits must be an integer greater than 0");
+        }
         this.credits = c;
         this.name = name;
     }
 
-    public Player(int c) {
+    public Player(int c) throws InvalidPlayer {
+        if ( c <= 0 ) {
+            throw new InvalidPlayer("Credits must be an integer greater than 0");
+        }
         this.credits = c;
     }
 

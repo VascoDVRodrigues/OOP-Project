@@ -167,7 +167,6 @@ public class Debug extends Game {
 
     public void play() {
         Command current;
-        int count = 0;
         while (!cmds.isEmpty()) {
             current = this.cmds.getNextCommand();
 
