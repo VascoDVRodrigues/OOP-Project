@@ -1,0 +1,492 @@
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand AS KS JS TS 9S 
+
+-cmd a
+2. 4 to a royal flush
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand AS KS JS TS 9S 
+player wins with a F and his credit is 10030
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand AH AD AS 2C 2S 
+
+-cmd a
+3. Three aces
+player should hold cards 1 2 3 
+
+-cmd h 1 2 3 4 5 
+player's hand AH AD AS 2C 2S 
+player wins with a FH and his credit is 10075
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 4C 4S 4H 5D 5C 
+
+-cmd a
+4. Straight, flush, full house
+player should hold everything
+
+-cmd h 1 2 3 4 5 
+player's hand 4C 4S 4H 5D 5C 
+player wins with a FH and his credit is 10120
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 5S 6S 7S 8S JS 
+
+-cmd a
+4. Straight, flush, full house
+player should hold everything
+
+-cmd h 1 2 3 4 5 
+player's hand 5S 6S 7S 8S JS 
+player wins with a F and his credit is 10150
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 3D 4H 5H 6H 7H 
+
+-cmd a
+4. Straight, flush, full house
+player should hold everything
+
+-cmd h 1 2 3 4 5 
+player's hand 3D 4H 5H 6H 7H 
+player wins with a S and his credit is 10170
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand AC KD QD JD TS 
+
+-cmd a
+4. Straight, flush, full house
+player should hold everything
+
+-cmd h 1 2 3 4 5 
+player's hand AC KD QD JD TS 
+player wins with a S and his credit is 10190
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand KC QC JC 9C 4D 
+
+-cmd a
+6. 4 to a straight flush
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand KC QC JC 9C 4D 
+player loses and his credit is 10185
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand AH AS KD KS QS 
+
+-cmd a
+7. Two pair
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand AH AS KD KS QS 
+player wins with a TP and his credit is 10185
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand JC JD 4D 7D 9D 
+
+-cmd a
+8. High pair
+player should hold cards 1 2 
+
+-cmd h 1 2 3 4 5 
+player's hand JC JD 4D 7D 9D 
+player wins with a JOB and his credit is 10185
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand QS QH JS AS 2C 
+
+-cmd a
+8. High pair
+player should hold cards 1 2 
+
+-cmd h 1 2 3 4 5 
+player's hand QS QH JS AS 2C 
+player wins with a JOB and his credit is 10185
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 8C JC QC KC 9H 
+
+-cmd a
+9. 4 to a flush
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand 8C JC QC KC 9H 
+player loses and his credit is 10180
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 2S 5S 7S 9S 7H 
+
+-cmd a
+9. 4 to a flush
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand 2S 5S 7S 9S 7H 
+player loses and his credit is 10175
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand TD JD QC KD 5S 
+
+-cmd a
+10. 3 to a royal flush
+player should hold cards 1 2 4 
+
+-cmd h 1 2 3 4 5 
+player's hand TD JD QC KD 5S 
+player loses and his credit is 10170
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand TH QH AH TD 8C 
+
+-cmd a
+10. 3 to a royal flush
+player should hold cards 1 2 3 
+
+-cmd h 1 2 3 4 5 
+player's hand TH QH AH TD 8C 
+player loses and his credit is 10165
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 7C 7D 8H 9S TD 
+
+-cmd a
+11. 4 to an outside straight
+player should hold cards 2 3 4 5 
+
+-cmd h 1 2 3 4 5 
+player's hand 7C 7D 8H 9S TD 
+player loses and his credit is 10160
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 7D 8D 9D TS 4H 
+
+-cmd a
+11. 4 to an outside straight
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand 7D 8D 9D TS 4H 
+player loses and his credit is 10155
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 7C 7D 8D 9D 3S 
+
+-cmd a
+12. Low pair
+player should hold cards 1 2 
+
+-cmd h 1 2 3 4 5 
+player's hand 7C 7D 8D 9D 3S 
+player loses and his credit is 10150
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand KS QD JC 9H 9C 
+
+-cmd a
+12. Low pair
+player should hold cards 4 5 
+
+-cmd h 1 2 3 4 5 
+player's hand KS QD JC 9H 9C 
+player loses and his credit is 10145
+
+-cmd b
+player is betting 5
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 1 2 3 4 5 
+h: illegal command
+

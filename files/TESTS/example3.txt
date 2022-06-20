@@ -1,0 +1,176 @@
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 2H QS JS 9D 8S 
+
+-cmd a
+14. 3 to a straight flush (type 1)
+player should hold cards 2 3 5 
+
+-cmd h 2 
+player's hand AH QS 3C 8D 5D 
+player loses and his credit is 9995
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 8H TH JH 3S 5D 
+
+-cmd a
+14. 3 to a straight flush (type 1)
+player should hold cards 1 2 3 
+
+-cmd h
+player's hand 8S 9C JD QD 4D 
+player loses and his credit is 9990
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand KS QD JD 9H 7C 
+
+-cmd a
+15. 4 to an inside straight with 3 high cards
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand KS QD JD 9H 7C 
+player loses and his credit is 9985
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand AH KC QC TD 6C 
+
+-cmd a
+15. 4 to an inside straight with 3 high cards
+player should hold cards 1 2 3 4 
+
+-cmd h
+player's hand AC KH TH 4S 5D 
+player loses and his credit is 9980
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand KH QS JS 9D 3C 
+
+-cmd a
+15. 4 to an inside straight with 3 high cards
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand KH QS JS 9D 3C 
+player loses and his credit is 9975
+
+-cmd s
+Hand		Nb
+[38;2;0;157;224m────────────────────
+[0;0mJack or Better   0
+Two Pair         0
+Three of a Kind  0
+Straight         0
+Flush            0
+Full House       0
+Four of a Kind   0
+Straight Flush   0
+Royal Flush      0
+Other            5
+[38;2;0;157;224m────────────────────
+[0;0mTotal            5
+[38;2;0;157;224m────────────────────
+[0;0mCredit           9975 (0,00%)
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand KC QH JS 9H 8H 
+
+-cmd a
+15. 4 to an inside straight with 3 high cards
+player should hold cards 1 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand KC QH JS 9H 8H 
+player loses and his credit is 9970
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand QD JD 7D 5H 4S 
+
+-cmd a
+16. QJ suited
+player should hold cards 1 2 
+
+-cmd h 1 2 3 4 5 
+player's hand QD JD 7D 5H 4S 
+player loses and his credit is 9965
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 8S 9H JD QD 2C 
+
+-cmd a
+16. QJ suited
+player should hold cards 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand 8S 9H JD QD 2C 
+player loses and his credit is 9960
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand QS JS 2H 3H 4H 
+
+-cmd a
+16. QJ suited
+player should hold cards 1 2 
+
+-cmd h 1 2 3 4 
+player's hand QS JS 2H 3H 7H 
+player loses and his credit is 9955
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand KH JH 3H 5S 6C 
+
+-cmd a
+17. 3 to a flush with 2 high cards
+player should hold cards 1 2 3 
+
+-cmd h 1 2 3 4 5 
+player's hand KH JH 3H 5S 6C 
+player loses and his credit is 9950
+
+-cmd s
+Hand		Nb
+[38;2;0;157;224m────────────────────
+[0;0mJack or Better   0
+Two Pair         0
+Three of a Kind  0
+Straight         0
+Flush            0
+Full House       0
+Four of a Kind   0
+Straight Flush   0
+Royal Flush      0
+Other            10
+[38;2;0;157;224m────────────────────
+[0;0mTotal            10
+[38;2;0;157;224m────────────────────
+[0;0mCredit           9950 (0,00%)
+
