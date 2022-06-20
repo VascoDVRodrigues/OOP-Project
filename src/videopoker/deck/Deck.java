@@ -2,7 +2,7 @@ package videopoker.deck;
 
 import java.util.ArrayList;
 
-public abstract class Deck {
+public abstract class Deck implements IDeck {
     protected ArrayList<Card> cardList;
 
     abstract public ArrayList<Card> getCards(int n);

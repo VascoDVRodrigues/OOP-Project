@@ -5,7 +5,7 @@ import videopoker.deck.Deck;
 /**
  * Game
  */
-abstract class Game {
+abstract class Game implements IGame{
     protected Deck deck;
     protected Player player;
     protected Hand hand;

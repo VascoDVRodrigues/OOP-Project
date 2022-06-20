@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 /**
  * This class is used to store the payout table for the game.
  */
-public class PayoutTable {
+public class PayoutTable implements IPayoutTable {
 
     protected Map<String, Payout> table;
 

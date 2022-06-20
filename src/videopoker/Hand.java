@@ -7,7 +7,7 @@ import videopoker.deck.Card;
 /**
  * This class is used to implement the player.
  */
-public class Hand {
+public class Hand implements IHand {
     //Attribute to save the cards inside the hand
     private ArrayList<Card> cards;
 

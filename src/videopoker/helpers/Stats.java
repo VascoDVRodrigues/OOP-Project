@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * It also keeps track of the number of hands delt.
  * </p>
  */
-public class Stats {
+public class Stats implements IStats{
     private static final String BLUE = "\u001B[38;2;0;157;224m";
     private static final String RESET = "\u001B[0;0m";
 

@@ -5,7 +5,7 @@ import java.util.*;
 import videopoker.Hand;
 import videopoker.deck.Card;
 
-public class CardAnalizer {
+public class CardAnalizer implements ICardAnalizer {
     public String getPayTableResult(Hand hand) {
         if (isFlush(hand) && isRoyal(hand))
             return "RF";

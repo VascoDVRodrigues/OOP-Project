@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Commands {
+public class Commands implements ICommands{
 
     private ArrayList<Command> cmds = new ArrayList<Command>();
  

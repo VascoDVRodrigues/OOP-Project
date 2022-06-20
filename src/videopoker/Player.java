@@ -5,7 +5,7 @@ import videopoker.exceptions.InvalidPlayer;
 /**
  * This class is used to implement the player.
  */
-public class Player {
+public class Player implements IPlayer{
     //Attributes for the credits, name and hand
     protected int credits;
     public String name;

@@ -5,7 +5,7 @@ import java.util.*;
 import videopoker.Hand;
 import videopoker.deck.Card;
 
-public class Advisor {
+public class Advisor implements IAdvisor {
     public ArrayList<Integer> getHoldList(String condition, Hand hand) {
         ArrayList<Integer> holdList = new ArrayList<Integer>();
         holdList.add(0);
