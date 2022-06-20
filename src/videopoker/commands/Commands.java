@@ -5,13 +5,20 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to implement the commands for the debug mode
+ */
 public class Commands implements ICommands{
 
     private ArrayList<Command> cmds = new ArrayList<Command>();
  
     /**
-     * Saves the commands just like in the command file.
-     * Indexes must be converted if necessary
+     * Constructor for the Commands class
+     * <p>
+     * Takes as parameter the path to the command file and saves the commands just like they appear in the command file.
+     * Indexes must be converted afterwards if necessary
+     * </p>
+     * @param cmd_file  Path to the command file
      */
     public Commands(String cmd_file) throws FileNotFoundException {
         ArrayList<String> cmds_str = this.parseCmdFile(cmd_file);
@@ -68,10 +75,16 @@ public class Commands implements ICommands{
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isEmpty() {
         return this.cmds.isEmpty();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Command getNextCommand() {
         if (!this.isEmpty()) {
             return this.cmds.remove(0);
@@ -79,35 +92,22 @@ public class Commands implements ICommands{
         return null;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        Commands c = new Commands(args[0]);
-        Command current;
-        // System.out.println(c);
-
-        while (!c.isEmpty()) {
-            current = c.getNextCommand();
-            System.out.println(current);
-            // System.out.println(current.getType());
-            // System.out.println(current.getArgs().size());
-        }
-
-    }
-
+    
     /* (non-Javadoc)
-     * @see java.lang.Object#toString()
+    * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-
+        
         for (Command c : this.cmds) {
             str.append( c.toString() );
             str.append("\n");
         }
-
+        
         return str.toString();
     }
-
+    
     /**
      * Function to parse the commands in the command file
      * May raise FileNotFoundException if the file doesent exist
@@ -120,24 +120,36 @@ public class Commands implements ICommands{
     private ArrayList<String> parseCmdFile(String cmd_file) throws FileNotFoundException {
         String line = new String();
         ArrayList<String> cmds = new ArrayList<String>();
-
+        
         File f = new File(cmd_file);
         Scanner reader = new Scanner(f);
-
+        
         while (reader.hasNextLine()) {
             line = reader.nextLine();
-
+            
             if (line.equals("")) { //Skips blank lines
                 continue;
             }
-
+            
             for (String str: line.split(" ")) {
                 cmds.add(str);
             }
-
+            
         }
         reader.close();
         return cmds;
     }
+    public static void main(String[] args) throws FileNotFoundException {
+        Commands c = new Commands(args[0]);
+        Command current;
+        // System.out.println(c);
     
+        while (!c.isEmpty()) {
+            current = c.getNextCommand();
+            System.out.println(current);
+            // System.out.println(current.getType());
+            // System.out.println(current.getArgs().size());
+        }
+    
+    }
 }
