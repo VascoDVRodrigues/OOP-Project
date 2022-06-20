@@ -1,0 +1,143 @@
+-cmd $
+player's credit is 10000
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand KC QC JC TC 9C 
+
+-cmd a
+1. Straight flush, four of a kind, royal flush
+player should hold everything
+
+-cmd h 1 2 3 4 5 
+player's hand KC QC JC TC 9C 
+player wins with a SF and his credit is 10245
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand AD KD QS JD TD 
+
+-cmd a
+2. 4 to a royal flush
+player should hold everything
+
+-cmd h 1 5 2 4 
+player's hand AD KD QD JD TD 
+player wins with a RF and his credit is 14240
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 5S 6S 7S 8S JS 
+
+-cmd a
+4. Straight, flush, full house
+player should hold everything
+
+-cmd h 1 2 3 4 5 
+player's hand 5S 6S 7S 8S JS 
+player wins with a F and his credit is 14270
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand TD JD QC KD 5S 
+
+-cmd a
+10. 3 to a royal flush
+player should hold cards 1 2 4 
+
+-cmd h 1 2 4 
+player's hand TD JD TH KD TS 
+player wins with a TOK and his credit is 14280
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 2H QS JS 9D 8S 
+
+-cmd a
+14. 3 to a straight flush (type 1)
+player should hold cards 2 3 5 
+
+-cmd h 2 3 5 
+player's hand 7H QS JS QD 8S 
+player wins with a JOB and his credit is 14280
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand KH JH 3H 5S 6S 
+
+-cmd a
+17. 3 to a flush with 2 high cards
+player should hold cards 1 2 3 
+
+-cmd h 1 2 3 
+player's hand KH JH 3H KS KC 
+player wins with a TOK and his credit is 14290
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand AD 2C 4C 5C 7S 
+
+-cmd a
+20. 3 to a straight flush (type 2)
+player should hold cards 2 3 4 
+
+-cmd h 1 2 3 4 5 
+player's hand AD 2C 4C 5C 7S 
+player loses and his credit is 14285
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 7C TC QC 3H 2D 
+
+-cmd a
+25. 3 to a flush with 1 high card
+player should hold cards 1 2 3 
+
+-cmd h 1 2 3 4 5 
+player's hand 7C TC QC 3H 2D 
+player loses and his credit is 14280
+
+-cmd b
+player is betting 5
+
+-cmd d
+player's hand 5C KD QH 6C 9C 
+
+-cmd a
+27. 3 to a straight flush (type 3)
+player should hold cards 1 4 5 
+
+-cmd s
+Hand		Nb
+[38;2;0;157;224m────────────────────
+[0;0mJack or Better   1
+Two Pair         0
+Three of a Kind  2
+Straight         0
+Flush            1
+Full House       0
+Four of a Kind   0
+Straight Flush   1
+Royal Flush      1
+Other            2
+[38;2;0;157;224m────────────────────
+[0;0mTotal            8
+[38;2;0;157;224m────────────────────
+[0;0mCredit           14280 (10800,00%)
+
