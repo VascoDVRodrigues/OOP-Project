@@ -1,19 +1,21 @@
 package videopoker.deck;
 
-/*
+/**
+ * 
+ * Class that implements a card object, it assumes that:
+ * 
  * H - hearts (copas)
  * D - diamonds (oiros)
  * S - spades (espadas)
  * C - clubs (paus)
  * 
- * As --> 1
- * Numbers 2 to 9
+ * Ace --> 1
+ * Numbers: 2 to 9
  * Number 10 --> T
  * Jack --> 11
  * Queen --> 12
  * King --> 13
  */
-
 public class Card {
 	protected char nape;
 	protected int number;

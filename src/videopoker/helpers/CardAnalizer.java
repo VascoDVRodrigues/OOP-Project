@@ -10,9 +10,15 @@ import videopoker.deck.Card;
  * <p> It recieves a hand and confronts it with all the possible hands, giving advice on the current hand </p>
  *
  *@param hand the hand to be analyzed
+ *
  */
-
 public class CardAnalizer implements ICardAnalizer {
+
+    /**
+     * Default empty constructor, doesent need attributes, it his a helper class
+     */
+    public CardAnalizer() {
+    }
 
     /**
      * {@inheritDoc}

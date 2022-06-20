@@ -14,8 +14,11 @@ abstract class Game implements IGame{
     protected final int maxBet = 5;
 
     /**
-     * Method to give an hand, sets the attribute hand and sets the hand in the player, since the player and the game have acess to the same hand.
      * 
+     * {@inheritDoc}
+     * 
+     * ets the attribute hand and sets the hand in the player, since the player and the game have acess to the same hand.
+     *
      * Final so that classes that extend this one all have the same method
      */
     public final void giveHand() {
@@ -26,20 +29,14 @@ abstract class Game implements IGame{
     }
 
     /**
-     * This function prints the deck.
-     * 
-     * Final so that classes that extend this one all have the same method
+     * {@inheritDoc}
      */
     public final void printDeck(){
         System.out.println(deck);
     }
 
     /**
-     * Method to run the Game
-     * 
-     * <p>
-     * This function runs the game, classes that extends this one must implement this method with the appropriate logic
-     * </p>
+     * {@inheritDoc}
      */
     abstract public void play();
     

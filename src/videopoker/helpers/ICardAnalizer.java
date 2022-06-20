@@ -15,6 +15,7 @@ public interface ICardAnalizer {
      * according to the napes and numbers of the cards it contains.
      * 
      * @param hand        The hand to be evaluated
+     * @return            The combination for given the hand
      */
     public String getPayTableResult(Hand hand);
 }

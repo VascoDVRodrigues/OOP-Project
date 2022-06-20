@@ -110,7 +110,7 @@ public class Payout {
      * 
      * @param bet The bet value to remove.
      * 
-     * @see videopoker.helpers.PayoutTable#addBet(int, int)
+     * @see videopoker.helpers.Payout#addBet(int, int)
      */
 
     public void removeBet(int bet) {

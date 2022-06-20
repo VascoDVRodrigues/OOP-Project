@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import videopoker.deck.Card;
 
+/**
+ * Interface to implement a hand object
+ */
 public interface IHand {
     
     /**

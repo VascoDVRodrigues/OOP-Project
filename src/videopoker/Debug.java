@@ -40,7 +40,8 @@ public class Debug extends Game {
      * 
      * @param p         Player object with the player
      * @param cmd_file  String with the path to the command file
-     * @param cardFilee String with the path to the card file
+     * @param cardFile String with the path to the card file
+     * @throws FileNotFoundException If the said card file doesen't exist
      * @see videopoker.deck.Card
      */
     public Debug(Player p, String cmd_file, String cardFile) throws FileNotFoundException {

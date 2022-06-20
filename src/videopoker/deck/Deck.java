@@ -2,6 +2,10 @@ package videopoker.deck;
 
 import java.util.ArrayList;
 
+/**
+ * Abstract class Deck that implements the interface IDeck
+ * The different types of decks must extend this class.
+ */
 public abstract class Deck implements IDeck {
     protected ArrayList<Card> cardList;
 

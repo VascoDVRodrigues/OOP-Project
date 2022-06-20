@@ -1,5 +1,8 @@
 package videopoker;
 
+/**
+ * Interface to implement a player object
+ */
 public interface IPlayer {
     /**
      * Method to increase the credit of the player.

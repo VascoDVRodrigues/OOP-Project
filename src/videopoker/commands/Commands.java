@@ -19,6 +19,7 @@ public class Commands implements ICommands{
      * Indexes must be converted afterwards if necessary
      * </p>
      * @param cmd_file  Path to the command file
+     * @throws FileNotFoundException If the command file doesent exist
      */
     public Commands(String cmd_file) throws FileNotFoundException {
         ArrayList<String> cmds_str = this.parseCmdFile(cmd_file);

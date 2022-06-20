@@ -74,8 +74,9 @@ public class RiggedDeck extends Deck{
     }
 
     /**
-     * @return Number of cards left in the deck
+     * Method to get how many cards there are left in the deck
      * 
+     * @return Number of cards left in the deck
      */
     public int getNumberOfCards() {
         return cardList.size();
