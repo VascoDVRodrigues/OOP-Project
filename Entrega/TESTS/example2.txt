@@ -1,0 +1,90 @@
+-cmd s
+Hand            Nb
+────────────────────
+Jack or Better   0
+Two Pair         0
+Three of a Kind  0
+Straight         0
+Flush            0
+Full House       0
+Four of a Kind   0
+Straight Flush   0
+Royal Flush      0
+Other            0
+────────────────────
+Total            0
+────────────────────
+Credit           10000 (NaN%)
+
+-cmd $
+player's credit is 10000
+
+-cmd b 3
+player is betting 3
+
+-cmd d
+player's hand 9C JC JH 3H 6D 
+
+-cmd a
+8. High pair
+player should hold cards 2 3
+
+-cmd h 2 3
+player's hand QC JC JH 8C 5D
+player wins with a JOB and his credit is 10000
+
+-cmd b
+player is betting 3
+
+-cmd d
+player's hand KH 7C 3S AD 9S
+
+-cmd a
+29. Ace
+player should hold cards 4
+
+-cmd h 4
+player's hand KS 9D 7H AD 8S
+player loses and his credit is 9997
+
+-cmd b
+player is betting 3
+
+-cmd d
+player's hand AS QD 3C 7H 8H
+
+-cmd a
+29. Ace
+player should hold cards 1
+
+-cmd h 1
+player's hand AS TC QD 4D QS
+player wins with a JOB and his credit is 9997
+
+-cmd b
+player is betting 3
+
+-cmd d
+player's hand 2H JC 6S 3H 4H
+
+-cmd a
+20. 3 to a straight flush (type 2)
+player should hold cards 1 4 5
+
+-cmd s
+Hand            Nb
+────────────────────
+Jack or Better   2
+Two Pair         0
+Three of a Kind  0
+Straight         0
+Flush            0
+Full House       0
+Four of a Kind   0
+Straight Flush   0
+Royal Flush      0
+Other            1
+────────────────────
+Total            3
+────────────────────
+Credit           9997 (66.67%)
