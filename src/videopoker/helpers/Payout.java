@@ -10,10 +10,6 @@ import java.util.Map.Entry;
  * </p>
  */
 public class Payout {
-    // Codes for colored text
-    private static final String BLUE = "\u001B[38;2;0;157;224m";
-    private static final String RESET = "\u001B[0;0m";
-
     protected String name;
     protected String key;
     protected HashMap<Integer, Integer> amounts;
@@ -158,6 +154,10 @@ public class Payout {
      * @return The header for the payout table.
      */
     public String printHeader() {
+        // Codes for colored text
+        String BLUE = "\u001B[38;2;0;157;224m";
+        String RESET = "\u001B[0;0m";
+        
         StringBuilder str1 = new StringBuilder();
         StringBuilder str2 = new StringBuilder();
         StringBuilder str3 = new StringBuilder();

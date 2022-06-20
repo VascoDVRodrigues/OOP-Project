@@ -28,7 +28,7 @@ public class Debug extends Game {
 
     // Attributes for getting the advices and the result of the hands
     private CardAnalizer analizer = new CardAnalizer();
-    private PayoutTable pay = new PayoutTable();
+    public PayoutTable pay = new PayoutTable();
     private Stats stats;
     private Advisor advisor = new Advisor();
 

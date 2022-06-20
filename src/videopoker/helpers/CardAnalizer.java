@@ -6,6 +6,10 @@ import videopoker.Hand;
 import videopoker.deck.Card;
 
 public class CardAnalizer implements ICardAnalizer {
+
+    /**
+     * {@inheritDoc}
+     */
     public String getPayTableResult(Hand hand) {
         if (isFlush(hand) && isRoyal(hand))
             return "RF";
@@ -32,6 +36,12 @@ public class CardAnalizer implements ICardAnalizer {
         return "O";
     }
 
+    /**
+     * It checks if the hand is a royal flush
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean isRoyal(Hand hand) {
         ArrayList<Integer> royaList = new ArrayList<Integer>();
         royaList.add(1);
@@ -49,6 +59,12 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * It checks if the hand is a flush
+     * 
+     * @param hand The hand to be evaluated.
+     * @return A boolean value.
+     */
     private boolean isFlush(Hand hand) {
         char aux = 'A';
         for (Card card : hand.getCards()) {
@@ -61,6 +77,12 @@ public class CardAnalizer implements ICardAnalizer {
         return true;
     }
 
+    /**
+     * It checks if the hand is a straight.
+     * 
+     * @param hand the hand to be evaluated
+     * @return The method is returning a boolean value.
+     */
     private boolean isStraight(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -86,6 +108,16 @@ public class CardAnalizer implements ICardAnalizer {
         return true;
     }
 
+    /**
+     * If there are four of a kind, return the number of the card. Otherwise, return
+     * 0
+     * This does not return a boolean, because the payout table differentiates the
+     * pay
+     * according to the card that has 4 occurences on the hand.
+     * 
+     * @param hand The hand that is being evaluated.
+     * @return The number of the card that is a four of a kind.
+     */
     private int isFour(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -99,6 +131,13 @@ public class CardAnalizer implements ICardAnalizer {
         return 0;
     }
 
+    /**
+     * If there is a pair of a card and an three of a kind of another, then it's a
+     * full house
+     * 
+     * @param hand The hand to be checked
+     * @return A boolean value.
+     */
     private boolean isFH(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -116,6 +155,12 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are three of any card in the hand, return true
+     * 
+     * @param hand The hand that is being checked.
+     * @return A boolean value.
+     */
     private boolean isTOK(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -128,6 +173,12 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * It checks if the hand is a two pair.
+     * 
+     * @param hand The hand that is being evaluated.
+     * @return The method is returning a boolean value.
+     */
     private boolean isTP(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -141,6 +192,13 @@ public class CardAnalizer implements ICardAnalizer {
         return aux == 2;
     }
 
+    /**
+     * If the hand has a Jack or better, return true
+     * This includes a Jack, a Queen, a King or an Ace
+     * 
+     * @param hand The hand that is being checked.
+     * @return A boolean value.
+     */
     private boolean isJOB(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -156,6 +214,12 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If the hand has three aces, return true
+     * 
+     * @param hand The hand that is being checked.
+     * @return A boolean value.
+     */
     private boolean is3A(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -166,6 +230,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are 4 cards of the same nape, and those 4 cards can make up a royal
+     * it returns true
+     * 
+     * @param hand the hand that is being checked
+     * @return A boolean value.
+     */
     private boolean is4toRF(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -198,6 +269,14 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If the hand has two cards of the same number, and those cards are high Cards,
+     * then the hand has a high pair
+     * then the method returns true, otherwise it returns false.
+     * 
+     * @param hand The hand that is being checked.
+     * @return A boolean value.
+     */
     private boolean isHP(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -207,6 +286,14 @@ public class CardAnalizer implements ICardAnalizer {
         return hash[0] == 2 || hash[12] == 2 || hash[11] == 2 || hash[10] == 2;
     }
 
+    /**
+     * If the hand has two cards of the same number, and those cards are low Cards,
+     * then the hand has a low pair
+     * then the method returns true, otherwise it returns false.
+     * 
+     * @param hand The hand that is being checked.
+     * @return A boolean value.
+     */
     private boolean isLP(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -220,6 +307,14 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If the hand has a card with the given number, return true, otherwise return
+     * false.
+     * 
+     * @param c    The card number you want to check for
+     * @param hand The hand that the player is currently holding.
+     * @return A boolean value.
+     */
     private boolean hasCard(int c, Hand hand) {
         for (Card card : hand.getCards()) {
             if (card.getNumber() == c)
@@ -228,6 +323,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are 4 cards of the same nape, and those 4 cards can make up a
+     * straight it returns true
+     * 
+     * @param hand the hand that is being checked
+     * @return A boolean value.
+     */
     private boolean is4toSF(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -275,6 +377,12 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * > If the hand has 4 cards of the same nape, return true
+     * 
+     * @param hand the hand that is being checked
+     * @return The method is returning a boolean value.
+     */
     private boolean is4toF(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -290,6 +398,13 @@ public class CardAnalizer implements ICardAnalizer {
         return true;
     }
 
+    /**
+     * If there are 3 cards of the same nape, and those 3 cards can make up a royal
+     * it returns true, otherwise it returns false
+     * 
+     * @param hand the hand that is being checked
+     * @return A boolean value.
+     */
     private boolean is3toRF(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -322,6 +437,16 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are four cards in a row, and the first card is not an ace, then it's
+     * an outside straight.
+     * The straight cannot contain an Ace because A234 and JQKA count as an inside
+     * straight because they are at
+     * an extreme end.
+     * 
+     * @param hand The hand to be checked
+     * @return The method is returning a boolean value.
+     */
     private boolean isOS(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -344,6 +469,12 @@ public class CardAnalizer implements ICardAnalizer {
         return (hit == 4 && hash[0] != 1);
     }
 
+    /**
+     * If the hand contains at least 4 of the 5 highest cards, return true
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean isHighUnsuited(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -354,6 +485,15 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are three cards of the same suit, and the remaining two cards are
+     * not of the same suit,
+     * and the three cards are not a straight, then the hand contains a 3 to
+     * straight flush type 1.
+     * 
+     * @param hand the hand to be evaluated
+     * @return The method is returning a boolean value.
+     */
     private boolean is3toSFT1(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -402,6 +542,13 @@ public class CardAnalizer implements ICardAnalizer {
         return (highcard >= skip && highcard != 0);
     }
 
+    /**
+     * If there are 4 cards to a straight, and 3 of those cards are high cards,
+     * it returns true
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean is4toIS3HC(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -428,6 +575,12 @@ public class CardAnalizer implements ICardAnalizer {
         return (highcard == 3 && (skip == 1 || skip == 0) && hit == 4);
     }
 
+    /**
+     * If the hand contains a Queen and a Jack of the same suit, return true
+     * 
+     * @param hand the hand that is being checked
+     * @return The method is returning a boolean value.
+     */
     private boolean isQJS(Hand hand) {
         for (Card card : hand.getCards()) {
             if (card.getNumber() == 12) {
@@ -441,6 +594,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are 3 cards to a flush, and 2 of those cards are high cards,
+     * it returns true
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean is3toF2HC(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -472,6 +632,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If the hand has two suited high cards it returns tru, otherwise it returns
+     * false
+     * 
+     * @param hand the hand that is being checked
+     * @return A boolean value.
+     */
     private boolean is2SHC(Hand hand) {
         for (Card card : hand.getCards()) {
 
@@ -487,6 +654,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are 4 cards to a straight, and 2 of those cards are high cards,
+     * it returns true
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean is4toIS2HC(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -512,6 +686,15 @@ public class CardAnalizer implements ICardAnalizer {
         return (highcard == 2 && skip == 1 && hit == 4);
     }
 
+    /**
+     * If there are three cards of the same suit, and the remaining two cards are
+     * not of the same suit,
+     * and the three cards are not a straight, then the hand contains a 3 to
+     * straight flush type 2.
+     * 
+     * @param hand the hand to be evaluated
+     * @return The method is returning a boolean value.
+     */
     private boolean is3toSFT2(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -567,6 +750,15 @@ public class CardAnalizer implements ICardAnalizer {
                 || (hit == 3 && skip == 0 && highcard == 0)); // Straight flush draw with no gaps
     }
 
+    /**
+     * If there are three cards of the same suit, and the remaining two cards are
+     * not of the same suit,
+     * and the three cards are not a straight, then the hand contains a 3 to
+     * straight flush type 3.
+     * 
+     * @param hand the hand to be evaluated
+     * @return The method is returning a boolean value.
+     */
     private boolean is3toSFT3(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -615,6 +807,13 @@ public class CardAnalizer implements ICardAnalizer {
         return (highcard == 0 && skip == 2);
     }
 
+    /**
+     * If there are 4 cards to a straight, and 1 of those cards are high cards,
+     * it returns true
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean is4toIS1HC(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -643,6 +842,13 @@ public class CardAnalizer implements ICardAnalizer {
         return (highcard == 1 && skip == 1 && hit == 4);
     }
 
+    /**
+     * If there are 4 cards to a straight, and none of them are high cards,
+     * it returns true
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean is4toIS0HC(Hand hand) {
         int[] hash = new int[13];
         for (Card card : hand.getCards()) {
@@ -675,6 +881,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If the hand contains a Jack and a Ten of the same suit, then it
+     * returns true, otherwise it returns false
+     * 
+     * @param hand The hand that is being checked.
+     * @return The method is returning a boolean value.
+     */
     private boolean isJTS(Hand hand) {
         for (Card card : hand.getCards()) {
             if (card.getNumber() == 11) {
@@ -688,6 +901,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are 3 cards to a flush, and 1 of those cards are high cards,
+     * it returns true
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean is3toF1HC(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -719,6 +939,12 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If the hand has a Queen and a 10 of the same nape, then it returns true
+     * 
+     * @param hand The hand that is being checked
+     * @return A boolean value
+     */
     private boolean isQTS(Hand hand) {
         for (Card card : hand.getCards()) {
             if (card.getNumber() == 12) { // Check if card is Queen
@@ -732,6 +958,12 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If the hand contains a King and a Ten of the same nape, then it returns true
+     * 
+     * @param hand the hand that is being checked
+     * @return The method is returning a boolean value.
+     */
     private boolean isKTS(Hand hand) {
         for (Card card : hand.getCards()) {
             if (card.getNumber() == 13) {
@@ -745,6 +977,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+    /**
+     * If there are 3 cards to a flush, and none of those cards are high cards,
+     * it returns true
+     * 
+     * @param hand The hand to be evaluated
+     * @return A boolean value.
+     */
     private boolean is3toF0HC(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -776,6 +1015,13 @@ public class CardAnalizer implements ICardAnalizer {
         return false;
     }
 
+   /**
+    * If compares the hand with several cases using the methods defined in this class to
+    * return the best case scenario 
+    * 
+    * @param hand the hand to be analyzed
+    * @return The method is returning a string that is the advice for the player.
+    */
     public String getAdviceFromTable(Hand hand) {
         if ((isFlush(hand) && isRoyal(hand)) || isFour(hand) != 0 || (isStraight(hand) && isFlush(hand)))
             return "1. Straight flush, four of a kind, royal flush";

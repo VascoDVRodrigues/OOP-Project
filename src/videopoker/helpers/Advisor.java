@@ -6,6 +6,13 @@ import videopoker.Hand;
 import videopoker.deck.Card;
 
 public class Advisor implements IAdvisor {
+    /**
+     * It returns an array of the indexes of the cards that should be held.
+     * 
+     * @param condition The advice that results in the best odds of success of the given hand.
+     * @param hand the hand you're evaluating
+     * @return The holdList is being returned.
+     */
     public ArrayList<Integer> getHoldList(String condition, Hand hand) {
         ArrayList<Integer> holdList = new ArrayList<Integer>();
         holdList.add(0);
@@ -146,8 +153,6 @@ public class Advisor implements IAdvisor {
                     }
                 }
             }
-            // Cartas desde i até j estão no straight
-            // System.out.println(i + " " + j);
             if (count == 4) { // sanity check
                 for (int k = 0; k < hand.getCards().size(); k++) {
                     if ((i < hand.getCards().get(k).getNumber()) &&
@@ -159,37 +164,6 @@ public class Advisor implements IAdvisor {
                 System.out.println("erro no 4 to outside straight, classe advisor");
                 System.out.println(hand);
             }
-
-            // // OUTRA FORMA
-            // Se existir mais do que 1 carta c mm numero retira-se essa carta
-            // Aqui o naipe não interessa, so se procura por um straight e nao flush
-            // int i = 0;
-            // for (Card card : hand.getCards()) {
-            // if (hash[card.getNumber() - 1] > 1) {
-            // holdList.remove(Integer.valueOf(i));
-            // return holdList;
-            // }
-            // i++;
-            // }
-            // /////////////////// [0,0,0,1,0,0,1,1,1,1,0,0]
-            // i = -1;
-            // int hit = 0;
-            // for (int j = 0; j < hash.length; j++) {
-            // if (hash[j] > 0) {
-            // hit++;
-            // i++;
-            // } else {
-            // if (hit == 1) {
-            // holdList.remove(Integer.valueOf(i));
-            // return holdList;
-            // } else if (hit == 4) {
-            // i++;
-            // holdList.remove(Integer.valueOf(i));
-            // return holdList;
-            // }
-            // }
-            // }
-
         } else if (condition == "12. Low pair") {
             int[] hash = new int[13];
             for (Card card : hand.getCards()) {
@@ -330,6 +304,12 @@ public class Advisor implements IAdvisor {
         return holdList;
     }
 
+    /**
+     * If you have an inside straight, discard the card that is not part of the straight.
+     * 
+     * @param hand the hand you're evaluating
+     * @return The method returns an ArrayList of Integers.
+     */
     private ArrayList<Integer> insideStraight(Hand hand) {
         int[] hash = new int[13];
         ArrayList<Integer> holdList = new ArrayList<Integer>();
