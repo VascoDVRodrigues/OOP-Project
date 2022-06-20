@@ -13,9 +13,10 @@ public class Command {
      * This class is used to implement a command.
      * <p>
      * Receives a string with the type of command and an ArrayList of integers representing the command's arguments
+     * </p>
+     * 
      * @param type  The type of command
      * @param args  The arguments of the command
-     * </p>
      */
     public Command(String type, ArrayList<Integer> args) {
         this.type = type;

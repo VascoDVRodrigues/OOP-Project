@@ -11,8 +11,6 @@ import videopoker.helpers.*;
  * Game.
  * 
  * {@inheritDoc}
- * 
- * @throws InvalidSimulationMode
  * @see videopoker.Game
  */
 public class Simulation extends Game {
