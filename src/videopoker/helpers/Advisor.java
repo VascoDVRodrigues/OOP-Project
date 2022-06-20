@@ -5,6 +5,11 @@ import java.util.*;
 import videopoker.Hand;
 import videopoker.deck.Card;
 
+/**
+ * Class that implements the advisor interface.
+ * 
+ * Analizes a hand and given optimal advice decides what cards should be held to follow the perfect strategy 
+ */
 public class Advisor implements IAdvisor {
      /**
      * {@inheritDoc}
