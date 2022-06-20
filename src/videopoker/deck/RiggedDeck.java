@@ -5,8 +5,26 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * This class extends the Deck abstract class. 
+ * 
+ * <p>
+ * This class firstly reads the cards from the card file, and returns the cards in the exact same order as they appear in the card file, usefull for debug sessions.
+ * </p>
+ */
 public class RiggedDeck extends Deck{
 
+    /**
+     * Constructor for the RiggedDeck class 
+     * <p>
+     * Receives a string with the path to a file with a cardfile, may throw a FileNotFoundException if the said file doesen't exist.
+     * Ignores all invalid characters in the file.
+     * </p>
+     * 
+     * @param filename                  String with the path to the card file
+     * @throws FileNotFoundException    If the file doesen't exist
+     */
     public RiggedDeck(String filename) throws FileNotFoundException{
         this.cardList = new ArrayList<Card>();
     
@@ -55,7 +73,7 @@ public class RiggedDeck extends Deck{
         myReader.close();
     }
 
-    /*
+    /**
      * @return Number of cards left in the deck
      * 
      */
@@ -63,6 +81,9 @@ public class RiggedDeck extends Deck{
         return cardList.size();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ArrayList<Card> getCards(int n) {
         ArrayList<Card> aux = new ArrayList<Card>();

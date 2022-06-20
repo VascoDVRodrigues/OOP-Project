@@ -30,7 +30,7 @@ public class Simulation extends Game {
      * </p>
      * 
      * @param p                     Player object with the player
-     * @param b                     Integer representing the amount to bet
+     * @param bet                   Integer representing the amount to bet
      * @param nbdeals               Integer representing the number of deals
      * @throws InvalidSimulationMode If invalid parameters are passed to the simulation mode
      * 
