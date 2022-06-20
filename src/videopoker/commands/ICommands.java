@@ -1,5 +1,8 @@
 package videopoker.commands;
 
+/**
+ * Interface for commands.
+ */
 public interface ICommands {
     /**
      * If the command list is not empty, remove and return the first command in the list.

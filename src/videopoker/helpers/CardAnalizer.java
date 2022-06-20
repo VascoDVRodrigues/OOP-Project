@@ -5,6 +5,11 @@ import java.util.*;
 import videopoker.Hand;
 import videopoker.deck.Card;
 
+/**
+ * This class is used as a helper to evaluate and analyze the hand. 
+ * <p> It recieves a hand and confronts it with all the possible hands, giving advice 
+ */
+
 public class CardAnalizer implements ICardAnalizer {
 
     /**
@@ -378,7 +383,7 @@ public class CardAnalizer implements ICardAnalizer {
     }
 
     /**
-     * > If the hand has 4 cards of the same nape, return true
+     * If the hand has 4 cards of the same nape, return true
      * 
      * @param hand the hand that is being checked
      * @return The method is returning a boolean value.

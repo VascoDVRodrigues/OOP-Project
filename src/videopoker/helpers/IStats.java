@@ -1,5 +1,9 @@
 package videopoker.helpers;
 
+/**
+ * Interface for statistics.
+ */
+
 public interface IStats {
 
     /**

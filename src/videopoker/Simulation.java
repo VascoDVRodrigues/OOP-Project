@@ -6,6 +6,15 @@ import videopoker.deck.RegularDeck;
 import videopoker.exceptions.InvalidSimulationMode;
 import videopoker.helpers.*;
 
+/**
+ * This class is used to implement the Simulation mode, it extends the abstract class
+ * Game.
+ * 
+ * {@inheritDoc}
+ * 
+ * @throws InvalidSimulationMode
+ * @see videopoker.Game
+ */
 public class Simulation extends Game {
     private CardAnalizer analizer = new CardAnalizer();
     private PayoutTable pay = new PayoutTable();
@@ -15,8 +24,17 @@ public class Simulation extends Game {
     private int bet, nbdeals;
 
     /**
-     * @throws InvalidSimulationMode
+     * This is the constructor for the Debug class.
+     * <p>
+     * It takes a Player object and integers representing the amount to bet in each deal and the number of deals to simulate.
+     * </p>
      * 
+     * @param p                     Player object with the player
+     * @param b                     Integer representing the amount to bet
+     * @param nbdeals               Integer representing the number of deals
+     * @throws InvalidSimulationMode If invalid parameters are passed to the simulation mode
+     * 
+     * @see videopoker.deck.Card
      */
     public Simulation(Player p, int bet, int nbdeals) throws InvalidSimulationMode {
         if (bet > maxBet) {
@@ -37,6 +55,11 @@ public class Simulation extends Game {
         this.nbdeals = nbdeals;
     }
 
+    /**
+     * {@inheritDoc}
+     * 
+     * Plays according to the perfect strategy, just bets, deals, asks for advice to the advisor and follows that advice.
+     */
     @Override
     public void play() {
         // strategy is to bet, deal, ask for advice and follow the advice

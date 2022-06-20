@@ -32,55 +32,29 @@ public class Hand implements IHand {
     }
 
     /**
-     * Method to add a single Card object to the hand;
-     * <p>
-     * It takes a single Card object;
-     * </p>
-     * 
-     * @param c     The Card object
-     * @see videopoker.deck.Card
-     */
+    * {@inheritDoc}
+    */
     public void addToHand(Card c) {
         cards.add(c);
     }
 
     /**
-     * Method to add a single Card object to the hand to a specific index;
-     * <p>
-     * It takes a single Card object and adds it to the hand to a specific index, may be usefull to later produce pretty prints;
-     * This method is overloaded.
-     * </p>
-     * 
-     * @param index The index where the card should be added
-     * @param c     The Card object
-     * @see videopoker.deck.Card
-     */
+    * {@inheritDoc}
+    */
     public void addToHand(int index, Card c) {
         cards.add(index, c);
     }
 
     /**
-     * Method to remove a single Card object from the hand in a specific index;
-     * <p>
-     * It takes the index of the card to be removed.
-     * </p>
-     * 
-     * @param index The index of the card to be removed
-     */
+    * {@inheritDoc}
+    */
     public void removeFromHand(int idx) {
         cards.remove(idx);
     }
 
     /**
-     * Method to hold cards at the given indexes;
-     * <p>
-     * It takes an ArrayList of indexes (Integers) of the cards to be held, and an ArrayList of Card objects with the cards that will replace the dropped ones. 
-     * </p>
-     * 
-     * @param idxs      The ArrayList of indexes of the cards to hold
-     * @param toReplace The ArrayList of Cards that will replace the dropped ones
-     * @see videopoker.deck.Card
-     */
+    * {@inheritDoc}
+    */
     public void holdCards(ArrayList<Integer> idxs, ArrayList<Card> toReplace) {
         // Remove the cards that are not in those indexes
         

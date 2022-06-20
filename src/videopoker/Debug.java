@@ -28,7 +28,7 @@ public class Debug extends Game {
 
     // Attributes for getting the advices and the result of the hands
     private CardAnalizer analizer = new CardAnalizer();
-    public PayoutTable pay = new PayoutTable();
+    private PayoutTable pay = new PayoutTable();
     private Stats stats;
     private Advisor advisor = new Advisor();
 
@@ -246,14 +246,9 @@ public class Debug extends Game {
     }
 
     /**
-     * Method to run the Debug mode
+     * {@inheritDoc}
      * 
-     * <p>
-     * The function just loops through the commands in the command list, and
-     * executes each command.
-     * Displays the errors in the commands and proceeds to the next command in case
-     * of error, does not crash or exit.
-     * </p>
+     * Just goes through the commands and executes them, ignoring invalid ones. 
      */
     public void play() {
         Command current;

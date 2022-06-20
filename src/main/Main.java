@@ -5,6 +5,17 @@ import java.io.FileNotFoundException;
 import videopoker.*;
 import videopoker.exceptions.*;
 
+/**
+ * MAin class of the program.
+ * <p>
+ * Entry point of the Video Poker game application. Handles the command line
+ * arguments, and based on the type of game it run either in <b>Debug</b> or
+ * <b>Simulation</b>.
+ * </p>
+ *
+ * @see videopoker.Debug
+ * @see videopoker.Simulation 
+ */
 public class Main {
     public static void main(String[] args) {
         Player p;

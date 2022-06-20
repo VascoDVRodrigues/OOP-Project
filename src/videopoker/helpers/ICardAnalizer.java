@@ -2,6 +2,9 @@ package videopoker.helpers;
 
 import videopoker.Hand;
 
+/**
+ * Interface for card analizer.
+ */
 public interface ICardAnalizer {
 
     /**

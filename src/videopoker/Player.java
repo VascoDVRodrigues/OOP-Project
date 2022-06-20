@@ -55,18 +55,14 @@ public class Player implements IPlayer{
     }
 
     /**
-     * Method to increase the credit of the player.
-     * 
-     * @param amount    The amount to increase the player's credit.
-     */
+    * {@inheritDoc}
+    */
     public void increaseCredit(int amount) {
         this.credits += amount;
     }
 
     /**
-     * Method to bet (derease the credit of the player).
-     * 
-     * @param amount    The amount of the bet.
+     * {@inheritDoc}
      */
     public void bet(int amount) {
         this.credits -= amount;
@@ -89,11 +85,8 @@ public class Player implements IPlayer{
         System.out.println("player's hand " + this.hand);
     }
 
-    /**
-     * Method to set the hand of the player.
-     * 
-     * @param hand    The hand to be setted, must be of type Hand.
-     * @see videopoker.Hand
+   /**
+     * {@inheritDoc}
      */
     public void setHand(Hand hand) {
         this.hand = hand;

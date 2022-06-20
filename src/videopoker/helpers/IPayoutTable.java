@@ -1,5 +1,9 @@
 package videopoker.helpers;
 
+
+/**
+ * Interface for the payout table.
+ */
 public interface IPayoutTable {
 
     /**

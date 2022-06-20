@@ -6,12 +6,8 @@ import videopoker.Hand;
 import videopoker.deck.Card;
 
 public class Advisor implements IAdvisor {
-    /**
-     * It returns an array of the indexes of the cards that should be held.
-     * 
-     * @param condition The advice that results in the best odds of success of the given hand.
-     * @param hand the hand you're evaluating
-     * @return The holdList is being returned.
+     /**
+     * {@inheritDoc}
      */
     public ArrayList<Integer> getHoldList(String condition, Hand hand) {
         ArrayList<Integer> holdList = new ArrayList<Integer>();
@@ -110,28 +106,6 @@ public class Advisor implements IAdvisor {
                 i++;
             }
 
-            // int hit = 0;
-            // for (i = 0; i < hash.length; i++) {
-            // if (hash[i] > 0 && hit < 4) {
-            // hit++;
-            // } else if (hit == 1) {
-            // int j = 0;
-            // for (Card card : hand.getCards()) {
-            // if (card.getNumber() - 1 == i) {
-            // holdList.remove(Integer.valueOf(j));
-            // return holdList;
-            // }
-            // j++;
-            // }
-            // } else if (hit == 4) {
-            // holdList.remove(Integer.valueOf(4));
-            // return holdList;
-            // }
-            // }
-
-            // [0,0,1,1,1,1,0,0,1,0,0,0,0]
-            // [0,0,0,1,0,0,1,1,1,1,0,0]
-
             holdList.removeAll(holdList);
             i = 0;
 
@@ -179,14 +153,6 @@ public class Advisor implements IAdvisor {
                 i++;
             }
 
-            // Ou assim
-            // holdList.removeAll(holdList);//so para limpar
-            // //Se a carta aparece 2 vezes na mão ent é para dar hold
-            // for (int i = 0; i < hand.getCards().size(); i++) {
-            // if ( hash[hand.getCards().get(i).number - 1] == 2) {
-            // holdList.add(i);
-            // }
-            // }
         } else if (condition == "13. AKQJ unsuited") {
             int i = 0;
             for (Card card : hand.getCards()) {
@@ -433,6 +399,15 @@ public class Advisor implements IAdvisor {
         return holdList;
     }
 
+    /**
+     * It returns an array of the indexes of the cards that should be held in a hand that contains 
+     * an X card and a Y card that may or may not be suited.
+     * 
+     * @param x the first card number
+     * @param y the second card number
+     * @param hand the hand you're currently playing
+     * @return The method returns an ArrayList of integers.
+     */
     private ArrayList<Integer> xyUnsuited(int x, int y, Hand hand) {
         ArrayList<Integer> holdList = new ArrayList<Integer>();
         holdList.add(0);
@@ -454,13 +429,16 @@ public class Advisor implements IAdvisor {
         return holdList;
     }
 
+    /**
+     * It checks if there are x cards with the same nape, then
+     * it returns their indexes to be held.
+     * 
+     * @param x the number of cards that have the same nape
+     * @param hand The hand that the player has.
+     * @return An ArrayList of Integers.
+     */
     private ArrayList<Integer> xtoFlush(int x, Hand hand) {
         ArrayList<Integer> holdList = new ArrayList<Integer>();
-        // holdList.add(0);
-        // holdList.add(1);
-        // holdList.add(2);
-        // holdList.add(3);
-        // holdList.add(4);
 
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -490,13 +468,5 @@ public class Advisor implements IAdvisor {
         }
 
         return holdList;
-
-        // int i = 0;
-        // for (Card card : hand.getCards()) {
-        // if (card.nape != true_nape) {
-        // holdList.remove(Integer.valueOf(i));
-        // }
-        // i++;
-        // }
     }
 }
