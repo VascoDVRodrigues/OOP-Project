@@ -7,7 +7,9 @@ import videopoker.deck.Card;
 
 /**
  * This class is used as a helper to evaluate and analyze the hand. 
- * <p> It recieves a hand and confronts it with all the possible hands, giving advice 
+ * <p> It recieves a hand and confronts it with all the possible hands, giving advice on the current hand </p>
+ *
+ *@param hand the hand to be analyzed
  */
 
 public class CardAnalizer implements ICardAnalizer {
