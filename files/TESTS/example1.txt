@@ -1,0 +1,136 @@
+-cmd s
+Hand            Nb
+────────────────────
+Jack or Better   0
+Two Pair         0
+Three of a Kind  0
+Straight         0
+Flush            0
+Full House       0
+Four of a Kind   0
+Straight Flush   0
+Royal Flush      0
+Other            0
+────────────────────
+Total            0
+────────────────────
+Credit           10000 (NaN%)
+
+-cmd $
+player's credit is 10000
+
+-cmd b 666
+b: illegal amount
+
+-cmd $
+player's credit is 10000
+
+-cmd b
+player is betting 5
+
+-cmd $
+player's credit is 9995
+
+-cmd d
+player's hand 9C TC 3H 6D QC
+
+-cmd b
+b: illegal command
+
+-cmd a
+player should hold cards 1 2 5
+
+-cmd d
+d: illegal command
+
+-cmd h 2 3
+player's hand 5H TC 3H 8H JH
+player loses and his credit is 9995
+
+-cmd h
+h: illegal command
+
+-cmd $
+player's credit is 9995
+
+-cmd d
+d: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h 4
+h: illegal command
+
+-cmd b 2
+player is betting 2
+
+-cmd b 3
+b: illegal command
+
+-cmd d
+player's hand QH 6S 7H AH 3S
+
+-cmd a
+player should hold cards 1 3 4
+
+-cmd h 1 2
+player's hand QH 6S KS QD KD
+player wins with a TP and his credit is 9995
+
+-cmd s
+Hand            Nb
+────────────────────
+Jack or Better   0
+Two Pair         1
+Three of a Kind  0
+Straight         0
+Flush            0
+Full House       0
+Four of a Kind   0
+Straight Flush   0
+Royal Flush      0
+Other            1
+────────────────────
+Total            2
+────────────────────
+Credit           9995 (28.57%)
+
+-cmd b
+player is betting 2
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd a
+a: illegal command
+
+-cmd h
+h: illegal command
+
+-cmd b
+b: illegal command
+
+-cmd d
+d: not enough cards: illegal command
+
+-cmd h 1 2 3 4 5
+h: illegal command
+
+-cmd s
+Hand            Nb
+────────────────────
+Jack or Better   0
+Two Pair         1
+Three of a Kind  0
+Straight         0
+Flush            0
+Full House       0
+Four of a Kind   0
+Straight Flush   0
+Royal Flush      0
+Other            1
+────────────────────
+Total            2
+────────────────────
+Credit           9995 (28.57%)

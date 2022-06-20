@@ -1,17 +1,17 @@
 Hand		Nb
 [38;2;0;157;224m????????????????????
-[0;0mJack or Better   191048 0.019105
-Two Pair         124025 0.012403
-Three of a Kind  72319 0.007232
-Straight         16657 0.001666
-Flush            15388 0.001539
-Full House       11201 0.001120
-Four of a Kind   2329 0.000233
-Straight Flush   97 0.000010
-Royal Flush      16 0.000002
-Other            566920 0.056692
+[0;0mJack or Better   18852
+Two Pair         12492
+Three of a Kind  7111
+Straight         1746
+Flush            1539
+Full House       1111
+Four of a Kind   246
+Straight Flush   13
+Royal Flush      0
+Other            56890
 [38;2;0;157;224m????????????????????
-[0;0mTotal            1000000
+[0;0mTotal            100000
 [38;2;0;157;224m????????????????????
-[0;0mCredit           1040155 (100.80%)
+[0;0mCredit           1001000 (100.20%)
 

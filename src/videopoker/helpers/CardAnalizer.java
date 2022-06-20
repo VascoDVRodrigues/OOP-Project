@@ -512,7 +512,6 @@ public class CardAnalizer implements ICardAnalizer {
         return (highcard == 2 && skip == 1 && hit == 4);
     }
 
-    // AINDA NÂO ESTÁ 100% CORRETO
     private boolean is3toSFT2(Hand hand) {
         HashMap<Character, Integer> hash_nape = new HashMap<Character, Integer>();
         hash_nape.put('H', 0);
@@ -564,7 +563,8 @@ public class CardAnalizer implements ICardAnalizer {
         }
         return ((highcard == 0 && skip == 1 && hit == 3) // Straight flush draw with one gap no High Card
                 || (highcard == 1 && skip == 2 && hit == 3) // Straight flush draw with two gaps one High Card
-                || (hash[0] == 1 && skip < 3));
+                || (hash[0] == 1 && skip < 3)
+                || (hit == 3 && skip == 0 && highcard == 0)); // Straight flush draw with no gaps
     }
 
     private boolean is3toSFT3(Hand hand) {

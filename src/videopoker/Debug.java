@@ -9,22 +9,24 @@ import videopoker.exceptions.*;
 import videopoker.helpers.*;
 
 /**
- * This class is used to implement the Debug mode, it extends the abstract class Game.
+ * This class is used to implement the Debug mode, it extends the abstract class
+ * Game.
  * 
  * {@inheritDoc}
+ * 
  * @see videopoker.Game
  */
 public class Debug extends Game {
     protected Commands cmds;
 
-    //Some private attributes to keep track of what commands can be used
+    // Some private attributes to keep track of what commands can be used
     private int lastBet = -1;
     private boolean allowBet = true;
     private boolean allowDeal = false;
     private boolean allowHold = false;
     private boolean allowAdvice = false;
 
-    //Attributes for getting the advices and the result of the hands
+    // Attributes for getting the advices and the result of the hands
     private CardAnalizer analizer = new CardAnalizer();
     private PayoutTable pay = new PayoutTable();
     private Stats stats;
@@ -55,8 +57,8 @@ public class Debug extends Game {
      * It takes the current object Command.
      * </p>
      * 
-     * @param current                   Current command object
-     * @throws IllegalCommandException  If the command is used illegally
+     * @param current Current command object
+     * @throws IllegalCommandException If the command is used illegally
      * @throws IllegalAmountException  If the amount of the bet is illegal
      * @see videopoker.commands.Command
      * @see videopoker.exceptions
@@ -83,7 +85,7 @@ public class Debug extends Game {
             throw new IllegalCommandException("b");
         }
 
-        //amount must be between 0 and maxBet
+        // amount must be between 0 and maxBet
         if (amount > maxBet || amount <= 0) {
             throw new IllegalAmountException();
         }
@@ -92,8 +94,8 @@ public class Debug extends Game {
         System.out.println("player is betting " + amount + "\n");
 
         lastBet = amount;
-        
-        //Update the flags to keep track of allowed commands
+
+        // Update the flags to keep track of allowed commands
         allowBet = false;
         allowDeal = true;
         allowAdvice = false;
@@ -103,11 +105,12 @@ public class Debug extends Game {
      * Helper method to do the deal command.
      * <p>
      * It takes the current object Command.
-     * The function checks if the command is allowed, and if it is, it deals the player a hand
+     * The function checks if the command is allowed, and if it is, it deals the
+     * player a hand
      * </p>
      * 
-     * @param current                   Current command object
-     * @throws IllegalCommandException  If the command is used illegally
+     * @param current Current command object
+     * @throws IllegalCommandException If the command is used illegally
      * @see videopoker.commands.Command
      * @see videopoker.exceptions
      */
@@ -115,10 +118,10 @@ public class Debug extends Game {
         if (!allowDeal) {
             throw new IllegalCommandException("d");
         }
-        
-        //Check if there are enough cards
+
+        // Check if there are enough cards
         if (((RiggedDeck) this.deck).getNumberOfCards() < 5) {
-            throw new IllegalCommandException("d: not enough cards");  
+            throw new IllegalCommandException("d: not enough cards");
         }
         // count++;
         this.giveHand();
@@ -126,7 +129,7 @@ public class Debug extends Game {
         this.player.displayHand();
         System.out.print("\n");
 
-        //Update the flags to keep track of allowed commands
+        // Update the flags to keep track of allowed commands
         allowDeal = false;
         allowHold = true;
         allowAdvice = true;
@@ -136,7 +139,8 @@ public class Debug extends Game {
      * Helper method to do the deal command.
      * <p>
      * The hold function allows the player to hold certain cards in his hand.
-     * The function takes a list of indexes as arguments, and replaces the dropped cards with new ones from the deck.
+     * The function takes a list of indexes as arguments, and replaces the dropped
+     * cards with new ones from the deck.
      * <\p>
      *
      * @param current Current command object
@@ -149,36 +153,36 @@ public class Debug extends Game {
         }
         // Fetch the cards that the player wants to hold
         ArrayList<Integer> holdIdxs = current.getArgs();
-        
-        //Must convert all indexes to indexes starting at 0, in cmd file starts at 1
+
+        // Must convert all indexes to indexes starting at 0, in cmd file starts at 1
         int idx;
         boolean illegal = false;
         for (int i = 0; i < holdIdxs.size(); i++) {
             idx = holdIdxs.get(i) - 1;
 
-            if (idx >= 5) { //Invalid index, hands have maximum of 5 cards
+            if (idx >= 5) { // Invalid index, hands have maximum of 5 cards
                 illegal = true;
                 break;
             } else {
                 holdIdxs.set(i, idx);
             }
         }
-        
+
         if (illegal) {
             throw new IllegalCommandException("h");
         }
 
-        //Check if there are enough cards in the deck
-        if (((RiggedDeck) this.deck).getNumberOfCards()< (5-holdIdxs.size()) ) {
-            throw new IllegalCommandException("h (not enough cards)");  
+        // Check if there are enough cards in the deck
+        if (((RiggedDeck) this.deck).getNumberOfCards() < (5 - holdIdxs.size())) {
+            throw new IllegalCommandException("h (not enough cards)");
         }
-        
-        //Hold those cards, and replaced the dropped ones
-        this.hand.holdCards(holdIdxs, this.deck.getCards(5-holdIdxs.size()));
-        
+
+        // Hold those cards, and replaced the dropped ones
+        this.hand.holdCards(holdIdxs, this.deck.getCards(5 - holdIdxs.size()));
+
         this.player.displayHand();
 
-        //Use the analizer to check the result
+        // Use the analizer to check the result
         String result = analizer.getPayTableResult(this.hand);
 
         int cashback;
@@ -194,7 +198,7 @@ public class Debug extends Game {
                     "player wins with a " + result + " and his credit is " + this.player.getCredits() + "\n");
         }
 
-        //Add the result to the stats object
+        // Add the result to the stats object
         stats.addStat(result, cashback, lastBet);
 
         allowBet = true;
@@ -205,22 +209,25 @@ public class Debug extends Game {
     /**
      * Helper method to do the deal command.
      * <p>
-     * The function takes the current command and checks if the advice command is allowed. If it is, it
-     * gets the advice from the table and then gets the hold list from the advisor. If the hold list is
-     * empty, the player should discard everything. If the hold list is 5, the player should hold
+     * The function takes the current command and checks if the advice command is
+     * allowed. If it is, it
+     * gets the advice from the table and then gets the hold list from the advisor.
+     * If the hold list is
+     * empty, the player should discard everything. If the hold list is 5, the
+     * player should hold
      * everything. Otherwise, the player should hold the cards in the hold list
      * <\p>
      * 
-     * @param current                   the current command
-     * @throws IllegalCommandException  if the command is used illegally
+     * @param current the current command
+     * @throws IllegalCommandException if the command is used illegally
      */
     private void advice(Command current) throws IllegalCommandException {
         if (!allowAdvice) {
             throw new IllegalCommandException("a");
         }
         String condition = this.analizer.getAdviceFromTable(this.hand);
-        // System.out.println(condition);
-        
+        System.out.println(condition);
+
         ArrayList<Integer> holdList = advisor.getHoldList(condition, this.hand);
 
         if (holdList.size() == 0) {
@@ -230,11 +237,11 @@ public class Debug extends Game {
         } else {
             StringBuilder str = new StringBuilder();
             for (Integer i : holdList) {
-                str.append(i+1); //+1 because advisor returns the true index (starts counting at 0)
+                str.append(i + 1); // +1 because advisor returns the true index (starts counting at 0)
                 str.append(" ");
             }
 
-            System.out.println("player should hold cards " + str.toString()+"\n");
+            System.out.println("player should hold cards " + str.toString() + "\n");
         }
     }
 
@@ -242,8 +249,10 @@ public class Debug extends Game {
      * Method to run the Debug mode
      * 
      * <p>
-     * The function just loops through the commands in the command list, and executes each command.
-     * Displays the errors in the commands and proceeds to the next command in case of error, does not crash or exit.
+     * The function just loops through the commands in the command list, and
+     * executes each command.
+     * Displays the errors in the commands and proceeds to the next command in case
+     * of error, does not crash or exit.
      * </p>
      */
     public void play() {
@@ -283,8 +292,8 @@ public class Debug extends Game {
                     System.out.println(e.getMessage());
                     continue;
                 }
-            } else if ( current.getType().equals("s") ) {
-                System.out.println(stats+"\n");
+            } else if (current.getType().equals("s")) {
+                System.out.println(stats + "\n");
             }
         }
     }

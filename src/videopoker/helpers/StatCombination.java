@@ -38,7 +38,7 @@ public class StatCombination {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append(String.format("%-16s %d %f\n", name, absolutValue, (float) absolutValue / (float) 10000000));
+        str.append(String.format("%-16s %d\n", name, absolutValue));
 
         return str.toString();
     }

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"main"},{"l":"videopoker"},{"l":"videopoker.commands"},{"l":"videopoker.deck"},{"l":"videopoker.helpers"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"main"},{"l":"videopoker"},{"l":"videopoker.commands"},{"l":"videopoker.deck"},{"l":"videopoker.exceptions"},{"l":"videopoker.helpers"}];updateSearchResults();
